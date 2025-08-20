@@ -1,0 +1,140 @@
+import streamlit as st
+from core.evaluation import check_translation
+from core.database import save_score, save_missing_words
+from core.llm_utils import LLMUtils
+from core.audio import play_audio
+from core.transcript_processing import TranscriptManager
+
+llm_utils = LLMUtils()
+transcript_manager = TranscriptManager()
+
+def writing():
+    # Initialize session state
+    if 'current_pair' not in st.session_state:
+        en, fr = transcript_manager.get_random_pair()
+        st.session_state.update({
+            'current_pair': (en, fr),
+            'user_translation': "",
+            'feedback': "",
+            'checked': False,
+            'score': 0,
+            'attempt_count': 0
+        })
+    
+    # Minimal CSS
+    st.markdown("""
+    <style>
+        .english-text {
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: white;
+            margin: 1rem 0;
+            padding: 1.5rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            border-left: 4px solid #10B981;
+        }
+        .score-badge {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+    </style>
+    """, unsafe_allow_html=True)
+    
+    # Header
+    st.markdown("### 📝 Translation Practice")
+    
+    # English prompt
+    st.markdown(f'<div class="english-text">{st.session_state.current_pair[0]}</div>', unsafe_allow_html=True)
+    
+    # Translation input
+    user_input = st.text_area(
+        "**Your French translation:**",
+        value=st.session_state.user_translation,
+        height=100,
+        placeholder="Write your translation here...",
+        label_visibility="visible"
+    )
+    
+    # Buttons row
+    col1, col2, col3 = st.columns([2, 2, 1])
+    
+    with col1:
+        if st.button("✅ Check", use_container_width=True):
+            if user_input.strip():
+                st.session_state.user_translation = user_input
+                st.session_state.feedback, st.session_state.score = check_translation(
+                    st.session_state.current_pair[0],
+                    user_input,
+                    st.session_state.current_pair[1]
+                )
+                st.session_state.attempt_count += 1
+                st.session_state.checked = True
+                
+                # Save results
+                missed = llm_utils.extract_missed_words(st.session_state.current_pair[1], user_input)
+                if missed:
+                    save_missing_words(missed)
+                save_score(st.session_state.current_pair[0], user_input, st.session_state.score)
+                
+                st.rerun()
+            else:
+                st.warning("Please enter a translation")
+    
+    with col2:
+        if st.button("🔄 New", use_container_width=True):
+            en, fr = transcript_manager.get_random_pair()
+            st.session_state.current_pair = (en, fr)
+            st.session_state.user_translation = ""
+            st.session_state.feedback = ""
+            st.session_state.checked = False
+            st.session_state.score = 0
+            st.rerun()
+    
+    with col3:
+        if st.button("🔊", use_container_width=True, help="Hear pronunciation"):
+            play_audio(st.session_state.current_pair[1])
+    
+    # Results display
+    if st.session_state.checked:
+        st.divider()
+        
+        # Score with color coding
+        score = st.session_state.score
+        if score >= 8:
+            color = "#10B981"
+            emoji = "🎉"
+        elif score >= 6:
+            color = "#F59E0B"
+            emoji = "👍"
+        else:
+            color = "#EF4444"
+            emoji = "💪"
+        
+        st.markdown(f'<div class="score-badge" style="background: {color}20; color: {color};">{emoji} Score: {score}/10</div>', unsafe_allow_html=True)
+        
+        # Comparison
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            st.write("**Your translation:**")
+            st.info(st.session_state.user_translation)
+        
+        with col2:
+            st.write("**Correct translation:**")
+            st.success(st.session_state.current_pair[1])
+        
+        # Feedback
+        if st.session_state.feedback:
+            st.write("**Feedback:**")
+            st.write(st.session_state.feedback)
+        
+        # Session info
+        st.caption(f"Attempt #{st.session_state.attempt_count}")
+
+# Optional: Add this if you want to test the component standalone
+if __name__ == "__main__":
+    writing()
