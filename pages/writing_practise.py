@@ -44,6 +44,8 @@ def writing():
     </style>
     """, unsafe_allow_html=True)
     
+    st.markdown("---")
+
     # Header
     st.markdown("### 📝 Translation Practice")
     

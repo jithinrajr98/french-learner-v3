@@ -316,7 +316,7 @@ def header_section():
     with col2:
         st.markdown("""
         <div style="margin-top: 10px;">
-            <h1 style="margin-bottom: 0; padding-top: 0;">French Mastery</h1>
+            <h1 style="margin-bottom: 0; padding-top: 0;">The Limiting Factor</h1>
             <p style="color: rgba(255,255,255,0.8); font-size: 1.1rem; margin-top: -8px;">
                 Apprendre le français avec intelligence artificielle
             </p>
@@ -336,7 +336,7 @@ def sidebar_navigation():
         with st.container():
             page = st.radio(
                 "",  # No label
-                ["Practice", "Missed Words", "Score History", "Transcript Viewer", "Practice Missed Words"],
+                ["Writing", "Vocabulary",  "Practice Vocabulary", "Transcript Viewer", "Progress Tracker"],
                 label_visibility="collapsed"
             )
 

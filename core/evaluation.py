@@ -38,6 +38,7 @@ Correct French translation: "{correct}"
     
     try:
         result = literal_eval(response)
+        print(f"LLM Response: {result}")
         feedback = result.get("feedback", "")
         score = result.get("score", 0)
     except Exception as e:
