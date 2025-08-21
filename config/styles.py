@@ -12,8 +12,6 @@ def set_page_config():
         initial_sidebar_state="expanded"
     )
 
-
-# At the top of your app, after imports
 def get_base64_of_bin_file(bin_file):
     with open(bin_file, 'rb') as f:
         data = f.read()
@@ -145,7 +143,7 @@ def apply_custom_styles():
             border: 1px solid rgba(255,255,255,0.4);
         }}
         
-       header[data-testid="stHeader"] {{
+        header[data-testid="stHeader"] {{
             background: transparent !important;
             background-color: transparent !important;
         }}
@@ -167,7 +165,6 @@ def apply_custom_styles():
             color: white !important;
             backdrop-filter: blur(10px);
         }}
-        
         
         /* Headers with improved visibility */
         h1 {{
@@ -296,32 +293,23 @@ def apply_custom_styles():
         ::-webkit-scrollbar-thumb:hover {{
             background: rgba(255,255,255,0.5);
         }}
+        
     </style>
     """, unsafe_allow_html=True)
 
 # ====== UI COMPONENTS ======
 def header_section():
-    """Elegant header with perfectly aligned French flag and title"""
-    col1, col2 = st.columns([1, 5])
-    with col1:
-        st.markdown(
-            """
-            <div style="display: flex; align-items: center; height: 100%; padding-top: 10px;">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Flag_of_France.svg" 
-                     width="72" style="display: block;">
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
-    with col2:
-        st.markdown("""
-        <div style="margin-top: 10px;">
-            <h1 style="margin-bottom: 0; padding-top: 0;">The Limiting Factor</h1>
-            <p style="color: rgba(255,255,255,0.8); font-size: 1.1rem; margin-top: -8px;">
-                Apprendre le français avec intelligence artificielle
-            </p>
+    """Elegant header with a new horizontal stripe design and French flag"""
+    st.markdown(f"""
+    <div style="margin-top: 10px; display: flex; align-items: left;">
+        <h1 style="margin-bottom: 0; padding-top: 0; display: inline-block;">Limiting Factor</h1>
+        <div style="margin-left: 0px; margin-top: 0px; display: flex; flex-direction: column; align-items: flex-start;">
+            <div style="height: 5px; background-color: #ED2939; width: 130px; margin: 4px 0; border-radius: 3px;"></div>
+            <div style="height: 5px; background-color: #FFFFFF; width: 100px; margin: 4px 0; border-radius: 3px;"></div>
+            <div style="height: 5px; background-color: #2C3E91; width: 50px; margin: 4px 0; border-radius: 3px;"></div>
         </div>
-        """, unsafe_allow_html=True)
+    </div>
+    """, unsafe_allow_html=True)
 
 def sidebar_navigation():
     with st.sidebar:
@@ -336,7 +324,7 @@ def sidebar_navigation():
         with st.container():
             page = st.radio(
                 "",  # No label
-                ["Writing", "Vocabulary",  "Practice Vocabulary", "Transcript Viewer", "Progress Tracker"],
+                ["Writing", "Vocabulary", "Practice Vocabulary", "Transcript Viewer", "Progress Tracker"],
                 label_visibility="collapsed"
             )
 
