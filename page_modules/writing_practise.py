@@ -44,8 +44,7 @@ def writing():
     </style>
     """, unsafe_allow_html=True)
     
-    st.markdown("---")
-
+    st.divider()
     # Header
     st.markdown("#### 📝 Writing Practice")
     
@@ -54,7 +53,7 @@ def writing():
     
     # Translation input
     user_input = st.text_area(
-        "**Your French translation:**",
+        "**Enter your french translation:**",
         value=st.session_state.user_translation,
         height=100,
         placeholder="Write your translation here...",
@@ -62,7 +61,7 @@ def writing():
     )
     
     # Buttons row
-    col1, col2, col3 = st.columns([2, 2, 1])
+    col1, col2 = st.columns([1, 1])
     
     with col1:
         if st.button("✅ Check", use_container_width=True):
@@ -96,13 +95,12 @@ def writing():
             st.session_state.score = 0
             st.rerun()
     
-    with col3:
-        if st.button("🔊", use_container_width=True, help="Hear pronunciation"):
-            play_audio_mobile_compatible(st.session_state.current_pair[1])
     
     # Results display
     if st.session_state.checked:
         st.divider()
+        # Session info
+        st.caption(f"Attempt #{st.session_state.attempt_count}")
         
         # Score with color coding
         score = st.session_state.score
@@ -129,13 +127,17 @@ def writing():
             st.write("**Correct translation:**")
             st.success(st.session_state.current_pair[1])
         
+        if st.button("🔊 Pronunciation", help="Hear pronunciation"):
+            play_audio_mobile_compatible(st.session_state.current_pair[1])
+        
+        st.divider()
+
         # Feedback
         if st.session_state.feedback:
             st.write("**Feedback:**")
             st.write(st.session_state.feedback)
         
-        # Session info
-        st.caption(f"Attempt #{st.session_state.attempt_count}")
+        
 
 # Optional: Add this if you want to test the component standalone
 if __name__ == "__main__":
