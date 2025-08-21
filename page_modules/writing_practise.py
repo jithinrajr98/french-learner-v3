@@ -47,6 +47,8 @@ def writing():
     st.divider()
     # Header
     st.markdown("#### 📝 Writing Practice")
+    st.caption(f" Translate the following English sentence into French. You will receive feedback and a score based on your translation accuracy.")
+
     
     # English prompt
     st.markdown(f'<div class="english-text">{st.session_state.current_pair[0]}</div>', unsafe_allow_html=True)
@@ -86,7 +88,7 @@ def writing():
                 st.warning("Please enter a translation")
     
     with col2:
-        if st.button("🔄 New", use_container_width=True):
+        if st.button("🔄 Try New ?", use_container_width=True):
             en, fr = transcript_manager.get_random_pair()
             st.session_state.current_pair = (en, fr)
             st.session_state.user_translation = ""
