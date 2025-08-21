@@ -4,7 +4,8 @@ import altair as alt
 import pandas as pd
 
 def analyse():
-    st.title("📊 Analysis")
+    st.divider()
+    st.markdown("#### 📊 Analysis")
     
     # Get data once and check availability
     stats = get_score_statistics()

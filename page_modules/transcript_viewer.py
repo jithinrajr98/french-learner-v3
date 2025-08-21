@@ -7,8 +7,12 @@ llm_utils = LLMUtils()
 transcript_manager = TranscriptManager()
 
 def transcript_render():
-    st.markdown("<h1 style='text-align: center;'>📄 YouTube Transcript Extractor</h1>", unsafe_allow_html=True)
-    st.markdown("---")
+    
+    st.divider()
+    st.markdown("#### 🎯 Update Transcript")
+    st.caption("This section allows you to process a new YouTube video transcript and generate translations.")
+    st.caption("You need to provide YouTube Video ID to extract the transcript and generate translations.")
+    
 
     # Use a single expander for the entire video processing section to keep it tidy
     with st.expander("🎥 Process a New YouTube Video"):
@@ -46,7 +50,7 @@ def transcript_render():
     
     st.markdown("---")
 
-    st.header("📜 Transcript Viewer")
+    st.markdown("#### 📜 Transcript Viewer")
     
     # Use columns to align the buttons side-by-side
     col1, col2 = st.columns(2)
