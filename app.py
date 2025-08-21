@@ -6,6 +6,7 @@ from pages.writing_practise import writing
 from pages.vocab_builder import vocab_builder
 from pages.vocab_practise import vocab_practise
 from pages.transcript_viewer import transcript_render
+from pages.performance_analyser import analyse
 
 import warnings
 warnings.filterwarnings("ignore")
@@ -27,7 +28,9 @@ def main():
 
     if page == "Transcript Viewer":
         transcript_render()
-   
+        
+    if page ==  "Progress Tracker":
+        analyse()   
    
 
 if __name__ == "__main__":

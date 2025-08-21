@@ -84,3 +84,97 @@ def delete_saved_word(word):
     except sqlite3.Error as e:
         st.error(f"Error deleting word: {e}")
         
+        
+def get_score_history():
+    """Get all score history"""
+    try:
+        with sqlite3.connect(DB_PATH, timeout=DB_TIMEOUT) as conn:
+            query = """
+                SELECT 
+                    id,
+                    sentence,
+                    user_translation,
+                    score,
+                    checked_on
+                FROM translation_scores 
+                ORDER BY checked_on ASC
+            """
+            df = pd.read_sql_query(query, conn)
+             # Ensure consistent column naming
+            if not df.empty and 'score' in df.columns:
+                df = df.rename(columns={'score': 'Score'})
+            
+        return df
+    except sqlite3.Error as e:
+        st.error(f"Error fetching score history: {e}")
+        return pd.DataFrame()
+
+def get_daily_scores():
+    """Get average scores grouped by day"""
+    try:
+        with sqlite3.connect(DB_PATH, timeout=DB_TIMEOUT) as conn:
+            query = """
+                SELECT 
+                    DATE(checked_on) as date,
+                    COUNT(*) as attempt_count,
+                    AVG(score) as avg_score,
+                    MIN(score) as min_score,
+                    MAX(score) as max_score
+                FROM translation_scores 
+                GROUP BY DATE(checked_on)
+                ORDER BY date DESC
+            """
+            df = pd.read_sql_query(query, conn)
+        return df
+    except sqlite3.Error as e:
+        st.error(f"Error fetching daily scores: {e}")
+        return pd.DataFrame()
+
+def get_weekly_progress():
+    """Get weekly progress data"""
+    try:
+        with sqlite3.connect(DB_PATH, timeout=DB_TIMEOUT) as conn:
+            query = """
+                SELECT 
+                    STRFTIME('%Y-%W', checked_on) as week,
+                    MIN(DATE(checked_on, 'weekday 0', '-7 days')) as week_start,
+                    COUNT(*) as attempt_count,
+                    AVG(score) as avg_score,
+                    MIN(score) as min_score,
+                    MAX(score) as max_score
+                FROM translation_scores 
+                GROUP BY STRFTIME('%Y-%W', checked_on)
+                ORDER BY week_start DESC
+            """
+            df = pd.read_sql_query(query, conn)
+        return df
+    except sqlite3.Error as e:
+        st.error(f"Error fetching weekly progress: {e}")
+        return pd.DataFrame()
+
+def get_score_statistics():
+    """Get overall score statistics"""
+    try:
+        with sqlite3.connect(DB_PATH, timeout=DB_TIMEOUT) as conn:
+            query = """
+                SELECT 
+                    COUNT(*) as total_attempts,
+                    AVG(score) as overall_avg,
+                    MIN(score) as min_score,
+                    MAX(score) as max_score,
+                    COUNT(DISTINCT DATE(checked_on)) as days_active
+                FROM translation_scores
+            """
+            result = conn.execute(query).fetchone()
+            stats = {
+                'total_attempts': result[0],
+                'overall_avg': round(result[1], 2) if result[1] else 0,
+                'min_score': result[2] or 0,
+                'max_score': result[3] or 0,
+                'days_active': result[4] or 0
+            }
+        return stats
+    except sqlite3.Error as e:
+        st.error(f"Error fetching score statistics: {e}")
+        return {}
+        
