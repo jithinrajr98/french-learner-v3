@@ -2,7 +2,7 @@ import streamlit as st
 from core.evaluation import check_translation
 from core.database import save_score, save_missing_words
 from core.llm_utils import LLMUtils
-from core.audio import play_audio
+from core.audio import play_audio, play_audio_mobile_compatible
 from core.transcript_processing import TranscriptManager
 
 llm_utils = LLMUtils()
@@ -98,7 +98,7 @@ def writing():
     
     with col3:
         if st.button("🔊", use_container_width=True, help="Hear pronunciation"):
-            play_audio(st.session_state.current_pair[1])
+            play_audio_mobile_compatible(st.session_state.current_pair[1])
     
     # Results display
     if st.session_state.checked:

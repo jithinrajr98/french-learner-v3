@@ -1,6 +1,6 @@
 import streamlit as st
 from core.llm_utils import LLMUtils
-from core.audio import play_audio
+from core.audio import play_audio, play_audio_mobile_compatible
 from core.database import save_score, save_missing_words, get_all_saved_words, delete_saved_word
 import sqlite3
 from config.settings import DB_PATH
@@ -145,7 +145,7 @@ def vocab_builder():
                 st.markdown(f"<div class='meaning-text'>{meaning}</div>", unsafe_allow_html=True)
             with row_cols[2]:
                 if st.button("🔊", key=f"audio_{word}", help="Play pronunciation"):
-                    play_audio(word)
+                    play_audio_mobile_compatible(word)
             with row_cols[3]:
                 if st.button("🗑️", key=f"delete_{word}", help="Delete"):
                     delete_saved_word(word)
