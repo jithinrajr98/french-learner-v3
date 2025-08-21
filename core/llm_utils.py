@@ -5,7 +5,7 @@ from config.settings import GROQ_MODEL, GROQ_TRANSCRIPT_MODEL
 from groq import Groq
 from dotenv import load_dotenv
 load_dotenv()
-
+import streamlit as st
 
 
 class LLMUtils:
@@ -14,9 +14,21 @@ class LLMUtils:
         """
         Initialize the LLMUtils class with a Groq client.
         """
-        if not os.getenv("GROQ_API_KEY"):
-            raise ValueError("GROQ_API_KEY environment variable is not set.")
-        self.groq_client = Groq(api_key=os.getenv("GROQ_API_KEY"))  
+        
+         # Try to get API key from Streamlit secrets first, then environment variables
+        api_key = None
+        # Check Streamlit secrets
+        if hasattr(st, 'secrets') and 'GROQ_API_KEY' in st.secrets:
+            api_key = st.secrets['GROQ_API_KEY']
+        # Fallback to environment variable
+        elif 'GROQ_API_KEY' in os.environ:
+            api_key = os.environ['GROQ_API_KEY']
+        
+        if not api_key:
+            raise ValueError("GROQ_API_KEY not found in Streamlit secrets or environment variables.")
+        
+        self.api_key = api_key
+        self.groq_client = Groq(api_key=self.api_key)  
     
     # def get_french_word_meaning(self, word: str) -> str:
     #     """
