@@ -60,15 +60,15 @@ def vocab_builder():
         }
     </style>
     """, unsafe_allow_html=True)
-    
+    st.divider()
     # Header
-    st.markdown("### 📚 Vocabulary Builder")
-    
+    st.markdown("#### 📚 Vocabulary")
+    st.caption("Build your French vocabulary by adding new words and their meanings. You can also listen to the pronunciation of each word.")
     # Get total word count
     with sqlite3.connect(DB_PATH) as conn:
         total_words = conn.execute("SELECT COUNT(*) FROM missing_words").fetchone()[0]
     
-    st.write(f"**Words saved:** {total_words}")
+    st.success(f"**Words in vocab:** {total_words}", icon="📖")
     st.divider()
     
     # Add new word section
@@ -84,7 +84,7 @@ def vocab_builder():
         ).strip()
     
     with add_col2:
-        if st.button("Add", key="add_button", use_container_width=True):
+        if st.button("➕ Add to vocab", key="add_button", use_container_width=True):
             if len(new_word) <= 3:
                 st.warning("Word must be longer than 3 characters")
             else:
@@ -102,7 +102,7 @@ def vocab_builder():
                         st.rerun()
     
     with add_col3:
-        if st.button("🔍 Search", key="search_button", use_container_width=True):
+        if st.button("🔍 Search vocab", key="search_button", use_container_width=True):
             st.session_state.search_term = new_word
             st.rerun()
     
