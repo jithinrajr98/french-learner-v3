@@ -324,7 +324,7 @@ def sidebar_navigation():
         with st.container():
             page = st.radio(
                 "",  # No label
-                ["Writing", "Vocabulary", "Practice Vocabulary", "Transcript Viewer", "Progress Tracker"],
+                ["Practise Writing", "Explore Vocabulary", "Practise Vocabulary", "Update Transcript", "Progress Tracker"],
                 label_visibility="collapsed"
             )
 

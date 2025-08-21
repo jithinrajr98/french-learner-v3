@@ -22,13 +22,13 @@ def main():
     page = sidebar_navigation()
     
     # Use elif instead of multiple if statements for better performance
-    if page == "Writing":
+    if page == "Practise Writing":
         writing()
-    elif page == "Vocabulary":
+    elif page == "Explore Vocabulary":
         vocab_builder()
-    elif page == "Practice Vocabulary":
+    elif page == "Practise Vocabulary":
         vocab_practise()
-    elif page == "Transcript Viewer":
+    elif page == "Update Transcript":
         transcript_render()
     elif page == "Progress Tracker":
         analyse()
