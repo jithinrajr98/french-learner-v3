@@ -131,13 +131,13 @@ class LLMUtils:
 
     1. First, determine if this is a verb in its infinitive form. If it is NOT a verb, return exactly: 'not a verb'
 
-    2. If it IS a verb, provide ONLY the conjugations in present tense in this format:
-    je [conjugation]\n
-    tu [conjugation]\n
-    il/elle/on [conjugation]\n
-    nous [conjugation]\n
-    vous [conjugation]\n
-    ils/elles [conjugation]\n
+    2. If it IS a verb, provide ONLY the conjugations in present tense in this format. Strictly follow the format without any additional text or explanations:
+    - je [conjugation]\n
+    - tu [conjugation]\n
+    - il/elle/on [conjugation]\n
+    - nous [conjugation]\n
+    - vous [conjugation]\n
+    - ils/elles [conjugation]\n
 
     3. Return ONLY the conjugations or 'not a verb' - no explanations, no additional text."""
 
