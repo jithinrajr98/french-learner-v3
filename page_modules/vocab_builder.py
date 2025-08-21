@@ -94,6 +94,7 @@ def vocab_builder():
                         st.info(f"'{new_word}' already exists")
                     else:
                         with st.spinner("Getting meaning..."):
+                            new_word = llm_utils.correct_french_accents(new_word)
                             meaning = llm_utils.get_french_word_meaning(new_word)
                             conn.execute("INSERT INTO missing_words (word, meaning) VALUES (?, ?)", (new_word, meaning))
                             conn.commit()

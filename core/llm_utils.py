@@ -29,20 +29,45 @@ class LLMUtils:
         
         self.api_key = api_key
         self.groq_client = Groq(api_key=self.api_key)  
-    
-    # def get_french_word_meaning(self, word: str) -> str:
-    #     """
-    #     Get the meaning of a French word using a language model.
-    #     """
-    #     prompt = f"""Please provide the meaning of the French word '{word}' in English. Return up to 3 meanings as a single comma seperated list. 
-    #     Do not explain or add any additional text.
-    #     Fromat the output as : 'meaning1, meaning2, meaning3'."""
-    #     response = self.groq_client.chat.completions.create(
-    #         messages=[
-    #          {"role": "user", "content": prompt}],
-    #         model=GROQ_MODEL )
         
-    #     return response.choices[0].message.content.strip()
+    
+    def get_french_word_meaning(self, word: str) -> str:
+        """
+        Get the meaning of a French word using a language model.
+        """
+        prompt = f"""Please provide the meaning of the French word '{word}' in English. Return up to 3 meanings as a single comma seperated list. 
+        Do not explain or add any additional text.
+        Fromat the output as : 'meaning1, meaning2, meaning3'."""
+        response = self.groq_client.chat.completions.create(
+            messages=[
+             {"role": "user", "content": prompt}],
+            model=GROQ_MODEL )
+        
+        return response.choices[0].message.content.strip()
+    
+    
+    def correct_french_accents(self, word: str) -> str:
+        prompt = f"""Correct any accent errors in this French text: "{word}"
+        
+        Important rules:
+            1. Return ONLY the corrected French text with proper accents (é, è, ê, ë, à, â, ä, ç, î, ï, ô, ö, ù, û, ü, ÿ)
+            2. Do not change correct accents that are already present
+            3. If the input has no accent errors, return it exactly as-is
+            4. Never add any explanation, commentary, or additional text
+            5. Preserve all capitalization, spaces, and punctuation exactly as in the input
+            6. Do not modify the text in any way other than correcting accents
+            7. Do not add any additional quotes or formatting
+            
+            Return ONLY the corrected text:"""
+        
+        response = self.groq_client.chat.completions.create(
+            messages=[{"role": "user", "content": prompt}],
+            model=GROQ_MODEL )
+        
+        response.choices[0].message.content.strip()
+        response = re.sub(r'^[\'"]|[\'"]$', '', response)
+        response = re.sub(r'^[\'"]|[\'"]$', '', response)
+        return response
     
     
     def extract_missed_words(self, correct: str, attempt: str) -> List[str]:
@@ -52,7 +77,7 @@ class LLMUtils:
         Correct: {correct}
         Attempt: {attempt}
         
-        Identify which content words (nouns, verbs, adjectives, adverbs) 
+        Identify which  words (nouns, verbs, adjectives, adverbs) 
         from the correct translation are missing in the attempt.
         Return ONLY a Python list of the missing words in their base form.
         Example: ['mot1', 'mot2']
@@ -69,38 +94,12 @@ class LLMUtils:
             return []
 
 
-    def get_french_word_meaning(self, word: str) -> str:
-            """
-            Corrects accent errors and gets English meaning in a single LLM call.
-            
-            Args:
-                word: The French word or phrase to process
-            
-            Returns:
-                English meanings of the accent-corrected French word
-            """
-            # A simplified, direct prompt for the LLM
-            prompt = f"""Correct the accents in the French text "{word}" and then provide up to 3 English meanings.
-                 Do not explain or add any additional text.
-                 strictly follow the output as: meaning1, meaning2, meaning3 """
-            
-            response = self.groq_client.chat.completions.create(
-                    messages=[
-                    {"role": "user", "content": prompt}],
-                    model=GROQ_MODEL )
-            response = response.choices[0].message.content.strip()
-            # Extract the meanings from the response
-            if "MEANINGS:" in response:
-                meanings_part = response.split("MEANINGS:")[1].strip()
-                return meanings_part
-            else:
-                # Fallback: return the entire response if format parsing fails
-                return response
+
 
 
     def example_sentence_generator(self, word: str) -> str:
             """
-            Generate an example french sentence using the given French word.
+            Generate an simple example french sentence using the given French word.
             
             Args:
                 word: The French word to use in the example sentence
@@ -116,6 +115,7 @@ class LLMUtils:
                     model=GROQ_MODEL )
             
             return response.choices[0].message.content.strip()
+        
     
     def conjugation_details(self, word: str) -> str:
         """

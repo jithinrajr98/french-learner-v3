@@ -47,7 +47,7 @@ def writing():
     st.markdown("---")
 
     # Header
-    st.markdown("### 📝 Translation Practice")
+    st.markdown("#### 📝 Writing Practice")
     
     # English prompt
     st.markdown(f'<div class="english-text">{st.session_state.current_pair[0]}</div>', unsafe_allow_html=True)
