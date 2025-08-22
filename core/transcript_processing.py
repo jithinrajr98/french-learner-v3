@@ -2,6 +2,8 @@ from pathlib import Path
 from typing import List, Tuple
 import random
 from config.settings import TRANSCRIPT_EN, TRANSCRIPT_FR
+import re
+from urllib.parse import urlparse, parse_qs
 import streamlit as st
 from youtube_transcript_api import YouTubeTranscriptApi
 from config.settings import TRANSCRIPT_YOUTUBE
@@ -76,6 +78,39 @@ class TranscriptManager:
         except IOError as e:
             print(f"An error occurred while writing to the file: {e}")
 
+
+    def extract_transcript(self, video_url: str):
+    
+        # Extract video ID from different YouTube URL formats
+        parsed_url = urlparse(video_url)
+        
+        if parsed_url.hostname in ['youtube.com', 'www.youtube.com', 'm.youtube.com']:
+            if parsed_url.path == '/watch':
+                video_id = parse_qs(parsed_url.query).get('v', [None])[0]
+            elif parsed_url.path.startswith('/embed/'):
+                video_id = parsed_url.path.split('/')[2]
+            elif parsed_url.path.startswith('/v/'):
+                video_id = parsed_url.path.split('/')[2]
+        elif parsed_url.hostname == 'youtu.be':
+            video_id = parsed_url.path[1:]  # Remove the leading slash
+        else:
+            raise ValueError("Invalid YouTube URL")
+        
+        if not video_id:
+            raise ValueError("Could not extract video ID from URL")
+        
+        ytt_api = YouTubeTranscriptApi()
+        fetched_transcript = ytt_api.fetch(video_id, languages=["fr"])
+        sentences = []
+        for snippet in fetched_transcript:
+            sentences.append(snippet.text)
+        transcript = " ".join(sentences)
+        try:
+            with open(TRANSCRIPT_YOUTUBE, "w", encoding="utf-8") as file:
+                file.write(transcript)
+                print(f"Transcript saved to {TRANSCRIPT_YOUTUBE}")
+        except IOError as e:
+            print(f"An error occurred while writing to the file: {e}")
 
 
 

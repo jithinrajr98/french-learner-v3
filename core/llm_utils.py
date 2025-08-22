@@ -163,7 +163,9 @@ class LLMUtils:
         Returns:
             A string with numbered French sentences
         """
-        prompt = f"""Extract and number the French sentences from the following transcript: {transcript}. Do not modify the sentences, just return them as a numbered list.
+        prompt = f"""Extract and number the French sentences from the following transcript: {transcript}.
+        Do not modify the sentences, just return them as a numbered list.
+        Try to keep the sentences as short as possible while maintaining their meaning.
         
         Format the output like this do not include any additional text or explanations:
         1. French Sentence one
@@ -194,7 +196,7 @@ class LLMUtils:
         Returns:
             A string with numbered English sentences
         """
-        prompt = f"""Translate literally of numbered french sentences from {french_transcript} to english numbered sentences list.
+        prompt = f"""Translate numbered french sentences from {french_transcript} to english numbered sentences list.
                      Maintain the original numbering and structure.
         
         Format the output like this do not include any additional text or explanations:

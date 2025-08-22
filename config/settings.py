@@ -20,4 +20,4 @@ COLOR_SCHEME = {
 BACKGROUND = BASE_DIR / "static" / "pic_10.jpg"  #pic_7.jpg
 
 GROQ_MODEL = "llama-3.3-70b-versatile"
-GROQ_TRANSCRIPT_MODEL = "meta-llama/llama-4-scout-17b-16e-instruct"
+GROQ_TRANSCRIPT_MODEL = "meta-llama/llama-4-maverick-17b-128e-instruct"

@@ -11,7 +11,7 @@ def transcript_render():
     st.divider()
     st.markdown("#### 🎯 Update Transcript")
     st.caption("This section allows you to process a new YouTube video transcript and generate translations.")
-    st.caption("You need to provide YouTube Video ID to extract the transcript and generate translations.")
+    st.caption("You need to provide YouTube url to extract the transcript and generate translations.")
     
 
     # Use a single expander for the entire video processing section to keep it tidy
@@ -20,7 +20,7 @@ def transcript_render():
 
         if st.button("Extract and Process Transcript", use_container_width=True):
             if not video_id:
-                st.warning("Please enter a video ID.")
+                st.warning("Please enter Youtube url.")
                 return
 
             st.info("Processing transcript... This may take a moment.")
