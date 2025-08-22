@@ -16,7 +16,7 @@ def transcript_render():
 
     # Use a single expander for the entire video processing section to keep it tidy
     with st.expander("🎥 Process a New YouTube Video"):
-        video_id = st.text_input("Enter YouTube Video ID:", placeholder="e.g., gUdkxWNJTr0")
+        video_id = st.text_input("Enter YouTube Video url:", placeholder="e.g. https://www.youtube.com/watch?v=VIDEO_ID", key="video_url")
 
         if st.button("Extract and Process Transcript", use_container_width=True):
             if not video_id:
