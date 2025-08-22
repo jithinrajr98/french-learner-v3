@@ -12,18 +12,22 @@ def transcript_render():
     st.markdown("#### 🎯 Update Transcript")
     st.caption("This section allows you to process a new YouTube video transcript and generate translations.")
     st.caption("You need to provide YouTube url to extract the transcript and generate translations.")
-    
 
     # Use a single expander for the entire video processing section to keep it tidy
     with st.expander("🎥 Process a New YouTube Video"):
         video_id = st.text_input("Enter YouTube Video url:", placeholder="e.g. https://www.youtube.com/watch?v=VIDEO_ID", key="video_url")
-        # save the video ID to a file for later use
-        with open(LINK_YOUTUBE, "w", encoding="utf-8") as file:
-                    file.write(video_id)
 
         if st.button("Extract and Process Transcript", use_container_width=True):
             if not video_id:
                 st.warning("Please enter Youtube url.")
+                return
+
+            # Save the video URL to file when processing starts
+            try:
+                with open(LINK_YOUTUBE, "w", encoding="utf-8") as file:
+                    file.write(video_id)
+            except Exception as e:
+                st.error(f"Error saving YouTube link: {str(e)}")
                 return
 
             st.info("Processing transcript... This may take a moment.")
@@ -84,10 +88,20 @@ def transcript_render():
             st.text_area("Content", value=transcript_content, height=500, key=title)
         except FileNotFoundError:
             st.error("Transcript file not found. Please process a video first.")
+        except Exception as e:
+            st.error(f"Error loading transcript: {str(e)}")
             
     st.divider()
-    youtube_link = transcript_manager.load_youtube_transcript(LINK_YOUTUBE)
-    if youtube_link.strip():
-        st.link_button("🎥 Click here to open the YouTube video", youtube_link)
+    st.markdown("#### 🎬 YouTube Video Link")
     
-    
+    # YouTube link display with proper error handling
+    try:
+        youtube_link = transcript_manager.load_youtube_transcript(LINK_YOUTUBE)
+        if youtube_link and youtube_link.strip() and youtube_link.startswith(('http://', 'https://')):
+            st.link_button("🎥 Click here to open the YouTube video", youtube_link)
+        else:
+            st.info("No valid YouTube link available. Please process a video first.")
+    except FileNotFoundError:
+        st.info("No YouTube link found. Please process a video first.")
+    except Exception as e:
+        st.error(f"Error loading YouTube link: {str(e)}")
