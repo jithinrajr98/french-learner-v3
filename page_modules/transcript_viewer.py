@@ -1,6 +1,6 @@
 from core.transcript_processing import TranscriptManager
 import streamlit as st
-from config.settings import TRANSCRIPT_YOUTUBE, TRANSCRIPT_EN, TRANSCRIPT_FR
+from config.settings import TRANSCRIPT_YOUTUBE, TRANSCRIPT_EN, TRANSCRIPT_FR, LINK_YOUTUBE
 from core.llm_utils import LLMUtils
 
 llm_utils = LLMUtils()
@@ -17,6 +17,9 @@ def transcript_render():
     # Use a single expander for the entire video processing section to keep it tidy
     with st.expander("🎥 Process a New YouTube Video"):
         video_id = st.text_input("Enter YouTube Video url:", placeholder="e.g. https://www.youtube.com/watch?v=VIDEO_ID", key="video_url")
+        # save the video ID to a file for later use
+        with open(LINK_YOUTUBE, "w", encoding="utf-8") as file:
+                    file.write(video_id)
 
         if st.button("Extract and Process Transcript", use_container_width=True):
             if not video_id:
@@ -81,3 +84,10 @@ def transcript_render():
             st.text_area("Content", value=transcript_content, height=500, key=title)
         except FileNotFoundError:
             st.error("Transcript file not found. Please process a video first.")
+            
+    st.divider()
+    youtube_link = transcript_manager.load_youtube_transcript(LINK_YOUTUBE)
+    if youtube_link.strip():
+        st.link_button("🎥 Click here to open the YouTube video", youtube_link)
+    
+    

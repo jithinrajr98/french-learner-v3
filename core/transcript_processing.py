@@ -63,20 +63,6 @@ class TranscriptManager:
 
         return self.english_sentences[idx], self.french_sentences[idx]
     
-    def extract_transcript(self, video_id: str):
-        
-        ytt_api = YouTubeTranscriptApi()
-        fetched_transcript = ytt_api.fetch(video_id, languages=["fr"])
-        sentences = []
-        for snippet in fetched_transcript:
-            sentences.append(snippet.text)
-        transcript = " ".join(sentences)
-        try:
-            with open(TRANSCRIPT_YOUTUBE, "w", encoding="utf-8") as file:
-                file.write(transcript)
-                print(f"Transcript saved to {TRANSCRIPT_YOUTUBE}")
-        except IOError as e:
-            print(f"An error occurred while writing to the file: {e}")
 
 
     def extract_transcript(self, video_url: str):
@@ -111,8 +97,6 @@ class TranscriptManager:
                 print(f"Transcript saved to {TRANSCRIPT_YOUTUBE}")
         except IOError as e:
             print(f"An error occurred while writing to the file: {e}")
-
-
 
 
 transcript_manager = TranscriptManager()
