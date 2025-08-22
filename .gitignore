@@ -2,4 +2,4 @@
 __pycache__
 .DS_Store
 .streamlit
-data
+french_learner.db
