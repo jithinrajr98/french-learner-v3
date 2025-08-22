@@ -64,7 +64,7 @@ class LLMUtils:
             messages=[{"role": "user", "content": prompt}],
             model=GROQ_MODEL )
         
-        response.choices[0].message.content.strip()
+        response = response.choices[0].message.content.strip()
         response = re.sub(r'^[\'"]|[\'"]$', '', response)
         response = re.sub(r'^[\'"]|[\'"]$', '', response)
         return response
