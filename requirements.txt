@@ -40,7 +40,7 @@ langsmith==0.4.14
 mariadb==1.1.13
 markupsafe==3.0.2
 matplotlib-inline==0.1.7
-mysql-connector-python==9.4.0
+mysql-connector-python==8.0.33
 narwhals==2.1.2
 nest-asyncio==1.6.0
 numpy==2.2.6
