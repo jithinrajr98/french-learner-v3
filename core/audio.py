@@ -4,8 +4,7 @@ import io
 import base64
 from IPython.display import Audio
 import streamlit as st
-import pyaudio
-  
+
 def play_audio(text, lang='fr'):
     """Generate and play audio for given text"""
     try:
