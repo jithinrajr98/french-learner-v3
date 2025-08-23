@@ -4,7 +4,7 @@ import io
 import base64
 from IPython.display import Audio
 import streamlit as st
-
+import pyaudio
   
 def play_audio(text, lang='fr'):
     """Generate and play audio for given text"""
@@ -42,3 +42,52 @@ def play_audio_mobile_compatible(text, lang='fr'):
         
     except Exception as e:
         st.error(f"Couldn't generate audio: {e}")
+        
+        
+def record_audio(duration=5, sample_rate=44100, chunk_size=1024):
+    """
+    Record audio from the user's microphone
+    Returns audio bytes if successful, None otherwise
+    """
+    try:
+        # Initialize PyAudio
+        p = pyaudio.PyAudio()
+        
+        # Open stream
+        stream = p.open(
+            format=pyaudio.paInt16,
+            channels=1,
+            rate=sample_rate,
+            input=True,
+            frames_per_buffer=chunk_size
+        )
+        
+        st.info(f"Recording for {duration} seconds... Speak now!")
+        
+        frames = []
+        
+        # Record audio
+        for i in range(0, int(sample_rate / chunk_size * duration)):
+            data = stream.read(chunk_size)
+            frames.append(data)
+        
+        # Stop and close the stream
+        stream.stop_stream()
+        stream.close()
+        p.terminate()
+        
+        # Save to in-memory WAV file
+        wav_buffer = io.BytesIO()
+        with wave.open(wav_buffer, 'wb') as wf:
+            wf.setnchannels(1)
+            wf.setsampwidth(p.get_sample_size(pyaudio.paInt16))
+            wf.setframerate(sample_rate)
+            wf.writeframes(b''.join(frames))
+        
+        wav_buffer.seek(0)
+        return wav_buffer.getvalue()
+        
+    except Exception as e:
+        st.error(f"Error recording audio: {e}")
+        return None
+
