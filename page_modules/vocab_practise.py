@@ -1,5 +1,5 @@
 import streamlit as st
-from core.database import get_all_saved_words, delete_saved_word
+from core.database_skysql import get_all_saved_words, delete_saved_word
 import random
 from core.audio import play_audio_mobile_compatible
 from core.llm_utils import LLMUtils

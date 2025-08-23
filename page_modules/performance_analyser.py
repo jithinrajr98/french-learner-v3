@@ -1,5 +1,5 @@
 import streamlit as st
-from core.database import get_score_history, get_daily_scores, get_weekly_progress, get_score_statistics
+from core.database_skysql import get_score_history, get_daily_scores, get_weekly_progress, get_score_statistics
 import altair as alt
 import pandas as pd
 

@@ -1,6 +1,6 @@
 import streamlit as st
 from core.evaluation import check_translation
-from core.database import save_score, save_missing_words
+from core.database_skysql import save_score, save_missing_words
 from core.llm_utils import LLMUtils
 from core.audio import play_audio, play_audio_mobile_compatible
 from core.transcript_processing import TranscriptManager
