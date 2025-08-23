@@ -1,128 +1,45 @@
-1. Vous entendez agent partout et vous avez l'impression qu'il y a une élite de técos qui part sans vous.
-2. Vous inquiétez pas parce que je suis là pour tout vous expliquer en10 minutes et croyez-moi, je vais vous emmener sur orbit pour que vous puissiez tout comprendre sur les agents a et commencer à saisir cette opportunité gigantesque.
-3. Parce que oui, vous avez probablement entendu ce terme partout.
-4. Construisez des agents, il a le futur est agentique, les agents vont révolutionner les business.
-5. Mais concrètement qu'est-ce que c'est un agent ?
-6. Comment est-ce que ça fonctionne ?
-7. Est-ce que ça vaut vraiment le coup de s'y intéresser ou est-ce que c'est que du bluff marketing ?
-8. On va voir tout ça dans cette vidéo.
-9. Déjà, on va commencer par démystifier tout ça parce que pour comprendre les agents IA, il faut comprendre l'IA dans sa globalité.
-10. Déjà, il y avait le premier niveau de compréhension, c'est celui de faire des promptes.
-11. C'est globalement ce que vous connaissez depuis l'arrivée de chat GPT.
-12. Vous posez une question, Lia répond et c'est tout.
-13. Par exemple, vous pouvez demander à Chat GPT de vous faire un programme de sport personnalisé et il va le faire.
-14. À ce moment-là, il y a une interaction.
-15. Le problème c'est qu'à chaque fois vous êtes obligé d'envoyer ce que vous voulez à l'IA pour avoir une réponse.
-16. Ensuite il y a le niveau2, ce qu'on appelle les automatisation IA.
-17. C'est peut-être quelque chose que vous avez commencé à faire avec des outils comme Make ou Zapier.
-18. En gros, LIA suit une séquence d'étapes que vous avez prédéfinie et elle va utiliser Lia au sein d'une seule étape pour transformer quelque chose.
-19. Par exemple, quand je reçois un email, résume-le, traduis-le en français et ensuite ajoute-le à mon CRM.
-20. Ça c'est quelque chose qui est assez prévisible puisque LIA va suivre ce que vous lui avez indiqué de faire.
-21. Le problème c'est que encore une fois c'est vous qui prenez la décision, c'est vous qui construisez votre automatisation et l'IA va simplement appliquer.
-22. Lia va se poser plein de questions en relation avec ça.
-23. Ensuite, il y a le niveau3, c'est enfin les agents IA.
-24. Contrairement aux automatisations IA où l'IA a un scope qui est réduit à la tâche qui doit faire, pour un agent IA, c'est beaucoup plus varié.
-25. Et en fait, la vraie différence, c'est que c'est lui qui va prendre la décision.
-26. Si vous avez besoin d'aide cet agent pour préparer votre rendez-vous de demain avec votre client, une automatisation serait capable de récupérer les infos du client ou encore de préparer un agenda spécifique.
-27. L'agent, lui, il va décider de toutes ses étapes secondaires.
-28. Donc, par exemple, il va consulter votre CRM pour retirer des infos clients.
-29. Il va regarder l'historique des échanges que vous avez avec lui.
-30. Il va checker votre calendrier pour voir l'heure prévu et ensuite, il va vous préparer un brief complet qui va vous envoyer par mail.
-31. C'est ça la différence, c'est que l'agent va décider lui-même du chemin à prendre pour arriver au résultat.
-32. Maintenant, c'est important de comprendre comment est-ce qu'on décompose un agent IA.
-33. Pour ça, il faut comprendre que pour créer un bon agent I, il faut trois ingrédients essentiels.
-34. Le premier, c'est le modèle de langage, donc le LLM.
-35. Ici, on va retrouver GPT4 par exemple qui est de chat GPT.
-36. On va retrouver Clo, Gemini, Deepsic, bref, tous les modèles de langage qu'on entend partout.
-37. Ensuite, la deuxième chose, c'est les outils, c'est les actions que votre agent il peut réaliser.
-38. Donc par exemple, consulter vos emails, consulter votre calendrier, créer un nouvel événement dans votre calendrier.
-39. Et en réalité, sans les outils, notre agent ne serait qu'un consultant.
-40. Mais ici, il va pouvoir réellement effectuer des tâches parce qu'on va le brancher à nos outils favoris.
-41. Donc Google Calendar, Gmail, Outlook, ClickUp, peu importe, il va pouvoir se connecter à tous ces outils.
-42. Et enfin, la dernière chose et c'est la chose la plus importante, ça va être les instructions.
-43. Les instructions, c'est un peu le manuel d'utilisation que vous allez donner à votre agent pour qu'il puisse effectuer les tâches.
-44. Il faut être extrêmement précis sur toutes les tâches et sur toutes les situations.
-45. Et c'est pour ça que j'aime bien cette comparaison avec les modes d'emploi parce que sur un mode d'emploi, on vous dit quoi faire à X ou Y événement.
-46. Si par exemple votre friteuse, elle est cassée, on vous dit quoi faire.
-47. On vous dit également quel mode de cuisson choisir si vous voulez faire des frites ou des pommes de terre.
-48. Et bien c'est exactement la même chose avec les agents.
-49. Donc au niveau des instructions, il faut surtout pas hésiter à être hyper dense et à couvrir tous les cas possibles.
-50. Par exemple, s'il y a une situation A et une situation B, présentez les deux situations.
-51. Et si dans une situation B, il y a deux sous-situations A ou B, présentez les deux situations.
-52. Comme ça, au plus il aura de contexte, au plus il pourra prendre des bonnes décisions.
-53. Maintenant, vous pouvez vous dire "OK, j'ai compris très clair comment est-ce que je peux le construire
-54. Vous avez plusieurs plateformes qui permettent de le faire, mais les plus répandus sont sans aucun doute Make et N8N.
-55. Et principalement N8N qui est l'un des pionniers sur la création d'agent IA comme ça avec nos outils automatisés.
-56. Et vous allez voir, c'est d'une simplicité assez folle.
-57. La première chose à faire pour construire l'agent, c'est de démarrer avec un déclencheur.
-58. Donc le déclencheur, ça peut être un formulaire qui est rempli, ça peut être aussi un chat qui est démarré, un webbook, c'est-à-dire une donnée qui a été reçue d'une autre application.
-59. Une fois que ça a été déclenché, et bien l'agent va se mettre à travailler et donc on va pouvoir lui connecter une LLM.
-60. Donc là, on a le choix entre Open AI, c'est-à-dire GPT ou encore avec Cloud.
-61. On peut vraiment choisir lequel on veut.
-62. Et une fois que c'est fait, on va pouvoir lui brancher plusieurs outils comme par exemple Google Calendar ou Gmail pour voir les emails.
-63. Ça se fait extrêmement simplement en quelques clics.
-64. Et une fois que vous avez fait ça, il va falloir définir les instructions.
-65. Donc ici, vous pouvez mettre quelque chose de très détaillé sur la marche à suivre et vous allez pouvoir mettre autant de lignes que vous voulez pour avoir des instructions qui sont hyper précises.
-66. N'oubliez pas non plus de faire passer la donnée que vous allez recevoir d'avant.
-67. Et une fois que c'est fait, vous pouvez le déclencher et vous allez avoir ce qu'on appelle un output, c'est-à-dire une sortie après que ça ait mouliné par l'agent IA.
-68. Cet agent IA peut également se connecter avec d'autres agents IA, mais ça j'en parlerai dans une prochaine vidéo.
-69. Maintenant, on va parler d'une innovation qui change la donne, le MCP.
-70. C'est pour modèle context protocole et ça a été créé par Entropic qui est une des boîtes concurrentes de Open AI.
-71. Donc en gros, le MCP c'est un protocole de communication qui standardise comment est-ce qu'on peut communiquer avec les différents outils et comment est-ce que les LLM peuvent communiquer.
-72. Techniquement, sans que ce soit compliqué, c'est un protocole de communication qui permet au modèle DIIA d'interagir avec différents outils.
-73. D'ailleurs, si ça vous intéresse d'aller plus loin, j'ai mis un document en description.
-74. Mais concrètement, imaginez le MCP comme une sorte de connecteur USBC.
-75. Vous voyez sur tous vos smartphones aujourd'hui, tout le monde a de l'USBC.
-76. Pourquoi ?
-77. Bah, c'était tout simplement pour standardiser le port et que tout le monde puisse avoir le même chargeur.
-78. Et bien globalement, le MCP c'est la même chose pour avoir quelque chose de standardisé sur tous les outils.
-79. Parce qu'avant, ce qu'on utilisait, c'était les API.
-80. Et le problème des API, c'est qu'il fallait définir à chaque fois l'action.
-81. Est-ce qu'on a envie de créer un événement ?
-82. Est-ce qu'on a envie de supprimer un événement ?
-83. Est-ce qu'on a envie de modifier un événement ?
-84. Et chaque action avait ce qu'on appelle un call API.
-85. Aujourd'hui, le MCP vous donne accès à l'intégralité des actions qui sont possibles de faire dans une application.
-86. Donc plutôt que de connecter quatre actions différentes, on va connecter juste un MCP.
-87. Si vous voulez, vous pouvez tester sur NN, il y a des intégrations natives et ça vous permet en un clin d'œil de pouvoir ajouter tous vos outils.
-88. Maintenant que vous êtes un pro sur les MCP, c'est important de comprendre quand utiliser un agent parce que si on est honnête aujourd'hui, on est quand même beaucoup plus sur des automatisations IA que sur des agents IA.
-89. Évidemment, ça va de plus en plus progresser vers les agents IA, mais pour certains experts, y compris chez anthropique, et ben c'est un peu sur côté.
-90. Mais il y a quand même des cas où ça va être très utile.
-91. Il y a un4è élément qu'on voit de plus en plus, c'est les rag pour retrieval augmented generation.
-92. Autrement dit, c'est un terme technique qui cache quelque chose de simple.
-93. Donner à votre agent la capacité d'aller chercher dans vos propres documents avant d'effectuer une réponse.
-94. Et au lieu de répondre avec des connaissances générales qu'il a de facto, il va aller chercher dans vos données pour mieux répondre.
-95. Et là, vous allez me dire "Oui, météo, c'est quoi la différence avec un outil classique ?"
-96. Et bien l'outil, il va avoir des actions à réaliser pour obtenir ce que vous voulez.
-97. par exemple obtenir une liste de notes.
-98. Le rag, lui, il va transformer tout le contenu que vous allez lui donner en mémoire.
-99. Il va puiser dans toute la mémoire afin de donner une réponse.
-100. Et pour créer un rag, vous pouvez utiliser des outils comme Pine Cone, Flowwise ou encore Long Chain.
-101. Maintenant, vous pouvez vous dire "OK, ça a l'air hyper cool les agents mais est-ce que c'est pas un peu risqué ?"
-102. Parce que oui, il y a un aspect crucial qu'on oublie souvent, c'est l'intervention humaine.
-103. Dans la vraie vie, même chez les humains, les meilleurs employés ne prennent pas toutes les décisions tout seul.
-104. Ils collaborent avec des gens.
-105. Et bien c'est la même chose pour les agents et il y a une approche qu'on appelle human in the loop qui intègre une supervision stratégique à des moments clés et les outils comme par exemple N8N nous donne la possibilité d'avoir une intervention humaine pour confirmer la théorie de l'agent avant d'effectuer une action.
-106. C'est quelque chose qui est très utile parce que on va pouvoir vraiment considérer l'agent comme un collègue de travail.
-107. Ça y est, maintenant vous savez tout.
-108. La question à se poser, c'est comment et quand utiliser un agent ?
-109. Donc il y a beaucoup de cas d'usage différents, mais ce qui cartonne, c'est effectuer toute une série de tâches répétitives imbriquées.
-110. Par exemple, si je devais écrire un script de vidéo YouTube, je pourrais demander à un agent qui lui-même va demander à un sous-agent qui est spécialisé dans la création d'intro pour YouTube, ensuite un agent qui est spécialisé dans la création de script.
-111. Ensuite, un agent qui est spécialisé dans la création de miniature.
-112. Et cet agent principal qui pilote ses sous-agents pourrait me retourner une vidéo complète.
-113. Ensuite, le deuxième cas d'usage, c'est évidemment le code parce que l'avantage avec le code, c'est qu'on peut très facilement définir si ça marche ou pas.
-114. Et les agents sont plutôt bon à utiliser ça et c'est ce qu'on retrouve beaucoup dans les outils de code assistés par I comme bolt ou Lovable.
-115. Ensuite, il y a des recherches avancées, donc avec les rag, on en a parlé, et il y a l'intégration avec tous vos outils quotidiens comme vos calendriers, ce genre de choses.
-116. Maintenant, les cas où il faut éviter d'utiliser des agents IA, c'est plus pour les agents grand public autonomes.
-117. Vous savez, ceux qui vont prendre le contrôle de votre ordinateur pour faire des réservations de vol et faire un itinéraire de voyage.
-118. Ça, on est encore au stade où c'est toujours plus facile de le faire soi-même.
-119. Et ensuite, la deuxième chose, c'est des tâches à haut risque sans vérification.
-120. Par exemple, moi je ne confierai pas la tâche d'envoyer un email sans le relire à30000 personnes à un agent.
-121. Donc le secret, c'est vraiment de trouver le point d'équilibre entre des tâches qu'on peut déjà commencer à déléguer à des agents et des tâches qu'on ne va pas encore tout de suite déléguer à des agents.
-122. Donc voilà, maintenant vous savez tout ce qu'il faut savoir sur les agent.
-123. Vous en savez probablement plus que95 % des gens qui en parlent sur LinkedIn.
-124. Honnêtement, le monde des agenda évolue à une vitesse folle et ce qui marche aujourd'hui pourrait très bien être obsolète demain.
-125. Donc si vous voulez rester à la page, vous pouvez aussi tester de créer votre premier agent via le lien N en description.
-126. Vous pouvez liker cette vidéo, vous abonner à cette chaîne et accéder à mon starter pack IA100 % gratuit via le premier lien en description.
-127. Et si cette vidéo vous a été utile, dites-moi en commentaire l'agent que vous voudriez que je construise parce que je suis vraiment curieux de savoir ce que vous allez créer.
-128. Et sinon, je vous retrouve dans une prochaine vidéo.
+1. On perd son argent parce que dans tous les cas c'est fait exprès, les codes sont calculés exprès pour que ce soit toujours le même qui gagne.
+2. Quand bien même on arrive à gagner son argent c'est très compliqué de le récupérer.
+3. Compte bloqué, gains annulés, procédure de vérification à rallonge.
+4. On voit toujours le même message.
+5. Oui, notre service de sécurité est en train de traiter votre dossier en cours.
+6. Ces derniers temps, les sites de paris sportifs comme Winamax, Unibet, Betclick et d'autres sont pointés du doigt par les parieurs.
+7. Pour vous prendre votre argent les gars, c'est les premiers, ils sont tout le temps là et dès qu'il faut payer et que c'est une grosse somme, ils annulent les paris.
+8. Des agissements bien loin de respecter la promesse de ces sites de paris.
+9. Dernièrement, le site Winamax a d'ailleurs perdu son procès après avoir refusé de verser les 400 000 € gagnés par l'un de ses joueurs.
+10. Il a été reproché à mon client d'avoir trop gagné.
+11. Même l'opérateur Winamax avait dit qu'il avait moins de chance de réussir un tel coup en matière de paris sportif que de gagner au loto.
+12. Et le juge a rétorqué peut-être qu'ils envisageaient de proposer uniquement des paris perdants.
+13. Un cas qui est loin d'être isolé sur les réseaux sociaux.
+14. De nombreux parieurs affirment avoir été bannis ou bloqués temporairement après l'obtention d'une somme conséquente.
+15. À ce moment-là, le service client est clair avec Ruben.
+16. Il recevra son argent dans les 3 jours ouvrés.
+17. Mais voilà, la demande prend finalement plus de temps pour une investigation plus poussée.
+18. Suite à votre demande, nous vous informons que votre dossier est toujours à l'étude par notre service sécurité.
+19. Nous ne sommes cependant pas en mesure de communiquer quant au délai de traitement de ce dossier.
+20. Ces investigations seraient lancées lorsque le site de paris douterait des agissements de son utilisateur comme la fraude avec l'usage d'un robot, la fraude à la carte bancaire, la fraude avec un avantage déloyal.
+21. En gros, si vous connaissez le résultat du pari avant tout le monde ou encore les paris en groupe.
+22. En droit français, on appelle ça une clause potestative ou abusive et en réalité une conséquence juridique ne peut pas dépendre d'une seule des parties.
+23. Et ces clauses sont souvent floues car rédigées par le site et interprétées par ce même site de façon à embrouiller le joueur suspecté de fraude et de le dissuader de saisir la justice.
+24. On se dit que s'attaquer à Winamax c'est quand même compliqué, tu vois.
+25. Ça va sûrement aussi coûter des frais d'avocat, beaucoup de temps parce qu'on sait la justice française c'est pas rapide.
+26. Donc c'est assez dissuasif.
+27. Le parieur ne connaît même pas ce risque de procédure judiciaire.
+28. Au final, lorsqu'il parie, il s'imagine pas une seule seconde que ça va se terminer au tribunal.
+29. Et si le client réussit toutefois à aller devant une juridiction, certains opérateurs arrivent à échapper à la loi française en établissant leur société dans des paradis fiscaux comme à Malte.
+30. Malte est un paradis judiciaire et qu'il est très difficile de signifier les actes français à Malte.
+31. Il y a une règle, c'est la règle du taux de retour aux joueurs.
+32. En clair, cette règle ordonne aux sites de paris sportifs de ne pas verser des gains supérieurs à 85 % des sommes engagées par leurs joueurs au cours des 6 derniers mois.
+33. Par exemple, si sur cette période un bookmaker reçoit 100 millions de mises, la somme maximum des gains qu'il peut reverser est de 85 millions d'euros.
+34. La règle du taux de retour aux joueurs permet à l'Autorité nationale des jeux de sanctionner un opérateur qui ne respecterait pas cette règle.
+35. Les opérateurs, un des mécanismes est de ne pas payer les gains parce que sinon vous allez franchir ce plafond.
+36. Donc les gros parieurs, les gros gagnants ne sont pas payés.
+37. Bien loin, donc, des belles promesses de ces sites de paris sportifs.
+38. C'est une pénalité en vrai.
+39. Il y en a 6000 € ça peut vraiment les sauver de éponger des dettes, sauver une famille et tout.
+40. Donc c'est pas réglo.
+41. Si vous êtes joueur perdant, pas de problème.
+42. Vous pouvez jouer à plusieurs.
+43. Du moment que vous perdez, il n'y a aucun problème.
+44. Mais dès lors que vous gagnez, là ça pose un problème à l'opérateur.
+45. La règle à observer et la première question à se poser, c'est est-ce que le parieur a un profil gagnant ou perdant ?

@@ -1,128 +1,45 @@
-1. You hear about agents everywhere and you get the impression that there's an elite group of techies who are ahead of you.
-2. Don't worry because I'm here to explain everything to you in 10 minutes and believe me, I'm going to take you to orbit so you can understand everything about agents and start grasping this gigantic opportunity.
-3. Because yes, you've probably heard this term everywhere.
-4. Build agents, the future is agent-based, agents are going to revolutionize businesses.
-5. But what is an agent, concretely?
-6. How does it work?
-7. Is it really worth paying attention to or is it just marketing hype?
-8. We're going to explore all of this in this video.
-9. First, we're going to start by demystifying all of this because to understand AI agents, you need to understand AI as a whole.
-10. First, there was the first level of understanding, which is making prompts.
-11. This is roughly what you've known since the arrival of Chat GPT.
-12. You ask a question, the AI responds, and that's it.
-13. For example, you can ask Chat GPT to create a personalized workout plan, and it will do it.
-14. At that point, there's an interaction.
-15. The problem is that every time you have to send what you want to the AI to get a response.
-16. Then there's level 2, which is what we call AI automation.
-17. This is maybe something you've started doing with tools like Make or Zapier.
-18. Basically, the AI follows a sequence of steps you've predefined, and it uses the AI within a single step to transform something.
-19. For example, when I receive an email, summarize it, translate it into French, and then add it to my CRM.
-20. That's something that's fairly predictable since the AI will follow what you've told it to do.
-21. The problem is that once again, it's you who's making the decision, it's you who's building your automation, and the AI is simply applying it.
-22. The AI will ask itself many questions related to this.
-23. Then there's level 3, which is finally AI agents.
-24. Unlike AI automations where the AI has a scope that's limited to the task it needs to perform, for an AI agent, it's much more varied.
-25. And in fact, the real difference is that it's the AI that makes the decision.
-26. If you need help from this agent to prepare your meeting tomorrow with your client, an automation would be able to retrieve the client's information or prepare a specific schedule.
-27. The agent, on the other hand, will decide on all these secondary steps.
-28. So, for example, it will consult your CRM to retrieve customer information.
-29. It will look at the history of exchanges you've had with them.
-30. It will check your calendar to see the scheduled time, and then it will prepare a complete brief that it will send to you by email.
-31. That's the difference; the agent will decide on its own the path to take to achieve the result.
-32. Now, it's essential to understand how to break down an AI agent.
-33. To do this, you need to understand that to create a good AI agent, you need three essential ingredients.
-34. The first is the language model, so the LLM.
-35. Here, you'll find GPT4, for example, which is from Chat GPT.
-36. You'll also find Clou, Gemini, Deepsic, and all the language models you've heard about everywhere.
-37. Then, the second thing is the tools, which are the actions your agent can perform.
-38. So, for example, consulting your emails, consulting your calendar, creating a new event in your calendar.
-39. And in reality, without the tools, our agent would just be a consultant.
-40. But here, it will be able to actually perform tasks because we'll connect it to our favorite tools.
-41. So, Google Calendar, Gmail, Outlook, ClickUp, whatever, it will be able to connect to all these tools.
-42. And finally, the last thing, and it's the most important, will be the instructions.
-43. The instructions are a bit like the user manual you'll give to your agent so it can perform tasks.
-44. You need to be extremely precise on all tasks and all situations.
-45. And that's why I like this comparison with user manuals because in a user manual, they tell you what to do in case of X or Y event.
-46. If, for example, your deep fryer is broken, it tells you what to do.
-47. It also tells you which cooking mode to choose if you want to make fries or potatoes.
-48. And it's exactly the same with agents.
-49. So, at the level of instructions, you shouldn't hesitate to be extremely detailed and cover all possible cases.
-50. For example, if there's situation A and situation B, present both situations.
-51. And if in situation B, there are two sub-situations A or B, present both situations.
-52. The more context it has, the better decisions it will be able to make.
-53. Now, you might be thinking, "OK, I understand very clearly how to build one."
-54. You have several platforms that allow you to do this, but the most widespread are undoubtedly Make and N8N.
-55. And mainly N8N, which is one of the pioneers in creating AI agents like this with our automated tools.
-56. And you'll see, it's incredibly simple.
-57. The first thing to do to build an agent is to start with a trigger.
-58. So, the trigger can be a form that's filled out, it can also be a chat that's started, a webhook, that is, data that's been received from another application.
-59. Once it's been triggered, the agent will start working, and so we'll be able to connect an LLM to it.
-60. So, here, we have the choice between Open AI, that is, GPT, or Cloud.
-61. We can really choose which one we want.
-62. And once that's done, we'll be able to connect several tools to it, such as Google Calendar or Gmail to check emails.
-63. It's done extremely simply in a few clicks.
-64. And once you've done that, you'll need to define the instructions.
-65. So, here, you can put something very detailed on the steps to follow, and you'll be able to put as many lines as you want to have hyper-precise instructions.
-66. Don't forget to also pass on the data that you'll receive beforehand.
-67. And once that's done, you can trigger it, and you'll get what we call an output, that is, a result after it's been processed by the AI agent.
-68. This AI agent can also connect with other AI agents, but I'll talk about that in a future video.
-69. Now, we're going to talk about an innovation that's changing the game, the MCP.
-70. It's for model context protocol, and it was created by Entropic, which is one of the competing companies of Open AI.
-71. So, basically, the MCP is a communication protocol that standardizes how we can communicate with different tools and how LLMs can communicate.
-72. Technically, without it being complicated, it's a communication protocol that allows the AI model to interact with different tools.
-73. If you're interested in going further, I've put a document in the description.
-74. But concretely, imagine the MCP as a sort of USBC connector.
-75. You see it on all your smartphones today; everyone has USBC.
-76. Why?
-77. Well, it was simply to standardize the port so everyone could have the same charger.
-78. And globally, the MCP is the same thing to have something standardized across all tools.
-79. Because before, what we used were APIs.
-80. And the problem with APIs is that you had to define each time the action.
-81. Do we want to create an event?
-82. Do we want to delete an event?
-83. Do we want to modify an event?
-84. And each action had what we call an API call.
-85. Today, the MCP gives you access to all the actions that are possible to do in an application.
-86. So, rather than connecting four different actions, we'll just connect one MCP.
-87. If you want, you can test it on N8N; there are native integrations, and it allows you to add all your tools in the blink of an eye.
-88. Now that you're a pro on MCPs, it's essential to understand when to use an agent because if we're honest today, we're still much more on AI automations than on AI agents.
-89. Obviously, it's going to progress more and more towards AI agents, but for some experts, including those at Anthropique, it's a bit on the side.
-90. But there are still cases where it's going to be very useful.
-91. There's a 4th element that we're seeing more and more, which is rag for retrieval-augmented generation.
-92. In other words, it's a technical term that hides something simple.
-93. Giving your agent the ability to go and search in your own documents before making a response.
-94. And instead of responding with general knowledge it has de facto, it will go and search in your data to respond better.
-95. And here, you'll say, "Yes, but what's the difference with a classic tool?"
-96. Well, the tool will have actions to perform to get what you want.
-97. For example, getting a list of notes.
-98. The rag, on the other hand, will transform all the content you give it into memory.
-99. It will draw from all the memory to give a response.
-100. And to create a rag, you can use tools like Pine Cone, Flowwise, or Long Chain.
-101. Now, you might be thinking, "OK, this sounds super cool, but isn't it a bit risky?"
-102. Because yes, there's a crucial aspect that we often forget, which is human intervention.
-103. In real life, even among humans, the best employees don't make all the decisions on their own.
-104. They collaborate with others.
-105. And it's the same thing for agents, and there's an approach called human-in-the-loop that integrates strategic supervision at key moments, and tools like N8N, for example, give us the possibility of having human intervention to confirm the agent's theory before performing an action.
-106. It's something that's very useful because we're going to be able to really consider the agent as a work colleague.
-107. There you have it; now you know everything.
-108. The question to ask is how and when to use an agent?
-109. So, there are many different use cases, but what's working well is performing a whole series of repetitive, nested tasks.
-110. For example, if I had to write a YouTube video script, I could ask an agent that would itself ask a sub-agent specializing in creating YouTube intros, then an agent specializing in script creation.
-111. Then, an agent specializing in creating thumbnails.
-112. And this main agent that controls its sub-agents could return a complete video to me.
-113. Then, the second use case is obviously code because the advantage with code is that we can very easily define if it works or not.
-114. And agents are rather good at using it, and that's what we find a lot in AI-assisted code tools like Bolt or Lovable.
-115. Then, there are advanced searches, so with rags, we talked about it, and there's integration with all your daily tools like your calendars, this kind of thing.
-116. Now, the cases where you should avoid using AI agents are more for autonomous public agents.
-117. You know, those that will take control of your computer to make flight reservations and make a travel itinerary.
-118. That's something we're still at the stage where it's always easier to do it yourself.
-119. And then, the second thing is high-risk tasks without verification.
-120. For example, I wouldn't entrust the task of sending an email without rereading it to 30,000 people to an agent.
-121. So, the secret is really to find the point of balance between tasks that we can already start delegating to agents and tasks that we won't yet delegate to agents.
-122. So, there you have it; now you know everything you need to know about agents.
-123. You probably know more than 95% of people who talk about it on LinkedIn.
-124. Honestly, the world of AI is evolving at a crazy speed, and what works today could very well be obsolete tomorrow.
-125. So, if you want to stay up to date, you can also test creating your first agent via the N8N link in the description.
-126. You can like this video, subscribe to this channel, and access my 100% free AI starter pack via the first link in the description.
-127. And if this video was useful to you, tell me in the comments which agent you'd like me to build because I'm really curious to know what you'll create.
-128. And otherwise, I'll see you in the next video.
+1. We lose our money because in any case it's done on purpose, the codes are calculated on purpose so that it's always the same person who wins.
+2. Even if we manage to win our money, it's very complicated to recover it.
+3. Account blocked, winnings cancelled, lengthy verification procedure.
+4. We always see the same message.
+5. Yes, our security service is currently processing your ongoing file.
+6. Recently, sports betting sites like Winamax, Unibet, Betclick and others have been pointed out by bettors.
+7. To take your money, the guys are always there, and as soon as it's time to pay and it's a large sum, they cancel the bets.
+8. Actions that are far from respecting the promise of these betting sites.
+9. Recently, the Winamax site lost its lawsuit after refusing to pay out the €400,000 won by one of its players.
+10. My client was accused of winning too much.
+11. Even the Winamax operator had said that he had less chance of succeeding in such a sports betting coup than winning the lottery.
+12. And the judge retorted that maybe they were planning to offer only losing bets.
+13. A case that is far from being isolated on social media.
+14. Many bettors claim to have been banned or temporarily blocked after obtaining a substantial sum.
+15. At that moment, the customer service is clear with Ruben.
+16. He will receive his money within 3 working days.
+17. But the request ultimately takes longer for a more in-depth investigation.
+18. Following your request, we inform you that your file is still being studied by our security service.
+19. We are however unable to communicate the processing time for this file.
+20. These investigations would be launched when the betting site doubts the actions of its user, such as fraud using a robot, credit card fraud, or fraud with unfair advantage.
+21. In other words, if you know the result of the bet before anyone else, or if you bet in a group.
+22. In French law, this is called a potestative or abusive clause, and in reality, a legal consequence cannot depend on only one of the parties.
+23. And these clauses are often vague because they are written by the site and interpreted by the same site in a way to confuse the player suspected of fraud and dissuade them from taking legal action.
+24. We think that taking on Winamax is quite complicated, you know.
+25. It's going to cost lawyer's fees, a lot of time, because we know the French justice system is not fast.
+26. So it's quite discouraging.
+27. The bettor doesn't even know the risk of judicial proceedings.
+28. Ultimately, when he bets, he doesn't imagine for a second that it will end up in court.
+29. And if the customer manages to go to court, some operators manage to escape French law by establishing their company in tax havens like Malta.
+30. Malta is a judicial paradise, and it's very difficult to serve French documents in Malta.
+31. There is a rule, it's the player return rate rule.
+32. In clear terms, this rule requires sports betting sites not to pay out winnings exceeding 85% of the amounts staked by their players over the last 6 months.
+33. For example, if during this period a bookmaker receives €100 million in bets, the maximum amount of winnings he can pay out is €85 million.
+34. The player return rate rule allows the National Gaming Authority to sanction an operator who does not respect this rule.
+35. Operators use one of the mechanisms, which is not to pay out winnings because otherwise, you will exceed this ceiling.
+36. So big bettors, big winners are not paid.
+37. Far from, therefore, the fine promises of these sports betting sites.
+38. It's a penalty, really.
+39. There's €6000 that can really save them from drowning in debt, save a family and everything.
+40. So it's not fair.
+41. If you're a losing player, no problem.
+42. You can play multiple times.
+43. As long as you lose, there's no problem.
+44. But as soon as you win, that's when it becomes a problem for the operator.
+45. The rule to observe and the first question to ask is, does the bettor have a winning or losing profile?

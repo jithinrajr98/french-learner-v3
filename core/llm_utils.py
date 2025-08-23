@@ -154,36 +154,52 @@ class LLMUtils:
         
         
     def youtube_french_sentence_generator(self, transcript: str) -> str:
-        """
-        Generate a numbered list of French sentences from a YouTube transcript.
-        
-        Args:
-            transcript: The YouTube transcript text
+            """
+            Generate a numbered list of French sentences from a YouTube transcript.
             
-        Returns:
-            A string with numbered French sentences
-        """
-        prompt = f"""Extract and number the French sentences from the following transcript: {transcript}.
-        Do not modify the sentences, just return them as a numbered list.
-        Try to keep the sentences as short as possible while maintaining their meaning.
+            Args:
+                transcript: The YouTube transcript text
+                
+            Returns:
+                A string with numbered French sentences
+            """
+            prompt = f"""ANALYZE this YouTube transcript and EXTRACT all complete French sentences:
+
+        TRANSCRIPT:
+        {transcript}
+
+        INSTRUCTIONS:
+        1. Extract ONLY complete, grammatically correct French sentences
+        2. PRESERVE the original wording, verb forms, tense, and sentence structure exactly as spoken
+        3. If a sentence is too long or complex, you may split it into shorter sentences BUT only at natural pause points
+        4. OMIT incomplete phrases, filler words, repetitions, and non-French content
+        5. NUMBER each sentence sequentially
+        6. Return ONLY the numbered list without any additional text or explanations
+
+        CRITERIA for what constitutes a sentence:
+        - Must have a subject and predicate
+        - Must express a complete thought
+        - Should be a self-contained utterance
+
+        OUTPUT FORMAT:
+        1. First complete French sentence
+        2. Second complete French sentence
+        3. Third complete French sentence
+        ..."""
+
+            try:
+                response = self.groq_client.chat.completions.create(
+                    messages=[{"role": "user", "content": prompt}],
+                    model=GROQ_TRANSCRIPT_MODEL,
+                    temperature=0.1,  # Lower temperature for more consistent results
+                    max_tokens=2000   # Adjust based on expected output length
+                )
+                response = response.choices[0].message.content.strip()
+                
+            except Exception as e:
+                return f"Error: {str(e)}"
         
-        Format the output like this do not include any additional text or explanations:
-        1. French Sentence one
-        2. French Sentence two
-        3. French Sentence three"""
-        
-        try:
-            response  = self.groq_client.chat.completions.create(
-                messages=[{"role": "user", "content": prompt}],
-                model=GROQ_TRANSCRIPT_MODEL
-            )
-            response =  response.choices[0].message.content.strip()
-        
-            
-        except Exception as e:
-            return f"Error: {str(e)}"
-        
-        return response
+            return response
     
     
     def youtube_english_sentence_generator(self, french_transcript: str) -> str:

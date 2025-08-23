@@ -1,10 +1,12 @@
 import streamlit as st
 from core.database import get_all_saved_words, delete_saved_word
+from core.database_supabase import SupabaseDB
 import random
 from core.audio import play_audio_mobile_compatible
 from core.llm_utils import LLMUtils
 
 llm_utils = LLMUtils()
+supabase_client = SupabaseDB()
 
 def vocab_practise():
     
@@ -39,11 +41,19 @@ def vocab_practise():
     st.divider()
     st.markdown("#### 🎯 Vocabulary Workout")
     st.caption("Practice your vocabulary with saved words. Click 'New Word' to get started or 'Delete Word' to remove a word from your list.")
+    
     # Initialize session state
     if 'word_index' not in st.session_state:
         st.session_state.word_index = 0
 
-    saved_words = get_all_saved_words()
+    # Get saved words from Supabase
+    try:
+        saved_words_data = supabase_client.get_all_saved_words()
+        # Convert Supabase data format to match original format (word, meaning, timestamp)
+        saved_words = [(item['word'], item['meaning'], item.get('added_on', '')) for item in saved_words_data]
+    except Exception as e:
+        st.error(f"Error fetching vocabulary: {e}")
+        saved_words = []
 
     if not saved_words:
         st.info("📚 No words available. Add some words to your vocabulary first!")
@@ -68,13 +78,21 @@ def vocab_practise():
 
     with col2:
         if st.button("🗑️ Delete Word", use_container_width=True):
-            delete_saved_word(current_word)  
-            st.success(f"Deleted word: `{current_word}`")
-            if len(saved_words) > 1:
-                st.session_state.word_index = random.randint(0, len(saved_words) - 2)
-            else:
-                st.session_state.word_index = 0
-            st.rerun()
+            try:
+                supabase_client.delete_saved_word(current_word)
+                st.success(f"Deleted word: `{current_word}`")
+                
+                # Update saved_words list after deletion
+                saved_words_data = supabase_client.get_all_saved_words()
+                saved_words = [(item['word'], item['meaning'], item.get('added_on', '')) for item in saved_words_data]
+                
+                if len(saved_words) > 0:
+                    st.session_state.word_index = random.randint(0, len(saved_words) - 1)
+                else:
+                    st.session_state.word_index = 0
+                st.rerun()
+            except Exception as e:
+                st.error(f"Error deleting word: {e}")
     
     st.markdown("---")
 
@@ -104,10 +122,13 @@ def vocab_practise():
             play_audio_mobile_compatible(st.session_state.example_sentence,)
     
     # Conjugation details (if it's a verb)
-    conjugation_info = llm_utils.conjugation_details(current_word)
-    if conjugation_info and "not a verb" not in conjugation_info.lower():
-        st.markdown("### 🔄 Conjugation")
-        st.info(conjugation_info)
+    try:
+        conjugation_info = llm_utils.conjugation_details(current_word)
+        if conjugation_info and "not a verb" not in conjugation_info.lower():
+            st.markdown("### 🔄 Conjugation")
+            st.info(conjugation_info)
+    except Exception as e:
+        st.warning(f"Could not load conjugation details: {e}")
 
     st.markdown("---")
   

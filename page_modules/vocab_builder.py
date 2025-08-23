@@ -4,10 +4,25 @@ from core.audio import play_audio, play_audio_mobile_compatible
 from core.database import save_score, save_missing_words, get_all_saved_words, delete_saved_word
 import sqlite3
 from config.settings import DB_PATH
+from core.database_supabase import SupabaseDB
+
 
 llm_utils = LLMUtils()
 
+def get_database_client():
+    """Get database client with fallback logic"""
+    try:
+        supabase_client = SupabaseDB()
+        # Test connection
+        supabase_client.get_all_saved_words()
+        return supabase_client, "supabase"
+    except Exception:
+        return None, "sqlite"
+
 def vocab_builder():
+    # Get database client
+    db_client, db_type = get_database_client()
+    
     # Minimal CSS for compact layout
     st.markdown("""
     <style>
@@ -61,12 +76,22 @@ def vocab_builder():
     </style>
     """, unsafe_allow_html=True)
     st.divider()
+    
     # Header
     st.markdown("#### 📚 Vocabulary")
     st.caption("Build your French vocabulary by adding new words and their meanings. You can also listen to the pronunciation of each word.")
-    # Get total word count
-    with sqlite3.connect(DB_PATH) as conn:
-        total_words = conn.execute("SELECT COUNT(*) FROM missing_words").fetchone()[0]
+    
+    # Get total word count based on database type
+    try:
+        if db_type == "supabase" and db_client:
+            saved_words_data = db_client.get_all_saved_words()
+            total_words = len(saved_words_data)
+        else:
+            with sqlite3.connect(DB_PATH) as conn:
+                total_words = conn.execute("SELECT COUNT(*) FROM missing_words").fetchone()[0]
+    except Exception as e:
+        st.error(f"Error getting word count: {e}")
+        total_words = 0
     
     st.success(f"**Words in vocab:** {total_words}", icon="📖")
     st.divider()
@@ -88,18 +113,45 @@ def vocab_builder():
             if len(new_word) <= 3:
                 st.warning("Word must be longer than 3 characters")
             else:
-                with sqlite3.connect(DB_PATH) as conn:
-                    existing = conn.execute("SELECT 1 FROM missing_words WHERE word = ?", (new_word,)).fetchone()
-                    if existing:
-                        st.info(f"'{new_word}' already exists")
+                try:
+                    if db_type == "supabase" and db_client:
+                        # Check if word exists in Supabase
+                        existing_words = db_client.supabase.table('missing_words').select('word').eq('word', new_word).execute()
+                        
+                        if existing_words.data:
+                            st.info(f"'{new_word}' already exists")
+                        else:
+                            with st.spinner("Getting meaning..."):
+                                # Correct French accents
+                                corrected_word = llm_utils.correct_french_accents(new_word)
+                                # Get meaning
+                                meaning = llm_utils.get_french_word_meaning(corrected_word)
+                                
+                                # Save to Supabase
+                                db_client.supabase.table('missing_words').insert({
+                                    'word': corrected_word,
+                                    'meaning': meaning
+                                }).execute()
+                                
+                            st.success(f"Added '{corrected_word}' to Supabase")
+                            st.rerun()
                     else:
-                        with st.spinner("Getting meaning..."):
-                            new_word = llm_utils.correct_french_accents(new_word)
-                            meaning = llm_utils.get_french_word_meaning(new_word)
-                            conn.execute("INSERT INTO missing_words (word, meaning) VALUES (?, ?)", (new_word, meaning))
-                            conn.commit()
-                        st.success(f"Added '{new_word}'")
-                        st.rerun()
+                        # Use SQLite
+                        with sqlite3.connect(DB_PATH) as conn:
+                            existing = conn.execute("SELECT 1 FROM missing_words WHERE word = ?", (new_word,)).fetchone()
+                            if existing:
+                                st.info(f"'{new_word}' already exists")
+                            else:
+                                with st.spinner("Getting meaning..."):
+                                    corrected_word = llm_utils.correct_french_accents(new_word)
+                                    meaning = llm_utils.get_french_word_meaning(corrected_word)
+                                    conn.execute("INSERT INTO missing_words (word, meaning) VALUES (?, ?)", (corrected_word, meaning))
+                                    conn.commit()
+                                st.success(f"Added '{corrected_word}' to local database")
+                                st.rerun()
+                                
+                except Exception as e:
+                    st.error(f"Error adding word: {e}")
     
     with add_col3:
         if st.button("🔍 Search vocab", key="search_button", use_container_width=True):
@@ -108,8 +160,17 @@ def vocab_builder():
     
     st.divider()
     
-    # Vocabulary list
-    saved_words = get_all_saved_words()
+    # Get vocabulary list based on database type
+    try:
+        if db_type == "supabase" and db_client:
+            saved_words_data = db_client.get_all_saved_words()
+            # Convert Supabase data format to match original format (word, meaning, timestamp)
+            saved_words = [(item['word'], item['meaning'], item.get('added_on', '')) for item in saved_words_data]
+        else:
+            saved_words = get_all_saved_words()
+    except Exception as e:
+        st.error(f"Error fetching vocabulary: {e}")
+        saved_words = []
     
     search_term = st.session_state.get('search_term', '')
     
@@ -149,8 +210,16 @@ def vocab_builder():
                     play_audio_mobile_compatible(word)
             with row_cols[3]:
                 if st.button("🗑️", key=f"delete_{word}", help="Delete"):
-                    delete_saved_word(word)
-                    st.rerun()
+                    try:
+                        if db_type == "supabase" and db_client:
+                            db_client.delete_saved_word(word)
+                            st.success(f"Deleted '{word}' from Supabase")
+                        else:
+                            delete_saved_word(word)
+                            st.success(f"Deleted '{word}' from local database")
+                        st.rerun()
+                    except Exception as e:
+                        st.error(f"Error deleting word: {e}")
     
     else:
         if not search_term:
