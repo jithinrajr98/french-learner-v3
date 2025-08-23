@@ -1,19 +1,16 @@
-import mariadb
+import mysql.connector
 from typing import List, Tuple, Optional
 from pathlib import Path
 from datetime import datetime
 import pandas as pd
 import streamlit as st
-from config.settings import SKYSQL_CONFIG, DB_PATH
+from config.settings import DB_PATH
 from core.llm_utils import LLMUtils
 import os
 from dotenv import load_dotenv
 load_dotenv()
 
-
 llm_utils = LLMUtils()
-
-
 
 # Try to get SkySQL configuration from Streamlit secrets first, then environment variables
 skysql_config = {}
@@ -68,71 +65,84 @@ elif 'SKYSQL_DATABASE' in os.environ:
 if not database:
     raise ValueError("SKYSQL_DATABASE not found in Streamlit secrets or environment variables.")
 
-# Create the final configuration dictionary
+# Create the final configuration dictionary - FIXED for MariaDB compatibility
 SKYSQL_CONFIG = {
     'host': host,
     'port': port,
     'user': user,
     'password': password,
     'database': database,
-    'ssl_verify_cert': True,
-    'autocommit': True
+    'ssl_verify_cert': False,
+    'autocommit': True,
+    'charset': 'utf8mb4',  # Explicitly set charset
+    'collation': 'utf8mb4_unicode_ci'  # Use MariaDB-compatible collation
 }
-
-
 
 def get_skysql_connection():
     """Get a connection to SkySQL MariaDB"""
     try:
-        conn = mariadb.connect(**SKYSQL_CONFIG)
+        conn = mysql.connector.connect(**SKYSQL_CONFIG)
         return conn
-    except mariadb.Error as e:
+    except mysql.connector.Error as e:
         st.error(f"Error connecting to SkySQL: {e}")
         raise
 
 def init_db():
-    """Initialize the database in SkySQL"""
+    """Initialize the database in SkySQL - FIXED for MariaDB compatibility"""
     try:
-        # First create database if it doesn't exist
+        # First create database if it doesn't exist - WITH EXPLICIT CHARSET AND COLLATION
         config_without_db = SKYSQL_CONFIG.copy()
         config_without_db.pop('database', None)
         
-        with mariadb.connect(**config_without_db) as conn:
+        with mysql.connector.connect(**config_without_db) as conn:
             cursor = conn.cursor()
-            cursor.execute("CREATE DATABASE IF NOT EXISTS french_db")
+            # Create database with explicit charset and collation for MariaDB
+            cursor.execute("""
+                CREATE DATABASE IF NOT EXISTS french_db 
+                CHARACTER SET utf8mb4 
+                COLLATE utf8mb4_unicode_ci
+            """)
             conn.commit()
         
-        # Now create tables in the database
+        # Now create tables in the database - WITH EXPLICIT CHARSET AND COLLATION
         with get_skysql_connection() as conn:
             cursor = conn.cursor()
             
-            # Create missing_words table
+            # Create missing_words table with explicit charset
             cursor.execute('''
                 CREATE TABLE IF NOT EXISTS missing_words (
                     word VARCHAR(255) PRIMARY KEY,
-                    meaning TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+                    meaning TEXT,
                     added_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+                ) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
             ''')
             
-            # Create translation_scores table
+            # Create translation_scores table with explicit charset
             cursor.execute('''
                 CREATE TABLE IF NOT EXISTS translation_scores (
                     id INT AUTO_INCREMENT PRIMARY KEY,
-                    sentence TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-                    user_translation TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+                    sentence TEXT,
+                    user_translation TEXT,
                     score INT,
-                    checked_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                    INDEX idx_checked_on (checked_on),
-                    INDEX idx_score (score)
-                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+                    checked_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                ) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
             ''')
+            
+            # Add indexes separately to keep it simple
+            try:
+                cursor.execute("CREATE INDEX IF NOT EXISTS idx_checked_on ON translation_scores (checked_on)")
+            except mysql.connector.Error:
+                pass  # Index might already exist
+                
+            try:
+                cursor.execute("CREATE INDEX IF NOT EXISTS idx_score ON translation_scores (score)")
+            except mysql.connector.Error:
+                pass  # Index might already exist
             
             conn.commit()
             
-    except mariadb.Error as e:
+    except mysql.connector.Error as e:
         raise Exception(f"Database initialization error: {e}")
-
 
 def save_missing_words(words: list):
     """Save missing words to SkySQL"""
@@ -143,7 +153,7 @@ def save_missing_words(words: list):
                 if len(word.strip()) <= 3:
                     continue
                 
-                # Check if word already exists - Use %s for MariaDB, not ?
+                # Check if word already exists
                 cursor.execute("SELECT 1 FROM missing_words WHERE word = %s", (word,))
                 existing = cursor.fetchone()
                 
@@ -154,7 +164,7 @@ def save_missing_words(words: list):
                         (word, meaning)
                     )
             conn.commit()
-    except mariadb.Error as e:
+    except mysql.connector.Error as e:
         st.error(f"Error saving words: {e}")
 
 def save_score(sentence, user_translation, score):
@@ -167,7 +177,7 @@ def save_score(sentence, user_translation, score):
                 (sentence, user_translation, score)
             )
             conn.commit()
-    except mariadb.Error as e:
+    except mysql.connector.Error as e:
         st.error(f"Error saving score: {e}")
 
 def get_all_saved_words():
@@ -178,7 +188,7 @@ def get_all_saved_words():
             cursor.execute("SELECT word, meaning, added_on FROM missing_words ORDER BY added_on DESC")
             rows = cursor.fetchall()
         return rows
-    except mariadb.Error as e:
+    except mysql.connector.Error as e:
         st.error(f"Error fetching words: {e}")
         return []
 
@@ -189,7 +199,7 @@ def delete_saved_word(word):
             cursor = conn.cursor()
             cursor.execute("DELETE FROM missing_words WHERE word = %s", (word,))
             conn.commit()
-    except mariadb.Error as e:
+    except mysql.connector.Error as e:
         st.error(f"Error deleting word: {e}")
 
 def get_score_history():
@@ -210,12 +220,10 @@ def get_score_history():
             if not df.empty and 'score' in df.columns:
                 df = df.rename(columns={'score': 'Score'})
         return df
-    except mariadb.Error as e:
+    except mysql.connector.Error as e:
         st.error(f"Error fetching score history: {e}")
         return pd.DataFrame()
-    
-    
-    
+
 def get_word_count():
     """Get total word count from SkySQL"""
     try:
@@ -256,7 +264,6 @@ def add_single_word(word):
         st.error(f"Error adding word: {e}")
         return None, None
 
-
 def get_daily_scores():
     """Get average scores grouped by day from SkySQL"""
     try:
@@ -274,7 +281,7 @@ def get_daily_scores():
             """
             df = pd.read_sql_query(query, conn)
         return df
-    except mariadb.Error as e:
+    except mysql.connector.Error as e:
         st.error(f"Error fetching daily scores: {e}")
         return pd.DataFrame()
 
@@ -296,7 +303,7 @@ def get_weekly_progress():
             """
             df = pd.read_sql_query(query, conn)
         return df
-    except mariadb.Error as e:
+    except mysql.connector.Error as e:
         st.error(f"Error fetching weekly progress: {e}")
         return pd.DataFrame()
 
@@ -334,7 +341,7 @@ def get_score_statistics():
                     'days_active': 0
                 }
         return stats
-    except mariadb.Error as e:
+    except mysql.connector.Error as e:
         st.error(f"Error fetching score statistics: {e}")
         return {}
 

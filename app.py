@@ -1,6 +1,6 @@
 from config.styles import apply_custom_styles, header_section, sidebar_navigation, set_page_config
 from core.database_skysql import init_db
-from config.settings import DB_PATH, SKYSQL_CONFIG
+from config.settings import DB_PATH
 import streamlit as st
 from page_modules.writing_practise import writing
 from page_modules.vocab_builder import vocab_builder

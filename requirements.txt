@@ -37,7 +37,6 @@ jupyter-core==5.8.1
 langchain-core==0.3.74
 langchain-ollama==0.3.6
 langsmith==0.4.14
-mariadb==1.1.13
 markupsafe==3.0.2
 matplotlib-inline==0.1.7
 mysql-connector-python==8.0.33
