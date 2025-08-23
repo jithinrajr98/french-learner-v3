@@ -1,12 +1,11 @@
 import streamlit as st
 from core.llm_utils import LLMUtils
 from core.audio import play_audio, play_audio_mobile_compatible
-from core.database_skysql import save_score, save_missing_words, get_all_saved_words, delete_saved_word,get_word_count, check_word_exists, add_single_word
+from core.database import save_score, save_missing_words, get_all_saved_words, delete_saved_word
 import sqlite3
 from config.settings import DB_PATH
 
 llm_utils = LLMUtils()
-
 
 def vocab_builder():
     # Minimal CSS for compact layout
@@ -61,15 +60,14 @@ def vocab_builder():
         }
     </style>
     """, unsafe_allow_html=True)
-    
     st.divider()
-    
     # Header
     st.markdown("#### 📚 Vocabulary")
     st.caption("Build your French vocabulary by adding new words and their meanings. You can also listen to the pronunciation of each word.")
+    # Get total word count
+    with sqlite3.connect(DB_PATH) as conn:
+        total_words = conn.execute("SELECT COUNT(*) FROM missing_words").fetchone()[0]
     
-    # Get total word count from SkySQL
-    total_words = get_word_count()
     st.success(f"**Words in vocab:** {total_words}", icon="📖")
     st.divider()
     
@@ -77,21 +75,12 @@ def vocab_builder():
     st.markdown("**➕ Add New Word**")
     add_col1, add_col2, add_col3 = st.columns([3, 1, 1])
     
-    # Check if we need to clear the input after adding a word
-    default_value = ""
-    if st.session_state.get('word_added', False):
-        st.session_state.word_added = False
-        # Force a rerun to show the cleared input
-        if 'add_word_input' in st.session_state:
-            del st.session_state.add_word_input
-    
     with add_col1:
         new_word = st.text_input(
             "",
             placeholder="Enter French word...",
             label_visibility="collapsed",
-            key="add_word_input",
-            value=default_value
+            key="add_word_input"
         ).strip()
     
     with add_col2:
@@ -99,17 +88,18 @@ def vocab_builder():
             if len(new_word) <= 3:
                 st.warning("Word must be longer than 3 characters")
             else:
-                # Check if word already exists
-                if check_word_exists(new_word):
-                    st.info(f"'{new_word}' already exists")
-                else:
-                    with st.spinner("Getting meaning..."):
-                        corrected_word, meaning = add_single_word(new_word)
-                        if corrected_word and meaning:
-                            st.success(f"Added '{corrected_word}'")
-                            # Use a flag to trigger rerun and clear input
-                            st.session_state.word_added = True
-                            st.rerun()
+                with sqlite3.connect(DB_PATH) as conn:
+                    existing = conn.execute("SELECT 1 FROM missing_words WHERE word = ?", (new_word,)).fetchone()
+                    if existing:
+                        st.info(f"'{new_word}' already exists")
+                    else:
+                        with st.spinner("Getting meaning..."):
+                            new_word = llm_utils.correct_french_accents(new_word)
+                            meaning = llm_utils.get_french_word_meaning(new_word)
+                            conn.execute("INSERT INTO missing_words (word, meaning) VALUES (?, ?)", (new_word, meaning))
+                            conn.commit()
+                        st.success(f"Added '{new_word}'")
+                        st.rerun()
     
     with add_col3:
         if st.button("🔍 Search vocab", key="search_button", use_container_width=True):
@@ -118,7 +108,7 @@ def vocab_builder():
     
     st.divider()
     
-    # Vocabulary list - Get from SkySQL
+    # Vocabulary list
     saved_words = get_all_saved_words()
     
     search_term = st.session_state.get('search_term', '')
@@ -130,15 +120,8 @@ def vocab_builder():
         ]
         if saved_words:
             st.write(f"**Found {len(saved_words)} words**")
-            # Add button to clear search
-            if st.button("❌ Clear Search", key="clear_search"):
-                st.session_state.search_term = ''
-                st.rerun()
         else:
             st.info("No words found")
-            if st.button("❌ Clear Search", key="clear_search_empty"):
-                st.session_state.search_term = ''
-                st.rerun()
             st.divider()
     
     if saved_words:
@@ -174,8 +157,6 @@ def vocab_builder():
             st.info("No words in your vocabulary yet. Add some words above!")
             st.divider()
 
-# Initialize session state for search and word addition
+# Initialize session state for search
 if 'search_term' not in st.session_state:
     st.session_state.search_term = ''
-if 'word_added' not in st.session_state:
-    st.session_state.word_added = False
