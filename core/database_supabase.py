@@ -3,6 +3,7 @@ import os
 import pandas as pd
 from datetime import datetime
 from dotenv import load_dotenv
+from core.llm_utils import LLMUtils
 load_dotenv()
 
 class SupabaseDB:
@@ -10,6 +11,7 @@ class SupabaseDB:
         url = os.getenv('SUPABASE_URL')
         key = os.getenv('SUPABASE_API_KEY')
         self.supabase = create_client(url, key)
+        self.llm_utils =  LLMUtils()
 
     def save_missing_words(self, words):
         """Save missing words with meanings"""
