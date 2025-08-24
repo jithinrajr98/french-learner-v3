@@ -1,6 +1,6 @@
 from ast import literal_eval
 from core.llm_utils import LLMUtils
-from config.settings import GROQ_MODEL, GROQ_TRANSCRIPT_MODEL
+from config.settings import GROQ_MODEL, GROQ_TRANSCRIPT_MODEL, GROQ_EVAL_MODEL
 
 
 llm_utils = LLMUtils()
@@ -33,7 +33,7 @@ Correct French translation: "{correct}"
     response = llm_utils.groq_client.chat.completions.create(
             messages=[
              {"role": "user", "content": prompt}],
-            model=GROQ_MODEL )
+            model=GROQ_EVAL_MODEL )
     response = response.choices[0].message.content.strip()
     print(f"LLM eval Response: {response}")
     
