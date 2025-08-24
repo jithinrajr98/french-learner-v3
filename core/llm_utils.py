@@ -175,6 +175,7 @@ class LLMUtils:
         4. OMIT incomplete phrases, filler words, repetitions, and non-French content
         5. NUMBER each sentence sequentially
         6. Return ONLY the numbered list without any additional text or explanations
+        7. PRESERVE ordering from the transcript
 
         CRITERIA for what constitutes a sentence:
         - Must have a subject and predicate
