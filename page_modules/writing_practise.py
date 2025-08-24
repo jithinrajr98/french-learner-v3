@@ -201,7 +201,6 @@ def writing():
                 help="Fine-tune the transcribed text if necessary"
             )
     
-    st.markdown('</div>', unsafe_allow_html=True)
     
     # Action buttons with better spacing
     st.markdown('<div class="button-row">', unsafe_allow_html=True)
@@ -297,9 +296,14 @@ def writing():
         st.markdown('</div>', unsafe_allow_html=True)
         
         # Feedback section
+        # Feedback section
         if st.session_state.feedback:
             st.markdown("**Feedback:**")
-            st.markdown(st.session_state.feedback)
+            # Display feedback with proper bullet point formatting
+            for line in st.session_state.feedback.split('\n'):
+                if line.strip():  # Only show non-empty lines
+                    st.warning(f":warning: {line}")
+                    
             st.markdown('</div>', unsafe_allow_html=True)
         
         st.markdown('</div>', unsafe_allow_html=True)

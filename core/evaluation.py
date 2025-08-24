@@ -11,7 +11,7 @@ You are a strict but fair French translation evaluator.
 
 Compare the user's translation to the correct one. Provide:
 1. Correct French Translation 
-2. give precise feedback explaining errors committed. Each error should be explained in a single sentence.
+2. give precise feedback explaining errors committed. Each error should be seperate sentence.
 3. A score from 0 to 10 (integer only), based on correctness of users translation compared to english sentence.
 4. While scoring, ignore any minor punctuation or accent errors, focus on the overall meaning and structure.
 5. Do not include any additional text or explanations outside the JSON format.
@@ -43,6 +43,9 @@ Correct French translation: "{correct}"
         result = literal_eval(response)
         print(f"LLM Response: {result}")
         feedback = result.get("feedback", "")
+        feedback_sentences = feedback.split(".")
+        feedback = "\n".join([f"• {sentence}" for sentence in feedback_sentences if sentence])
+        # Get the first sentence of feedback
         score = result.get("score", 0)
     except Exception as e:
         feedback = "⚠️ Failed to parse LLM response."
