@@ -149,7 +149,7 @@ def writing():
     
     # Clean header section
     st.markdown('<div class="header-section">', unsafe_allow_html=True)
-    st.markdown("# 📝 Writing Practice")
+    st.markdown("#### 📝 Writing Practice")
     st.markdown("**Translate the English sentence into French**")
     st.markdown('</div>', unsafe_allow_html=True)
 
