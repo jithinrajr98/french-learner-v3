@@ -17,7 +17,10 @@ def play_audio(text, lang='fr'):
         st.error(f"Couldn't generate audio: {e}")        
         
 def play_audio_mobile_compatible(text, lang='fr'):
-    """Generate and play audio with mobile compatibility"""
+    """Generate and play audio with mobile compatibility at configurable speed"""
+    # Define playback speed (can be easily modified)
+    PLAYBACK_SPEED = 1.15
+    
     try:
         # Generate TTS audio
         tts = gTTS(text=text, lang=lang, slow=False)
@@ -28,13 +31,28 @@ def play_audio_mobile_compatible(text, lang='fr'):
         # Convert to base64 for better mobile compatibility
         audio_base64 = base64.b64encode(audio_bytes.read()).decode()
         
-        # Create custom HTML audio player with better mobile support
+        # Create custom HTML audio player with better mobile support and configurable playback rate
         audio_html = f"""
-        <audio controls autoplay style="width: 100%; margin: 10px 0;">
+        <audio controls autoplay style="width: 100%; margin: 10px 0;" playbackRate="{PLAYBACK_SPEED}">
             <source src="data:audio/mp3;base64,{audio_base64}" type="audio/mpeg">
             <source src="data:audio/wav;base64,{audio_base64}" type="audio/wav">
             Your browser does not support the audio element.
         </audio>
+        <script>
+            // Set playback rate to {PLAYBACK_SPEED}x after audio loads
+            document.addEventListener('DOMContentLoaded', function() {{
+                const audioElements = document.querySelectorAll('audio');
+                audioElements.forEach(function(audio) {{
+                    audio.addEventListener('loadeddata', function() {{
+                        audio.playbackRate = {PLAYBACK_SPEED};
+                    }});
+                    // Also set it immediately in case audio is already loaded
+                    if (audio.readyState >= 2) {{
+                        audio.playbackRate = {PLAYBACK_SPEED};
+                    }}
+                }});
+            }});
+        </script>
         """
         
         st.markdown(audio_html, unsafe_allow_html=True)
