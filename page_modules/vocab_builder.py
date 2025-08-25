@@ -23,6 +23,10 @@ def vocab_builder():
     # Get database client
     db_client, db_type = get_database_client()
     
+    # Initialize session state for selected words
+    if 'selected_words' not in st.session_state:
+        st.session_state.selected_words = set()
+    
     # Minimal CSS for compact layout
     st.markdown("""
     <style>
@@ -186,29 +190,75 @@ def vocab_builder():
             st.divider()
     
     if saved_words:
+        # Bulk delete section
+        if len(st.session_state.selected_words) > 0:
+            bulk_col1, bulk_col2, bulk_col3 = st.columns([2, 1, 1])
+            with bulk_col1:
+                st.info(f"{len(st.session_state.selected_words)} words selected")
+            with bulk_col2:
+                if st.button("🗑️ Delete Selected", key="bulk_delete", use_container_width=True):
+                    try:
+                        deleted_count = 0
+                        for word in list(st.session_state.selected_words):
+                            if db_type == "supabase" and db_client:
+                                db_client.delete_saved_word(word)
+                            else:
+                                delete_saved_word(word)
+                            deleted_count += 1
+                        
+                        st.session_state.selected_words.clear()
+                        st.success(f"Deleted {deleted_count} words")
+                        st.rerun()
+                    except Exception as e:
+                        st.error(f"Error deleting words: {e}")
+            with bulk_col3:
+                if st.button("❌ Clear Selection", key="clear_selection", use_container_width=True):
+                    st.session_state.selected_words.clear()
+                    st.rerun()
+            st.divider()
+        
         # Header row
-        header_cols = st.columns([2, 3, 0.5, 0.5])
+        header_cols = st.columns([0.5, 2, 3, 0.5, 0.5])
         with header_cols[0]:
-            st.markdown("<div class='word-text' style='color: white;'>Word</div>", unsafe_allow_html=True)
+            # Select All checkbox
+            select_all = st.checkbox("", key="select_all", label_visibility="collapsed")
+            if select_all:
+                st.session_state.selected_words = set(word for word, _, _ in saved_words)
+                st.rerun()
+            elif not select_all and len(st.session_state.selected_words) == len(saved_words):
+                st.session_state.selected_words.clear()
+                st.rerun()
         with header_cols[1]:
-            st.markdown("<div class='word-text' style='color: white;'>Meaning</div>", unsafe_allow_html=True)
+            st.markdown("<div class='word-text' style='color: white;'>Word</div>", unsafe_allow_html=True)
         with header_cols[2]:
-            st.markdown("<div class='word-text' style='color: white;'>🔊</div>", unsafe_allow_html=True)
+            st.markdown("<div class='word-text' style='color: white;'>Meaning</div>", unsafe_allow_html=True)
         with header_cols[3]:
+            st.markdown("<div class='word-text' style='color: white;'>🔊</div>", unsafe_allow_html=True)
+        with header_cols[4]:
             st.markdown("<div class='word-text' style='color: white;'>🗑️</div>", unsafe_allow_html=True)
         st.markdown("---")
 
         # Word rows
         for word, meaning, timestamp in saved_words:
-            row_cols = st.columns([2, 3, 0.5, 0.5])
+            row_cols = st.columns([0.5, 2, 3, 0.5, 0.5])
             with row_cols[0]:
-                st.markdown(f"<div class='word-text'>{word}</div>", unsafe_allow_html=True)
+                # Individual word checkbox
+                is_selected = st.checkbox("", key=f"select_{word}", 
+                                        value=word in st.session_state.selected_words,
+                                        label_visibility="collapsed")
+                if is_selected:
+                    st.session_state.selected_words.add(word)
+                else:
+                    st.session_state.selected_words.discard(word)
+                    
             with row_cols[1]:
-                st.markdown(f"<div class='meaning-text'>{meaning}</div>", unsafe_allow_html=True)
+                st.markdown(f"<div class='word-text'>{word}</div>", unsafe_allow_html=True)
             with row_cols[2]:
+                st.markdown(f"<div class='meaning-text'>{meaning}</div>", unsafe_allow_html=True)
+            with row_cols[3]:
                 if st.button("🔊", key=f"audio_{word}", help="Play pronunciation"):
                     play_audio_mobile_compatible(word)
-            with row_cols[3]:
+            with row_cols[4]:
                 if st.button("🗑️", key=f"delete_{word}", help="Delete"):
                     try:
                         if db_type == "supabase" and db_client:
@@ -217,6 +267,7 @@ def vocab_builder():
                         else:
                             delete_saved_word(word)
                             st.success(f"Deleted '{word}' from local database")
+                        st.session_state.selected_words.discard(word)
                         st.rerun()
                     except Exception as e:
                         st.error(f"Error deleting word: {e}")
