@@ -213,7 +213,8 @@ class LLMUtils:
         Returns:
             A string with numbered English sentences
         """
-        prompt = f"""Translate numbered french sentences from {french_transcript} to english numbered sentences list.
+        prompt = f"""Translate numbered french sentences from {french_transcript} to english numbered sentences list. Give literal translations only.
+        
                      Maintain the original numbering and structure.
         
         Format the output like this do not include any additional text or explanations:
