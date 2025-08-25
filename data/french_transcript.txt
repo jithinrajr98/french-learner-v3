@@ -1,64 +1,71 @@
-1. Je vais très bien et toi ?
-2. Moi ça va très bien merci.
-3. Je suis un petit peu malade.
-4. Je suis enrhumé et parce que j'ai attrapé sûrement de la grippe.
-5. Ça sent un peu ma voix.
-6. Je risque de d'éternuer quelquefois.
-7. Aujourd'hui je voulais prendre comme sujet l'apprentissage des langues.
-8. Est-ce que tu penses que les enfants apprennent plus vite que les adultes ?
-9. Je pense oui.
-10. Ils apprennent sans le vouloir.
-11. Ils ne font pas d'efforts particuliers.
-12. Moi je pense également que les enfants apprennent plus vite que les adultes.
-13. Ils apprennent sans étudier la langue.
-14. Ils l'écoutent, ils essaient de parler et ça leur permet d'acquérir la langue.
-15. Les leçons à l'école ne sont pas la meilleure solution pour apprendre.
-16. Le rendement n'a pas l'air très bon à l'école.
-17. Ça permet d'acquérir tout de même des bases qui peuvent aider pour la suite.
-18. Je n'étais pas un bon élève.
-19. J'avais beaucoup de mal à me concentrer pendant de longues périodes de temps.
-20. Ça n'a jamais changé.
-21. Tu es allé en Roumanie et tu as appris le roumain très rapidement.
-22. C'était grâce à une autre source de motivation.
-23. Quelle était la source de motivation ?
-24. Des femmes, ta copine à l'époque, c'était ça.
-25. J'avais quand même un petit livre au départ qui m'a permis de savoir lire un peu le roumain.
-26. J'ai appris très rapidement grâce à des enfants dans un monastère.
-27. Quand les enfants parlent avec des mots simples.
-28. Communiquer avec des enfants, ça permet de faciliter la compréhension et d'acquérir la langue rapidement.
-29. Au début c'est bien d'avoir quelques bases, d'étudier, de lire des bases.
-30. Après, quand on a ces bases-là, on peut écouter du contenu et acquérir la langue sans vraiment forcément se forcer à étudier.
-31. Je n'étais pas très bon à l'école.
-32. J'ai fait de l'espagnol pendant trois ans mais j'ai abandonné.
-33. J'étais pas très bon en anglais non plus.
-34. Quand je suis allé en Australie, j'ai rapidement appris.
-35. J'ai beaucoup d'amis américains.
-36. Mon anglais n'est pas parfait, mais il me permet quand même de communiquer.
-37. J'ai fait une leçon d'espagnol et le mois dernier j'ai étudié le japonais.
-38. Je me suis rendu compte aujourd'hui que l'espagnol est beaucoup plus facile.
-39. C'est peut-être pour ça que tu as rapidement aussi appris le roumain.
-40. C'est un peu similaire au français.
-41. C'est une langue latine donc beaucoup plus facile que l'autre langue.
-42. Au niveau du vocabulaire, il y avait beaucoup de mots similaires.
-43. Je crois qu'il y a beaucoup de mots proches de l'italien.
-44. Les Roumains ont toujours beaucoup aidé.
-45. Ils sont très accueillants dans les villes et dans les villages.
-46. Je trouve qu'être français en Roumanie, c'est facile.
-47. Les Français sont très bien reçus.
-48. Je vais apprendre une nouvelle langue.
-49. J'ai fait ma leçon d'espagnol, peut-être que je vais continuer l'espagnol pendant quelques mois.
-50. Je pense que l'espagnol reviendra très vite.
-51. C'est bien de pouvoir terminer d'acquérir cette langue.
-52. On a déjà quelques bases.
-53. Toutes les langues sont difficiles.
-54. La compréhension de l'espagnol sera assez facile.
-55. Parler sera beaucoup plus compliqué.
-56. Il y a beaucoup de règles de conjugaison.
-57. Comprendre l'espagnol, je pense que ça viendra rapidement.
-58. Ça viendra plus rapidement qu'en chinois ou en japonais.
-59. En espagnol, on connaît peut-être plusieurs milliers de mots déjà.
-60. On peut commencer à n'importe quel âge.
-61. Les langues c'est quelque chose qu'on n'a jamais terminé d'apprendre.
-62. On peut toujours progresser.
-63. À un certain niveau, quand tu atteins le niveau intermédiaire, ça devient très intéressant.
-64. Tu peux commencer à communiquer avec les gens, à avoir des discussions un peu plus profondes.
+1. On respecte le code de la route
+2. On est sur une route à quatre voix
+3. C'est que des gens qui bossent
+4. On perd du temps dans Paris
+5. On n'arrive plus à rouler maintenant
+6. C'est le périf
+7. On se demande vraiment s'il va rester quelque part où on va réussir à rouler
+8. Il est 5h19 du matin
+9. On est le 10 octobre
+10. Ça y est c'est officiel le périphérique passe dans sa totalité à 50 km/h
+11. C'est limite dangereux de rouler à 50 la nuit ou tôt le matin
+12. On est sur l'axe le plus emprunté de France
+13. On est sur une route à quatre voix
+14. Il y a plus d'un million de véhicules qui passent ici par jour
+15. Le seul moment où les personnes vont ralentir c'est arrivé devant les radars sur le périphérique
+16. Ça aurait été beaucoup plus logique de mettre des heures bien définies où on n'a pas le droit de dépasser 50 kmh
+17. Après ça mettre des heures où on peut rouler plus vite
+18. Mais 70 c'était très très bien
+19. C'était ni trop vite ni pas assez
+20. C'était vraiment idéal
+21. Mais 50 c'est frustrant
+22. Je rentre chez moi j'en ai marre
+23. Je viens travailler j'en ai marre
+24. Il y a pas un moment où on est tranquille
+25. Eux qui sont réveillés toute la nuit bah ils font comment
+26. On a une décision unanime voilà de la ville de Paris
+27. Il y a pas de piéton
+28. Il y a pas de vélo
+29. C'est quoi l'intérêt
+30. C'est que d'ici quelques années on va nous mettre 30 km/h
+31. On nous mettra une piste cyclable
+32. La boucle sera bouclée tout simplement
+33. On nous mettra des petits arbres comme ça on pourra regarder des arbres pendant qu'on roulera
+34. Déjà on perd du temps dans Paris
+35. On n'arrive plus à rouler maintenant
+36. Les 3/4 des accidents sur le périphérique c'est avec un deux roues que ça se passe en général
+37. C'est jamais avec de voiture voiture
+38. Un véhicule qui roule pas pour moi c'est un véhicule qui pollue
+39. Il aurait été beaucoup plus logique de mettre un enrobé phonique
+40. Chose qui existe déjà et qu'on a sur une certaine partie du périphérique
+41. Ça crée une réelle différence
+42. On préfère toujours s'en prendre à ceux qui bossent
+43. On est rajouter de la pénibilité tout simplement
+44. Niveau charge mental on en peut plus
+45. Même en terme d'espérance de vie ça va
+46. On a dû perdre quelques années
+47. On est stressé angoissé du matin au soir
+48. La vitesse moyenne des taxis parisiens ne fait que baisser
+49. Aujourd'hui les clients à chaque fin de course on nous dit plus bonne journée
+50. On nous dit bon courage monsieur
+51. Les gens savent très très bien ce qu'on subit du matin au soir
+52. On a une consultation au mois de décembre qui est prévu avec la Mairie de Paris
+53. Si je note qu'il y a pas d'amélioration pour nous les taxis parisiens
+54. Qui sommes ni plus ni moins que la continuité du service public
+55. Si je vais attendre je pense de finir de payer ma voiture
+56. Je vais faire comme pas mal de collègues taxi
+57. Ils ont basculé en tant que taxi de banlieue
+58. La charge mentale elle est trop importante
+59. On est épuisé
+60. S'ils veulent pas de nous qu'est-ce que vous voulez qu'on fasse
+61. On va pas forcer les choses
+62. On transporte des clients
+63. On essaie de faire en sorte que les gens prennent moins leur véhicule
+64. Logiquement devrait avoir un avantage
+65. Mais ces promesses ont toujours été faites
+66. On n'a jamais vu la couleur
+67. Si on a cette politique de pas vouloir de véhicules à Paris qu'on assume
+68. Qu'on assume la politique que vous voulez
+69. Si vous voulez pas de véhicule individuel à Paris interdisez les véhicules
+70. Arrêtez de faire en sorte que les gens deviennent fous
+71. On va vraiment finir par on va tous finir à l'asile

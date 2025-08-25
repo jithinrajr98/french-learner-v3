@@ -1,64 +1,71 @@
-1. I'm fine and you?
-2. I'm doing very well, thank you.
-3. I'm a little sick.
-4. I have a cold and I think I've caught the flu.
-5. My voice sounds a bit rough.
-6. I risk sneezing sometimes.
-7. Today I wanted to talk about language learning.
-8. Do you think children learn faster than adults?
-9. I think so.
-10. They learn without even trying.
-11. They don't make any special effort.
-12. I also think that children learn faster than adults.
-13. They learn without studying the language.
-14. They listen to it, they try to speak and it allows them to acquire the language.
-15. Lessons at school are not the best solution for learning.
-16. The outcome doesn't seem very good at school.
-17. It still allows you to acquire some basics that can help later on.
-18. I wasn't a good student.
-19. I had a lot of trouble concentrating for long periods of time.
-20. It never changed.
-21. You went to Romania and you learned Romanian very quickly.
-22. It was thanks to another source of motivation.
-23. What was the source of motivation?
-24. Women, your girlfriend at the time, that was it.
-25. I had a small book at the beginning that allowed me to know how to read a bit of Romanian.
-26. I learned very quickly thanks to children in a monastery.
-27. When children speak with simple words.
-28. Communicating with children makes it easier to understand and acquire the language quickly.
-29. At the beginning, it's good to have some basics, to study, to read the basics.
-30. Then, when you have those basics, you can listen to content and acquire the language without really having to force yourself to study.
-31. I wasn't very good at school.
-32. I did Spanish for three years but I gave up.
-33. I wasn't very good at English either.
-34. When I went to Australia, I learned quickly.
-35. I have many American friends.
-36. My English isn't perfect, but it still allows me to communicate.
-37. I did a Spanish lesson and last month I studied Japanese.
-38. I realized today that Spanish is much easier.
-39. Maybe that's why you also learned Romanian quickly.
-40. It's a bit similar to French.
-41. It's a Latin language, so much easier than the other language.
-42. At the vocabulary level, there were many similar words.
-43. I think there are many words close to Italian.
-44. The Romanians were always very helpful.
-45. They are very welcoming in cities and villages.
-46. I find that being French in Romania is easy.
-47. The French are very well received.
-48. I'm going to learn a new language.
-49. I did my Spanish lesson, maybe I'll continue Spanish for a few months.
-50. I think Spanish will come back very quickly.
-51. It's good to be able to finish acquiring this language.
-52. We already have some basics.
-53. All languages are difficult.
-54. Understanding Spanish will be quite easy.
-55. Speaking will be much more complicated.
-56. There are many conjugation rules.
-57. I think understanding Spanish will come quickly.
-58. It will come more quickly than Chinese or Japanese.
-59. In Spanish, we already know several thousand words.
-60. You can start at any age.
-61. Languages are something you never finish learning.
-62. You can always make progress.
-63. At a certain level, when you reach the intermediate level, it becomes very interesting.
-64. You can start communicating with people, having a bit deeper discussions.
+1. We respect the highway code
+2. We are on a four-lane road
+3. It's just people who work
+4. We waste time in Paris
+5. We can't drive anymore now
+6. It's the périphérique
+7. We really wonder if we'll be able to drive anywhere
+8. It's 5:19 am
+9. It's October 10th
+10. It's official, the périphérique is now entirely at 50 km/h
+11. It's almost dangerous to drive at 50 at night or early in the morning
+12. We are on the busiest axis in France
+13. We are on a four-lane road
+14. There are over a million vehicles that pass here every day
+15. The only time people slow down is when they reach the speed cameras on the périphérique
+16. It would have been much more logical to have set hours when you can't exceed 50 km/h
+17. And then have hours when you can drive faster
+18. But 70 was very, very fine
+19. It was neither too fast nor too slow
+20. It was really ideal
+21. But 50 is frustrating
+22. I go home, I'm fed up
+23. I come to work, I'm fed up
+24. There's not a single moment when we're calm
+25. What about those who are awake all night, how do they manage
+26. We have a unanimous decision from the city of Paris
+27. There are no pedestrians
+28. There are no bicycles
+29. What's the point
+30. It's just that in a few years, they'll put us at 30 km/h
+31. They'll put in a bike lane
+32. The loop will be closed, quite simply
+33. They'll put in little trees so we can look at trees while we drive
+34. We already waste time in Paris
+35. We can't drive anymore now
+36. Three-quarters of accidents on the périphérique involve motorcycles
+37. It's never car to car
+38. A vehicle that doesn't move for me is a vehicle that pollutes
+39. It would have been much more logical to put in noise-reducing asphalt
+40. Something that already exists and is on a certain part of the périphérique
+41. It makes a real difference
+42. We always prefer to target those who work
+43. We're just adding to the hardship
+44. We're at maximum mental load
+45. Even in terms of life expectancy, it's going to affect us
+46. We've probably lost a few years
+47. We're stressed and anxious from morning to night
+48. The average speed of Parisian taxis is constantly decreasing
+49. Today, clients at the end of every ride tell us, "no more good day"
+50. They say, "good luck, sir"
+51. People are very aware of what we go through from morning to night
+52. We have a consultation scheduled for December with the City of Paris
+53. If I note that there's no improvement for us taxi drivers in Paris
+54. Who are neither more nor less than the continuity of public service
+55. If I have to wait, I think I'll finish paying off my car
+56. I'll do like many of my taxi colleagues
+57. They switched to being suburban taxis
+58. The mental load is too high
+59. We're exhausted
+60. If they don't want us, what do you expect us to do
+61. We won't force things
+62. We transport clients
+63. We try to make people use their vehicles less
+64. Logically, we should have an advantage
+65. But these promises have always been made
+66. We've never seen the color of it
+67. If we have this policy of not wanting vehicles in Paris, then own it
+68. Own the policy you're pursuing
+69. If you don't want individual vehicles in Paris, ban vehicles
+70. Stop making people go crazy
+71. We're really going to end up, we're all going to end up in the asylum
