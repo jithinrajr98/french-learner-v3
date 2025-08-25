@@ -1,71 +1,48 @@
-1. On respecte le code de la route
-2. On est sur une route à quatre voix
-3. C'est que des gens qui bossent
-4. On perd du temps dans Paris
-5. On n'arrive plus à rouler maintenant
-6. C'est le périf
-7. On se demande vraiment s'il va rester quelque part où on va réussir à rouler
-8. Il est 5h19 du matin
-9. On est le 10 octobre
-10. Ça y est c'est officiel le périphérique passe dans sa totalité à 50 km/h
-11. C'est limite dangereux de rouler à 50 la nuit ou tôt le matin
-12. On est sur l'axe le plus emprunté de France
-13. On est sur une route à quatre voix
-14. Il y a plus d'un million de véhicules qui passent ici par jour
-15. Le seul moment où les personnes vont ralentir c'est arrivé devant les radars sur le périphérique
-16. Ça aurait été beaucoup plus logique de mettre des heures bien définies où on n'a pas le droit de dépasser 50 kmh
-17. Après ça mettre des heures où on peut rouler plus vite
-18. Mais 70 c'était très très bien
-19. C'était ni trop vite ni pas assez
-20. C'était vraiment idéal
-21. Mais 50 c'est frustrant
-22. Je rentre chez moi j'en ai marre
-23. Je viens travailler j'en ai marre
-24. Il y a pas un moment où on est tranquille
-25. Eux qui sont réveillés toute la nuit bah ils font comment
-26. On a une décision unanime voilà de la ville de Paris
-27. Il y a pas de piéton
-28. Il y a pas de vélo
-29. C'est quoi l'intérêt
-30. C'est que d'ici quelques années on va nous mettre 30 km/h
-31. On nous mettra une piste cyclable
-32. La boucle sera bouclée tout simplement
-33. On nous mettra des petits arbres comme ça on pourra regarder des arbres pendant qu'on roulera
-34. Déjà on perd du temps dans Paris
-35. On n'arrive plus à rouler maintenant
-36. Les 3/4 des accidents sur le périphérique c'est avec un deux roues que ça se passe en général
-37. C'est jamais avec de voiture voiture
-38. Un véhicule qui roule pas pour moi c'est un véhicule qui pollue
-39. Il aurait été beaucoup plus logique de mettre un enrobé phonique
-40. Chose qui existe déjà et qu'on a sur une certaine partie du périphérique
-41. Ça crée une réelle différence
-42. On préfère toujours s'en prendre à ceux qui bossent
-43. On est rajouter de la pénibilité tout simplement
-44. Niveau charge mental on en peut plus
-45. Même en terme d'espérance de vie ça va
-46. On a dû perdre quelques années
-47. On est stressé angoissé du matin au soir
-48. La vitesse moyenne des taxis parisiens ne fait que baisser
-49. Aujourd'hui les clients à chaque fin de course on nous dit plus bonne journée
-50. On nous dit bon courage monsieur
-51. Les gens savent très très bien ce qu'on subit du matin au soir
-52. On a une consultation au mois de décembre qui est prévu avec la Mairie de Paris
-53. Si je note qu'il y a pas d'amélioration pour nous les taxis parisiens
-54. Qui sommes ni plus ni moins que la continuité du service public
-55. Si je vais attendre je pense de finir de payer ma voiture
-56. Je vais faire comme pas mal de collègues taxi
-57. Ils ont basculé en tant que taxi de banlieue
-58. La charge mentale elle est trop importante
-59. On est épuisé
-60. S'ils veulent pas de nous qu'est-ce que vous voulez qu'on fasse
-61. On va pas forcer les choses
-62. On transporte des clients
-63. On essaie de faire en sorte que les gens prennent moins leur véhicule
-64. Logiquement devrait avoir un avantage
-65. Mais ces promesses ont toujours été faites
-66. On n'a jamais vu la couleur
-67. Si on a cette politique de pas vouloir de véhicules à Paris qu'on assume
-68. Qu'on assume la politique que vous voulez
-69. Si vous voulez pas de véhicule individuel à Paris interdisez les véhicules
-70. Arrêtez de faire en sorte que les gens deviennent fous
-71. On va vraiment finir par on va tous finir à l'asile
+1. On respecte le code de la route.
+2. On est sur une route à quatre voix.
+3. C'est que des gens qui bossent, c'est pas des délinquants de la route.
+4. Déjà on perd du temps dans Paris, on n'arrive plus à rouler.
+5. Maintenant c'est le périf, on se demande vraiment s'il va rester quelque part où on va réussir à rouler.
+6. Il est 5h19 du matin, on est le 10 octobre, donc ça y est, c'est officiel, le périphérique passe dans sa totalité à 50 km/h.
+7. Ben c'est limite dangereux de rouler à 50 la nuit ou tôt le matin.
+8. On est sur quand même l'axe le plus emprunté de France.
+9. On est sur une route à quatre voix, il y a plus d'un million de véhicules qui passent ici par jour.
+10. Le seul moment où les personnes vont ralentir, c'est arrivé devant les radars sur le périphérique.
+11. Ça aurait été beaucoup plus logique de mettre des heures bien définies où on n'a pas le droit de dépasser 50 kmh.
+12. Après ça, mettre des heures où on peut rouler plus vite, mais 70 c'était très très bien.
+13. C'était ni trop vite ni pas assez, c'était vraiment idéal, 70.
+14. Mais 50 c'est frustrant, c'est frustrant.
+15. Je rentre chez moi, j'en ai marre, je viens travailler, j'en ai marre.
+16. Il y a pas un moment où on est tranquille.
+17. Je regarde plus devant aujourd'hui sur le périphérique, je regarde derrière, je regarde si quelqu'un va nous rentrer dedans.
+18. Eux qui sont réveillés toute la nuit, bah ils font comment ?
+19. On a une décision unanime voilà de la ville de Paris.
+20. Il y a pas de piéton, il y a pas de vélo, donc c'est quoi l'intérêt ?
+21. Mais moi, l'intérêt, je sais très bien, c'est quoi l'intérêt, c'est que d'ici quelques années on va nous mettre 30 km/h.
+22. On nous mettra une piste cyclable et la boucle sera bouclée tout simplement.
+23. On nous mettra des petits arbres comme ça, on pourra regarder des arbres pendant qu'on roulera tout simplement.
+24. Déjà on perd du temps dans Paris, on n'arrive plus à rouler.
+25. Les 3/4 des accidents sur le périphérique, c'est avec un deux roues que ça se passe en général.
+26. C'est jamais avec de voiture voiture, c'est très rare.
+27. Un véhicule qui roule pas, pour moi c'est très simple, c'est un véhicule qui pollue.
+28. Il aurait été beaucoup plus logique de mettre un enrobé phonique.
+29. Chose qui existe déjà et qu'on a sur une certaine partie du périphérique et ça crée une réelle différence.
+30. On préfère toujours s'en prendre à ceux qui bossent.
+31. Ceux qui bossent, voilà, c'est rajouter de la pénibilité tout simplement.
+32. Niveau charge mental, on en peut plus.
+33. Même en terme d'espérance de vie, ça va, quoi.
+34. On a dû perdre quelques années, on est stressé, angoissé du matin au soir.
+35. La vitesse moyenne des taxis parisiens ne fait que baisser.
+36. Aujourd'hui les clients à chaque fin de course, on nous dit plus bonne journée, on nous dit bon courage monsieur.
+37. Parce que les gens savent très très bien ce qu'on subit du matin au soir.
+38. On a une consultation au mois de décembre qui est prévu avec la Mairie de Paris avec les syndicats de taxis.
+39. Si je note qu'il y a pas d'amélioration pour nous les taxis parisiens qui sommes ni plus ni moins que la continuité du service public.
+40. Si je vais attendre, je pense de finir de payer ma voiture et puis je vais faire comme pas mal de collègues taxi.
+41. Ils ont basculé en tant que taxi de banlieue parce que voilà, la charge mentale elle est trop importante.
+42. On est épuisé ou sinon je vais changer de secteur d'activité.
+43. Écoutez, s'ils veulent pas de nous, qu'est-ce que vous voulez qu'on fasse ?
+44. On va pas forcer les choses, nous on transporte des clients et on essaie de faire en sorte que les gens prennent moins leur véhicule.
+45. Logiquement, ça devrait avoir un avantage, mais ces promesses ont toujours été faites, mais on n'a jamais vu la couleur.
+46. Si on a cette politique de pas vouloir de véhicules à Paris, qu'on assume.
+47. Si vous voulez pas de véhicule individuel à Paris, interdisez les véhicules.
+48. Mais arrêtez de faire en sorte que les gens deviennent fous, on va vraiment finir par on va tous finir à l'asile.

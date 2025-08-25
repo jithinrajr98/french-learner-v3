@@ -1,71 +1,48 @@
-1. We respect the highway code
-2. We are on a four-lane road
-3. It's just people who work
-4. We waste time in Paris
-5. We can't drive anymore now
-6. It's the périphérique
-7. We really wonder if we'll be able to drive anywhere
-8. It's 5:19 am
-9. It's October 10th
-10. It's official, the périphérique is now entirely at 50 km/h
-11. It's almost dangerous to drive at 50 at night or early in the morning
-12. We are on the busiest axis in France
-13. We are on a four-lane road
-14. There are over a million vehicles that pass here every day
-15. The only time people slow down is when they reach the speed cameras on the périphérique
-16. It would have been much more logical to have set hours when you can't exceed 50 km/h
-17. And then have hours when you can drive faster
-18. But 70 was very, very fine
-19. It was neither too fast nor too slow
-20. It was really ideal
-21. But 50 is frustrating
-22. I go home, I'm fed up
-23. I come to work, I'm fed up
-24. There's not a single moment when we're calm
-25. What about those who are awake all night, how do they manage
-26. We have a unanimous decision from the city of Paris
-27. There are no pedestrians
-28. There are no bicycles
-29. What's the point
-30. It's just that in a few years, they'll put us at 30 km/h
-31. They'll put in a bike lane
-32. The loop will be closed, quite simply
-33. They'll put in little trees so we can look at trees while we drive
-34. We already waste time in Paris
-35. We can't drive anymore now
-36. Three-quarters of accidents on the périphérique involve motorcycles
-37. It's never car to car
-38. A vehicle that doesn't move for me is a vehicle that pollutes
-39. It would have been much more logical to put in noise-reducing asphalt
-40. Something that already exists and is on a certain part of the périphérique
-41. It makes a real difference
-42. We always prefer to target those who work
-43. We're just adding to the hardship
-44. We're at maximum mental load
-45. Even in terms of life expectancy, it's going to affect us
-46. We've probably lost a few years
-47. We're stressed and anxious from morning to night
-48. The average speed of Parisian taxis is constantly decreasing
-49. Today, clients at the end of every ride tell us, "no more good day"
-50. They say, "good luck, sir"
-51. People are very aware of what we go through from morning to night
-52. We have a consultation scheduled for December with the City of Paris
-53. If I note that there's no improvement for us taxi drivers in Paris
-54. Who are neither more nor less than the continuity of public service
-55. If I have to wait, I think I'll finish paying off my car
-56. I'll do like many of my taxi colleagues
-57. They switched to being suburban taxis
-58. The mental load is too high
-59. We're exhausted
-60. If they don't want us, what do you expect us to do
-61. We won't force things
-62. We transport clients
-63. We try to make people use their vehicles less
-64. Logically, we should have an advantage
-65. But these promises have always been made
-66. We've never seen the color of it
-67. If we have this policy of not wanting vehicles in Paris, then own it
-68. Own the policy you're pursuing
-69. If you don't want individual vehicles in Paris, ban vehicles
-70. Stop making people go crazy
-71. We're really going to end up, we're all going to end up in the asylum
+1. We respect the highway code.
+2. We are on a four-lane road.
+3. It's just people who work, they're not road delinquents.
+4. We already lose time in Paris, we can't drive anymore.
+5. Now it's the périphérique, we really wonder if it's going to remain somewhere we can drive.
+6. It's 5:19 in the morning, it's October 10th, so it's official, the périphérique is entirely at 50 km/h.
+7. It's almost dangerous to drive at 50 at night or early in the morning.
+8. We're on the busiest axis in France.
+9. We're on a four-lane road, there are over a million vehicles that pass here per day.
+10. The only time people slow down is when they arrive in front of the radar on the périphérique.
+11. It would have been much more logical to set specific hours when you can't exceed 50 km/h.
+12. After that, set hours when you can drive faster, but 70 was very very good.
+13. It was neither too fast nor too slow, it was really ideal, 70.
+14. But 50 is frustrating, it's frustrating.
+15. I go home, I'm fed up, I come to work, I'm fed up.
+16. There's not a single moment when we're calm.
+17. I don't look ahead on the périphérique today, I look behind, I check if someone is going to crash into us.
+18. Those who are awake all night, how do they do it?
+19. We have a unanimous decision from the city of Paris.
+20. There are no pedestrians, there are no bicycles, so what's the point?
+21. But I know very well what's the point, it's that in a few years they'll put us at 30 km/h.
+22. They'll put a bike lane and the loop will be closed, simply.
+23. They'll put little trees like that, we can look at trees while we drive, simply.
+24. We already lose time in Paris, we can't drive anymore.
+25. Three-quarters of accidents on the périphérique involve a two-wheeled vehicle, generally.
+26. It's never between cars, it's very rare.
+27. A vehicle that doesn't move, for me it's simple, it's a vehicle that pollutes.
+28. It would have been much more logical to put a soundproof coating.
+29. Something that already exists and that we have on a certain part of the périphérique and it makes a real difference.
+30. We always prefer to target those who work.
+31. Those who work, it's just adding to the hardship, simply.
+32. In terms of mental load, we're at our limit.
+33. Even in terms of life expectancy, it's going to be okay.
+34. We've probably lost a few years, we're stressed, anxious from morning to night.
+35. The average speed of Parisian taxis is constantly decreasing.
+36. Today, clients at the end of every ride say not "good day" anymore, they say "good luck, sir".
+37. Because people know very well what we go through from morning to night.
+38. We have a consultation scheduled for December with the City Hall of Paris with taxi unions.
+39. If I note that there's no improvement for us Parisian taxi drivers who are no more no less than the continuity of public service.
+40. If I wait, I think I'll finish paying for my car and then I'll do like many taxi colleagues.
+41. They switched to suburban taxi because the mental load is too high.
+42. We're exhausted, or I'll change profession.
+43. Listen, if they don't want us, what do you want us to do?
+44. We won't force things, we transport clients and try to make people use their vehicles less.
+45. Logically, it should have an advantage, but these promises have always been made, but we've never seen the color.
+46. If we have this policy of not wanting vehicles in Paris, let's assume it.
+47. If you don't want individual vehicles in Paris, ban vehicles.
+48. But stop making people go crazy, we'll really end up, we'll all end up in the asylum.
