@@ -34,6 +34,10 @@ def apply_custom_styles():
             min-height: 100vh;
         }}
         
+        .stRadio > div {{
+            gap: 2rem;
+        }}
+        
         /* Add overlay pattern for depth */
         .stApp::before {{
             content: '';
@@ -293,6 +297,8 @@ def apply_custom_styles():
         ::-webkit-scrollbar-thumb:hover {{
             background: rgba(255,255,255,0.5);
         }}
+        
+        
         
     </style>
     """, unsafe_allow_html=True)
