@@ -96,7 +96,6 @@ class LLMUtils:
 
 
 
-
     def example_sentence_generator(self, word: str) -> str:
             """
             Generate an simple example french sentence using the given French word.

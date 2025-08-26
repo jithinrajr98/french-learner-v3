@@ -23,6 +23,7 @@ BACKGROUND = BASE_DIR / "static" / "pic_10.jpg"  #pic_7.jpg
 GROQ_MODEL = "llama-3.3-70b-versatile"
 GROQ_TRANSCRIPT_MODEL = "meta-llama/llama-4-maverick-17b-128e-instruct"
 GROQ_EVAL_MODEL = "meta-llama/llama-4-maverick-17b-128e-instruct"
+GROQ_SCORE_MODEL = "gemma2-9b-it"
 
 VOSK_MODEL_PATH = BASE_DIR / "models" / "vosk-model-small-fr-0.22/" 
 

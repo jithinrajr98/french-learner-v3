@@ -1,5 +1,5 @@
 import streamlit as st
-from core.evaluation import check_translation
+from core.evaluation import check_translation,scorer
 from core.database import save_score, save_missing_words
 from core.llm_utils import LLMUtils
 from core.audio import play_audio, play_audio_mobile_compatible
@@ -218,7 +218,7 @@ def writing():
     if check_clicked:
         if user_input and user_input.strip():
             st.session_state.user_translation = user_input
-            st.session_state.feedback, st.session_state.score = check_translation(
+            st.session_state.feedback = check_translation(
                 st.session_state.current_pair[0],
                 user_input,
                 st.session_state.current_pair[1]
@@ -226,6 +226,10 @@ def writing():
             st.session_state.attempt_count += 1
             st.session_state.checked = True
             
+            #calculate score using scorer function
+            st.session_state.score =  scorer(user_input,
+                st.session_state.current_pair[1]
+            )
             # Save results
             missed = llm_utils.extract_missed_words(st.session_state.current_pair[1], user_input)
             if missed:
