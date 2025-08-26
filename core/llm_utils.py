@@ -170,7 +170,7 @@ class LLMUtils:
         INSTRUCTIONS:
         1. Extract ONLY complete, grammatically correct French sentences
         2. PRESERVE the original wording, verb forms, tense, and sentence structure exactly as spoken
-        3. If a sentence is too long or complex, you may split it into shorter sentences BUT only at natural pause points
+        3. If a sentence is more than 10 words, you may split it into shorter sentences BUT only at natural pause points
         4. OMIT incomplete phrases, filler words, repetitions, and non-French content
         5. NUMBER each sentence sequentially
         6. Return ONLY the numbered list without any additional text or explanations
