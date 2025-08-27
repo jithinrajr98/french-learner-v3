@@ -8,7 +8,85 @@ supabase_client = SupabaseDB()
 
 def analyse():
     st.divider()
-    st.markdown("#### 📊 Analysis")
+    st.markdown("#### 📊 Performance Analysis")
+    
+    # Enhanced CSS for KPI cards
+    st.markdown("""
+    <style>
+        .kpi-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+            border-radius: 12px;
+            padding: 16px 12px;
+            margin: 6px;
+            border: 1px solid rgba(255,255,255,0.15);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .kpi-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(0,0,0,0.12);
+            border-color: rgba(255,255,255,0.25);
+        }
+        
+        .kpi-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #10B981, #3B82F6, #8B5CF6);
+        }
+        
+        .kpi-icon {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+            opacity: 0.8;
+        }
+        
+        .kpi-value {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #A7F3D0;
+            margin: 4px 0;
+            line-height: 1;
+        }
+        
+        .kpi-label {
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.7);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 500;
+        }
+        
+        .kpi-subtitle {
+            font-size: 0.7rem;
+            color: rgba(255,255,255,0.5);
+            margin-top: 4px;
+        }
+        
+        .kpi-container {
+            display: flex;
+            gap: 12px;
+            margin: 16px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .kpi-container {
+                flex-direction: column;
+                gap: 8px;
+            }
+            .kpi-card {
+                margin: 2px 0;
+            }
+        }
+    </style>
+    """, unsafe_allow_html=True)
     
     # Get data from Supabase and check availability
     try:
@@ -20,14 +98,45 @@ def analyse():
         st.error(f"Error loading statistics: {e}")
         return
     
-    # Overview metrics - clean and simple
+    # KPI Cards Layout
+    st.markdown('<div class="kpi-container">', unsafe_allow_html=True)
+    
     col1, col2, col3 = st.columns(3)
     with col1:
-        st.metric("Attempts", stats.get('total_attempts', 0))
+        st.markdown(f"""
+        <div class="kpi-card">
+            <div class="kpi-icon">🎯</div>
+            <div class="kpi-value">{stats.get('total_attempts', 0)}</div>
+            <div class="kpi-label">Total Attempts</div>
+            <div class="kpi-subtitle">Practice sessions</div>
+        </div>
+        """, unsafe_allow_html=True)
+    
     with col2:
-        st.metric("Average", f"{stats.get('overall_avg', 0):.1f}")
+        avg_score = stats.get('overall_avg', 0)
+        performance_emoji = "🔥" if avg_score >= 8 else "📈" if avg_score >= 6 else "💪"
+        st.markdown(f"""
+        <div class="kpi-card">
+            <div class="kpi-icon">{performance_emoji}</div>
+            <div class="kpi-value">{avg_score:.1f}</div>
+            <div class="kpi-label">Average Score</div>
+            <div class="kpi-subtitle">Out of 10</div>
+        </div>
+        """, unsafe_allow_html=True)
+    
     with col3:
-        st.metric("Best", stats.get('max_score', 0))
+        best_score = stats.get('max_score', 0)
+        best_emoji = "🏆" if best_score == 10 else "⭐" if best_score >= 8 else "🎖️"
+        st.markdown(f"""
+        <div class="kpi-card">
+            <div class="kpi-icon">{best_emoji}</div>
+            <div class="kpi-value">{best_score}</div>
+            <div class="kpi-label">Best Score</div>
+            <div class="kpi-subtitle">Personal record</div>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    st.markdown('</div>', unsafe_allow_html=True)
     
     st.divider()
     
@@ -125,8 +234,8 @@ def analyse():
                 cutoff_date = recent_df[date_col].max() - pd.Timedelta(days=4)
                 recent_df = recent_df[recent_df[date_col] >= cutoff_date].copy()
                 
-                # Create day label and date for sorting
-                recent_df['day'] = recent_df[date_col].dt.strftime('%a %m/%d')
+                # Create day label and date for sorting - DATE ONLY
+                recent_df['day'] = recent_df[date_col].dt.strftime('%m/%d')
                 recent_df['date_only'] = recent_df[date_col].dt.date
                 
                 # Group by day to see how many days we have
@@ -143,7 +252,7 @@ def analyse():
                         color='#4A90E2',
                         opacity=0.7
                     ).encode(
-                        x=alt.X('day:O', title="Day", sort=alt.Sort(field='date_only')),
+                        x=alt.X('day:O', title="Date", sort=alt.Sort(field='date_only')),
                         y=alt.Y(f'{score_col}:Q', title="Score", scale=alt.Scale(domain=[0, 10])),
                         tooltip=['day:O', f'{score_col}:Q']
                     ).properties(height=250)
@@ -183,6 +292,9 @@ def analyse():
                 daily_df['date'] = pd.to_datetime(daily_df['date'])
                 daily_df = daily_df.sort_values('date').tail(30)  # Last 30 days only
                 
+                # Format date to show only date without time
+                daily_df['date_formatted'] = daily_df['date'].dt.strftime('%m/%d')
+                
                 daily_chart = alt.Chart(daily_df).configure(
                     background='transparent'
                 ).configure_view(
@@ -191,10 +303,10 @@ def analyse():
                     cornerRadiusTopLeft=3,
                     cornerRadiusTopRight=3
                 ).encode(
-                    x=alt.X('date:T', title=None),
+                    x=alt.X('date_formatted:O', title="Date", sort=alt.Sort(field='date')),
                     y=alt.Y('avg_score:Q', title="Daily Avg", scale=alt.Scale(domain=[0, 10])),
                     color=alt.Color('avg_score:Q', scale=alt.Scale(scheme='blues'), legend=None),
-                    tooltip=['date:T', 'avg_score:Q', 'attempt_count:Q']
+                    tooltip=['date_formatted:O', 'avg_score:Q', 'attempt_count:Q']
                 ).properties(height=200)
                 
                 st.altair_chart(daily_chart, use_container_width=True)
@@ -229,10 +341,15 @@ def analyse():
     # Attempts per day over whole period
     with st.expander("📊 Daily Attempt Frequency", expanded=False):
         try:
+            # Get individual scores with dates for last 5 days
+            # Using get_score_history() which should have individual records
             daily_df = supabase_client.get_daily_scores()
             if not daily_df.empty:
                 daily_df['date'] = pd.to_datetime(daily_df['date'])
                 daily_df = daily_df.sort_values('date')
+                
+                # Format date to show only date without time
+                daily_df['date_formatted'] = daily_df['date'].dt.strftime('%m/%d')
                 
                 # Bar chart showing attempts per day
                 attempts_chart = alt.Chart(daily_df).configure(
@@ -243,10 +360,10 @@ def analyse():
                     cornerRadiusTopLeft=3,
                     cornerRadiusTopRight=3
                 ).encode(
-                    x=alt.X('date:T', title="Date"),
+                    x=alt.X('date_formatted:O', title="Date", sort=alt.Sort(field='date')),
                     y=alt.Y('attempt_count:Q', title="Attempts per Day"),
                     color=alt.Color('attempt_count:Q', scale=alt.Scale(scheme='blues'), legend=None),
-                    tooltip=['date:T', 'attempt_count:Q', 'avg_score:Q']
+                    tooltip=['date_formatted:O', 'attempt_count:Q', 'avg_score:Q']
                 ).properties(height=250)
                 
                 st.altair_chart(attempts_chart, use_container_width=True)

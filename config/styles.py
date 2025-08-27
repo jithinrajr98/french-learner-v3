@@ -308,7 +308,7 @@ def header_section():
     """Elegant header with a new horizontal stripe design and French flag"""
     st.markdown(f"""
     <div style="margin-top: 10px; display: flex; align-items: left;">
-        <h1 style="margin-bottom: 0; padding-top: 0; display: inline-block;">Limiting Factor</h1>
+        <h1 style="margin-bottom: 0; font-family: Zapfino; padding-top: 0; display: inline-block;">Limiting Factor</h1>
         <div style="margin-left: 0px; margin-top: 0px; display: flex; flex-direction: column; align-items: flex-start;">
             <div style="height: 5px; background-color: #ED2939; width: 130px; margin: 4px 0; border-radius: 3px;"></div>
             <div style="height: 5px; background-color: #FFFFFF; width: 100px; margin: 4px 0; border-radius: 3px;"></div>

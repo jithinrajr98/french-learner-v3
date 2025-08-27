@@ -148,8 +148,9 @@ def writing():
     """, unsafe_allow_html=True)
     
     # Clean header section
+    st.divider()
     st.markdown('<div class="header-section">', unsafe_allow_html=True)
-    st.markdown("#### 📝 Writing Practice")
+    st.markdown("#### 📝 Improve Writing and Speaking")
     st.markdown("**Translate the English sentence into French**")
     st.markdown('</div>', unsafe_allow_html=True)
 
@@ -162,14 +163,14 @@ def writing():
     st.markdown('<div class="method-selector">', unsafe_allow_html=True)
     input_method = st.radio(
         "**Choose how to input your translation:**",
-        ["Type translation", "Speak translation"],
+        ["Type", "Speak"],
         horizontal=True
     )
     st.markdown('</div>', unsafe_allow_html=True)
     
     user_input = ""
     
-    if input_method == "Type translation":
+    if input_method == "Type":
         user_input = st.text_area(
             "**Your French translation:**",
             value=st.session_state.user_translation,
@@ -207,7 +208,7 @@ def writing():
     col1, col2 = st.columns(2, gap="large")
     
     with col1:
-        check_clicked = st.button("✅ Check Translation", use_container_width=True, type="primary")
+        check_clicked = st.button("✅ Evaluate", use_container_width=True, type="primary")
     
     with col2:
         new_clicked = st.button("🔄 Try New Sentence", use_container_width=True)
@@ -238,7 +239,7 @@ def writing():
             
             st.rerun()
         else:
-            st.warning("⚠️ Please enter or speak a translation before checking")
+            st.warning("⚠️ Please type or record your translation")
     
     if new_clicked:
         en, fr = transcript_manager.get_random_pair()
@@ -288,7 +289,7 @@ def writing():
             st.info(st.session_state.user_translation)
         
         with col2:
-            st.markdown("**Correct Translation:**")
+            st.markdown("**Actual Sentence from Transcript:**")
             st.success(st.session_state.current_pair[1])
         
         st.markdown('</div>', unsafe_allow_html=True)

@@ -33,6 +33,12 @@ def vocab_practise():
             margin-bottom: 1rem;
             text-align: center;
         }
+        .radio-section {
+            padding: 1rem;
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+            margin: 0.5rem 0;
+        }
     </style>
     """, unsafe_allow_html=True)
     
@@ -109,23 +115,25 @@ def vocab_practise():
         st.markdown("#### 💡 Example Sentence")
         st.info(st.session_state.example_sentence)
     
-    # Audio section
-    st.markdown("#### 🎵 Pronounciation")
-    audio_col1, audio_col2 = st.columns(2)
-    with audio_col1:
-        if st.button("🔊 Listen word",use_container_width=True):
+    # Audio section with radio buttons
+    st.markdown("#### 🎵 Pronunciation")
+    
+    # Use columns to create clickable buttons that look like radio options
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        if st.button("🔊 Listen to word", use_container_width=True, key=f"word_audio_{current_word}"):
             play_audio_mobile_compatible(st.session_state.current_practice_word)
     
-    with audio_col2:
-        # Generate example sentence using LLM
-        if st.button("🔊 Listen sentence",  use_container_width=True):
-            play_audio_mobile_compatible(st.session_state.example_sentence,)
+    with col2:
+        if st.button("🔊 Listen to sentence", use_container_width=True, key=f"sentence_audio_{current_word}"):
+            play_audio_mobile_compatible(st.session_state.example_sentence)
     
     # Conjugation details (if it's a verb)
     try:
         conjugation_info = llm_utils.conjugation_details(current_word)
         if conjugation_info and "not a verb" not in conjugation_info.lower():
-            st.markdown("### 🔄 Conjugation")
+            st.markdown("#### 🔄 Conjugation")
             st.info(conjugation_info)
     except Exception as e:
         st.warning(f"Could not load conjugation details: {e}")
