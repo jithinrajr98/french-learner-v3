@@ -1,64 +1,80 @@
-1. Bonjour les amis et bienvenue dans ce nouvel épisode aujourd'hui nous allons avoir une conversation tout à fait ordinaire.
-2. Nous allons parler de la météo de nos projets pour le weekend bref faire un peu de small talk mais en français lent.
-3. On vous rappelle que le 1er avril notre club de lecture commence sur discord avec tous les membres de la communauté easy French.
-4. Nous allons lire ensemble le livre une famille compliquée de France du bain.
-5. Et à l'issue de ce projet nous allons la rencontrer en live.
-6. Pour nous rejoindre inscrivez-vous sur le lien easy-french.org/ membership.
-7. Toutes les infos sont là.
-8. Alors comment ça va?
-9. Ça va bien.
-10. Et toi ça va un peu fatigué mais ça va.
-11. Tu es fatigué à cause du travail.
-12. Oui et j'étais de garde à l'hôpital tout le weekend donc je n'ai pas pu me reposer.
-13. Oh ma pauvre oui c'était dur.
-14. Heureusement j'ai eu un jour de repos mais je n'ai pas complètement récupéré.
-15. Et toi tu as fait quoi ce weekend?
-16. Je suis allée à Bordeaux pour voir mes parents et ma sœur.
-17. Ah c'était très sympa.
-18. Il a fait très beau donc on a même pu aller au bord de la mer.
-19. Oh la chance tu t'es baigné non.
-20. Quand même pas il ne faisait pas assez chaud mais c'était quand même sympa de se promener sur la plage.
-21. Depuis qu'il a commencé à faire beau on est plus en forme.
-22. Oui c'est fou j'ai beaucoup plus d'énergie depuis qu'on a un peu de soleil.
-23. J'espère que ça va durer.
-24. Je crois qu'il va pleuvoir ce weekend.
-25. Oh non j'avais envie d'aller me promener au bois de Vincen.
-26. Je vais peut-être faire autre chose du coup.
-27. Et toi tu as prévu quelque chose?
-28. Samedi je vais prendre un café avec une amie.
-29. Et si on a le temps on ira peut-être au cinéma.
-30. Dimanche je vais sûrement rester à la maison et faire la lessive et le ménage.
-31. Oui moi aussi je vais faire ça dimanche.
-32. J'ai beaucoup de lessives en retard mais je vais quand même faire la grasse matinée.
-33. Tu as raison.
-34. Bon ça te dit qu'on aille se balader?
-35. Ah c'est agréable de profiter du beau temps comme ça.
-36. J'ai l'impression d'être en vacances.
-37. Oui moi aussi.
-38. D'ailleurs tu as prévu de partir bientôt en vacances?
-39. Oui cet été je vais passer une semaine dans le sud près de Toulon.
-40. Je pars avec toute ma famille et avec mon copain.
-41. J'ai trop hâte.
-42. Tu m'étonnes.
-43. Et toi tu vas partir en Corse?
-44. Tu sais cet été personne ne peut prendre de vacances à l'hôpital à cause des Jeux Olympiques.
-45. Ah oui c'est vrai.
-46. Mais tu pourras peut-être partir en septembre.
-47. Oui on va faire ça et les billets seront moins chers.
-48. C'est sûr et il y aura moins de monde et il fera encore chaud.
-49. Mais ça va être long d'attendre tout l'été.
-50. Ah oui je comprends.
-51. En plus Paris ne va pas être très agréable.
-52. Oui ça va être bon.
-53. J'espère au moins qu'il n'y aura pas de canicule.
-54. On verra bien.
-55. Pour le moment il faut juste profiter du printemps.
-56. Le soleil nous a manqué cet hiver.
-57. C'est sûr mais il faut quand même qu'on se remette au travail.
-58. Non on a une vidéo à terminer.
-59. Mais la vidéo est terminée.
-60. Non ah bon merci les amis d'avoir regardé cet épisode.
-61. On espère qu'il vous a plu.
-62. N'oubliez pas de mettre un petit like de vous abonner à notre chaîne.
-63. Et de nous laisser un petit commentaire en français.
-64. On vous dit à la semaine prochaine.
+1. Bonjour à toutes et à tous.
+2. Bienvenue dans Paris.
+3. Cette semaine, je vous emmène à la découverte d'une drôle de garde parisienne autrefois tournée vers la voiture, désormais cernée par les bus mais toujours boudé par le métro.
+4. Vous l'avez compris, gros plan aujourd'hui sur la gare de Bercy ou plutôt les gares de Bercy car il y a bien sûr celle-ci exploitée par la SNCF avec ses teres intercités en direction de Dijon, Neuver, Clermontferrand.
+5. Mais il y a aussi celle-ci voisine où des bus longue distance vous emmènent là aussi à petite vitesse à Bordeaux, Marseille, Lyon ou encore Colne.
+6. L'une est à l'éroit, l'autre va bientôt fermer.
+7. Pourtant, ces deux gares connaissent un succès fou avec 100 millions de voyageurs cumulés l'an dernier.
+8. Ça valait bien un numéro de Parigo.
+9. Bersis n'est pas seulement une arena et un parc paysager, ce sont aussi deux gares mitoyennes.
+10. La première date de 1977, l'autre de 2017.
+11. Leur point commun, des espaces limités, un accès compliqué et des voyageurs pas vraiment chouchoutés.
+12. La gare SNCF de Bercy est la plus petite de Paris et sans doute la plus atypique ici.
+13. Pas de transilien, de RER, ni même de TGV.
+14. Pourtant, son traficondit de 30 % en 10 ans.
+15. Alors, quel est son secret ?
+16. Sa directrice est notre invité.
+17. Nous viendrons aussi sur le passé glorieux de cette gare où les voitures prenaient littéralement le train direction le sud de la France.
+18. Un service écolo avant l'heure aujourd'hui disparu.
+19. L'autrain fut arrêté en 2019, faute de rentabilité.
+20. Enfin, nous verrons comment les autocaristes se préparent à la fermeture progressive de la gare routière de Ber d'ici 2030.
+21. Malgré tous ces défauts, est aujourd'hui la plus fréquentée de France.
+22. Alors, où vont passer tous ces bus longue distance ?
+23. Entretien avec le leader du marché.
+24. Serrail encore visible aujourd'hui dans le parc de Bercy témoigne du rôle d'évolu à la toute première gare construite à deux pas d'ici des 1849 transporté du vin.
+25. Cette époque est évidemment révolue mais la gare de Bercy reste tournée vers les régions viticol.
+26. Bonjour Clémence Catel Gira.
+27. Bonjour Bertrand.
+28. Vous êtes la directrice de cette gare très atypique d'abord par son nom Paris Ber Bourgogne pays d'Auverne qui fit l'objet d'une vraie bataille politique et ensuite parce qu'elle est la seule garisienne à de desservirement aucune ville d'Île-de-France.
+29. Est-ce que c'est un handicap ou un atout ?
+30. Bon, c'est un vrai atout.
+31. Euh c'est un vrai plaisir d'accueillir finalement les gens qui arrivent euh sur Paris.
+32. On travaille très bien avec les TER, Bourgogne Franchecté et Centre Val-Doire et puis Intercité.
+33. Donc on est ravi d'accueillir ces transporteurs.
+34. Autre paradoxe, votre gare, c'est la clairement la la plus petite de Paris avec seulement six voies et trois caisses.
+35. C'est pas forcément la plus accessible parce que elle est bouée à la fois par le métro, l'ER, certes, il y a la 14 et la 6, mais il faut quand même marcher pour y accéder.
+36. Et pourtant, c'est vous qui avez connu la plus forte progression du trafic ces 10 dernières années quand on regarde les gares parisiennes.
+37. Plus 30 % et vous avez atteint 5 millions de voyageurs par an.
+38. C'est quoi votre secret ?
+39. Alors notre secret, elle est pas si petite que ça finalement hein.
+40. Vous vous disiez 5 millions, c'est l'équivalent d'une gare comme Reince ou Orléan.
+41. Donc finalement, elle a toute une grande cette gare.
+42. C'est une gare qui est finalement au centre de Paris.
+43. On est à 5 10 minutes à pied de Gard de Lyon.
+44. On est juste à côté de la Cor Aren à Ber, on est aussi tout près de la gare de Bery, la gare routière pour les bus longue distance.
+45. On y sera dans un instant.
+46. Et puis on a des activités TER et intercité en plein développement.
+47. Alors vous avez un public très particulier ici.
+48. On va dire c'est un public qui aime prendre son temps ou qui n'a pas forcément les moyens de payer des billets très chers.
+49. Par exemple, pour aller à Dijon, bah il y a soit le TGV depuis la Gere Lyon, soit le TER depuis ici, mais évidemment, il met beaucoup plus de temps.
+50. Est-ce que c'est un public qui se gère différemment de celui justement de la grande sœur située un peu plus loin ?
+51. On a finalement, paradoxalement, un public assez euh semblable.
+52. On a euh des navetteurs, des gens qui viennent travailler et qui viennent tous les jours en gare.
+53. Et puis on a aussi une clientèle plus touristique.
+54. On a beaucoup de gens vélo euh puisqu'on peut facilement embarquer euh son vélo au sein des trains.
+55. Et puis on a même des clients très touristiques puisque la semaine dernière, on a accueilli l'Orient Express qui est arrivé d'Istanbul.
+56. Alors, est-ce que vous-même vous êtes directrice à la fois de la gare de Bercy et de celle de gare de Lyon ?
+57. Est-ce que ça veut dire que cette garde de Bercy est condamnée à vivre dans l'ombre de sa grande-sœur ?
+58. Pas du tout.
+59. Au contraire, c'est plutôt la grande sœur qui va regarder Bercy pour expérimenter à Ber après déployer à Gare de Lyon.
+60. La dernière expérimentation qu'on a fait, c'est sur le tri déchets.
+61. On est à plus de 60 % de valorisation des déchets et c'est facile de commencer à expérimenter des choses sur Beril pour après aller les les recopier sur Paris Gardillon.
+62. Il y a pas une frustration à ne avoir jamais de de TGV de train modern et rapide ici ?
+63. Alors, train moderne, on a euh l'oxygène qui arrive et puis on a eu des renouvellements de matériel CR.
+64. Donc, on a aussi des trains qui sont parfois bien plus jeunes que les TGV ici.
+65. Est-ce que vous avez quand même des projets d'ingagrandissement ?
+66. Parce qu'on le voit, certains weekends de de grand départ, on se sent vraiment à l'étroit ici quand même, hein.
+67. Alors, on n' pas de projet d'agrandissement à court terme.
+68. On a plutôt un projet mais à long terme.
+69. En attendant, on a plusieurs projets, petits projets pour fluidifier le trafic.
+70. 1, on travaille beaucoup sur les annonces et le prépositionnement des clients.
+71. Les jours de grand départ, on met aussi en place des volontaires en gare pour orienter les clients et pour embarquer le plus facilement possible.
+72. Merci beaucoup Clément Scatel Girard pour toutes ces précisions.
+73. Maintenant, on va aller s'intéresser à un service disparu mais qui fit les beaux jours de cette gare jusqu'en 2019.
+74. Il s'agit bien sûr de l'autotrain.
+75. On voit ça avec Antoine Delcour et Norbert Cohen.
+76. Aux abords de Beril, il faut tout ouvrir l'œil pour les apercevoir.
+77. Malgré la fin des autotrains, quelques panneaux sont restés.
+78. Vestige d'une aventure lancée après-guerre.
+79. La SNCF a mise en service sur la ligne Paris Biarit un nouveau train d'automobile accompagné qui prend en charge les véhicules en même temps que les voyageurs.
+80. Une solution originale sans aucun doute qui permet tout en gard
