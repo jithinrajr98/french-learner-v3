@@ -80,7 +80,7 @@ def writing():
             background: rgba(255,255,255,0.1);
             border-radius: 16px;
             border-left: 4px solid #10B981;
-            text-align: center;
+            text-align: left;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
         .score-badge {
