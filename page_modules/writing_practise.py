@@ -201,16 +201,14 @@ def writing():
     
     
     # Action buttons with better spacing
-    col1, col2 = st.columns(2, gap="large")
+    col1, col2 = st.columns(2, gap="small")
     
     with col1:
         check_clicked = st.button("✅ Evaluate", use_container_width=True, type="primary")
     
     with col2:
         new_clicked = st.button("🔄 Try New Sentence", use_container_width=True)
-    
-    st.markdown('</div>', unsafe_allow_html=True)
-    
+        
     # Handle button clicks
     if check_clicked:
         if user_input and user_input.strip():
