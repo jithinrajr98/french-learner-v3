@@ -201,7 +201,6 @@ def writing():
     
     
     # Action buttons with better spacing
-    st.markdown('<div class="button-row">', unsafe_allow_html=True)
     col1, col2 = st.columns(2, gap="large")
     
     with col1:
