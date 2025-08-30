@@ -73,10 +73,10 @@ def writing():
         }
         .english-text {
             font-size: 1.3rem;
-            font-weight: 500;
+            font-weight: 400;
             color: white;
-            margin: 2rem 0;
-            padding: 2rem;
+            margin: 1rem 0;
+            padding: 1rem;
             background: rgba(255,255,255,0.1);
             border-radius: 16px;
             border-left: 4px solid #10B981;
@@ -152,21 +152,18 @@ def writing():
     st.markdown('<div class="header-section">', unsafe_allow_html=True)
     st.markdown("#### 📝 Improve Writing and Speaking")
     st.markdown("**Translate the English sentence into French**")
-    st.markdown('</div>', unsafe_allow_html=True)
-
     # English prompt in a clean container
     st.markdown(f'<div class="english-text">{st.session_state.current_pair[0]}</div>', unsafe_allow_html=True)
     
     # Input section with cleaner styling
     
     # Method selector with better spacing
-    st.markdown('<div class="method-selector">', unsafe_allow_html=True)
     input_method = st.radio(
         "**Choose how to input your translation:**",
         ["Type", "Speak"],
         horizontal=True
     )
-    st.markdown('</div>', unsafe_allow_html=True)
+    # st.markdown('</div>', unsafe_allow_html=True)
     
     user_input = ""
     
