@@ -19,7 +19,7 @@ def play_audio(text, lang='fr'):
 def play_audio_mobile_compatible(text, lang='fr'):
     """Generate and play audio with mobile compatibility at configurable speed"""
     # Define playback speed (can be easily modified)
-    PLAYBACK_SPEED = 1.15
+    PLAYBACK_SPEED = 1.25
     
     try:
         # Generate TTS audio
