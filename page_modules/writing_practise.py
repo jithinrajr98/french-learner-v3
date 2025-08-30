@@ -72,7 +72,7 @@ def writing():
             margin: 0 auto;
         }
         .english-text {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             font-weight: 400;
             color: white;
             margin: 1rem 0;
@@ -151,7 +151,7 @@ def writing():
     st.divider()
     st.markdown('<div class="header-section">', unsafe_allow_html=True)
     st.markdown("#### 📝 Improve Writing and Speaking")
-    st.markdown("**Translate the English sentence into French**")
+    st.markdown("Translate the English sentence into French")
     # English prompt in a clean container
     st.markdown(f'<div class="english-text">{st.session_state.current_pair[0]}</div>', unsafe_allow_html=True)
     
