@@ -1,49 +1,33 @@
-1. Hello to all.
-2. Today, I'm taking you with me to show you my typical day as a data scientist.
-3. I arrive at work, I greet my colleagues and it's off to do a bit of monitoring.
-4. I start by keeping myself informed of the news from the world of data by consulting research papers, articles on Medium, towards datascience, or LinkedIn and on a few subreddits like r/datascience, r/MachineLearning or again r/dataisbeautiful.
-5. From 10:00 to 12:00, daily meeting, the daily.
-6. It's time for the daily: the daily meeting with the different teams to take stock of each person's progress and to communicate well about the tasks to come.
-7. Generally, each task to be performed is listed in the form of a sprint, itself made up of tasks and sub-tasks assigned to the different members of the team.
-8. To have good visibility over all the tasks, we use software like Jira, Monday or again GitHub Project which allows us to define clear and precise objectives in order to have an overview of the different teams.
-9. There are then three main topics: the one we worked on last.
-10. At first, the goal is to make a report of the different progress on the sprint and therefore on the ongoing tasks.
-11. As a data scientist, I generally mention the project I was able to work on the day before and the tasks I was able to perform.
-12. For example, yesterday, I was able to work on the adjustment of the parameters of my deep learning model.
-13. We discuss the topic we will work on after the meeting.
-14. We can also discuss the other meetings we may have with the data engineers, software engineers, or all the other teams related to the task we must accomplish.
-15. Last topic: the problems we encountered and that we are likely to encounter.
-16. One of the most important elements is communication, which must take place in good times as in bad times.
-17. This is why it is essential to present the problems that a data scientist may face in order to allow the different teams to be able to provide a solution to the problem, whether it is a code problem or techniques related to an implemented method, the faster the information circulates, the faster the problem will be resolved.
-18. At 12:00, it's lunch break.
-19. There is no fixed time because we try to finish certain tasks before going to the table.
-20. Following the morning daily, I have clearer and more precise objectives.
-21. Let's take the example of a typical mission of a data scientist: a client who would like to know the consumption habits of their clients.
-22. The realization of this task can take several days, or even several weeks.
-23. However, there is a certain cycle that comes back daily, which is the following: stating the company's problem.
-24. It is essential to clearly define the problem to be treated.
-25. And how I, as a data scientist, will be able to respond to it.
-26. For example, customers change their minds and tend not to stay in the long term.
-27. We would then like to be able to determine the causes of these trends and find a solution to deal with this problem.
-28. What we will need to carry out this project is to know who will be involved, what are the desired deliverables, must the results be updated daily, weekly or monthly?
-29. Do we have a .CSV file at our disposal or do we need to call on a web-scrapping expert to collect the data?
-30. The first analysis of my data allows me to have an overview of the volume of the data, a statistical description of these, or again the study of the different distributions.
-31. Before being able to apply any machine learning or deep learning model, I will make sure that the data is conforming for the implementation of a model.
-32. Processing of missing values, management of duplicates, encoding of variables.
-33. I also perform a first selection of variables.
-34. What are the important variables?
-35. What are the redundant ones?
-36. What about the correlations?
-37. After all these steps, we will move on to the application of a basic model depending on the problem I want to respond to, I will have to choose the type of model that is most adapted.
-38. To do this, it is essential to ask the right questions.
-39. Is it a supervised or unsupervised learning model?
-40. Depending on the answer, we will focus on classification, regression or clustering models.
-41. For example, importing a random forest model without parameter adjustment.
-42. We then move on to the iteration of the model once our basic model has been implemented, several steps can consist of improving it by implementing other more efficient models or again by doing research on parameters and hyper-parameters of over or under-sampling, feature selection, etc.
-43. And finally, we finish with the evaluation of the model.
-44. Once the model is implemented, the evaluation of its performance is one of the most important tasks.
-45. Indeed, depending on the problem, the metric to be optimized in order to respond to it as precisely as possible can be different.
-46. Accuracy, F1 score, precision recall.
-47. 6:15 PM: Return home.
-48. And that's it, I hope I gave you a good idea of my typical day as a data scientist.
-49. So, obviously, depending on the company, the missions or the clients, no day is really alike and you still have an idea of what to expect when you work on a project in data science.
+1. Hello everyone, it's Vincent and I am a data engineer and today,
+2. To make it very simple, a data engineer is a professional specialized in the management and engineering of data.
+3. It's one of the most sought-after jobs in the tech world.
+4. Arrived at work between 9 am and 9:30 am, I have a coffee with my colleagues and we discuss a bit before holding the morning meeting with our teams.
+5. After the meeting, I turn on the computer and start checking important emails.
+6. I respond to the received emails and plan my day according to the order of priorities and the different projects I have to intervene in.
+7. The work of a data engineer is to facilitate the work of data scientists and analysts.
+8. I make sure to offer normalized data, that is to say data in a uniform format.
+9. Example: men are 0, women are 1.
+10. We don't have male/female, M/F, etc.
+11. I also check that the data is complete, that there are no missing values, but also that the data is consistent by creating clean and well-organized tables so that data analysts and scientists can focus only on their task.
+12. I then get to work on a data pipeline creation project.
+13. For those who don't know what it is, a data pipeline is the process of extracting, transforming, and recording data in a format suitable for its use.
+14. I will therefore extract data by doing web scraping, by searching for information in the HTML code of web pages, by making API queries, HTTP requests to receive information.
+15. Once the data is extracted, I transform it to put it in a table or data frame, I then do data cleaning, for example by removing duplicates, by changing women to 1, by deleting all useless data to clarify the data frame as much as possible.
+16. Once the data frame is ready, I record the data in a database in a table or without structure.
+17. I finish by creating a database schema and a data flow plan.
+18. I usually have a meal around 12:30 pm, but it depends on my progress on the morning's work as well as the availability of my colleagues.
+19. After the lunch break, I return to work and I make sure that all the data is processed correctly and that the information is stored in the database.
+20. Data processing makes it possible to offer clean and transformed data according to uses.
+21. For example, we only want numbers to define prediction models, for this step, I will use specialized libraries like Pandas, Spark, etc.
+22. and I use languages that can perform actions on a large volume of data in record time, in order to optimize my time at work.
+23. As for storage, we can store data in the cloud or on a local server, or even on one's computer.
+24. Depending on the needs, I can transform the data into an SQL table or JSON documents for MongoDB.
+25. I feed my database using a database management system also called DBMS.
+26. Once I have taken care of data storage, I move on to optimizing the performance of the data pipeline by examining the critical points and making adjustments, such as working on the quality of my code to ensure good documentation and better readability.
+27. I like to finish my day by doing watch, it's useful to me when the techniques I use become obsolete.
+28. In general, I like to discuss it with my colleagues.
+29. It's always interesting to learn from others about new tools and new technologies.
+30. Just like today, I'm going to train on AWS cloud to get certified.
+31. I usually leave the office around 6 pm, once my daily schedule is finished.
+32. If this video on a typical day of a data engineer pleased you, don't hesitate to like, to ask your questions in the comments and to subscribe to not miss the next videos.
+33. And if this video made you want to learn more in detail about the job of a data engineer, don't hesitate to make an appointment with one of our advisors.

@@ -1,49 +1,33 @@
-1. Bonjour à tous.
-2. Aujourd'hui, je vous emmène avec moi pour vous montrer ma journée type en tant que data scientist.
-3. J'arrive au travail, Je salue mes collègues et c'est parti pour faire un peu de veille.
-4. Je commence par me tenir au courant de l'actualité du monde de la data en consultant des papiers de recherche, des articles sur Medium, towards datascience, ou LinkedIn et sur quelques subreddits comme r/datascience, r/MachineLearning ou encore r/dataisbeautiful.
-5. De 10h00 à 12h00, réunion quotidienne, la daily.
-6. C'est l'heure de la daily : la réunion quotidienne avec les différentes équipes afin de faire un point sur les avancées de chacun et de bien communiquer sur les tâches à venir.
-7. Généralement, chaque tâche à réaliser est inscrite sous forme de sprint, lui même constitué de tâches et sous tâches attribuées aux différents membres de l'équipe.
-8. Pour avoir une bonne visibilité sur toutes les tâches, on utilise des logiciels comme Jira, Monday ou encore GitHub Project qui permet de définir des objectifs clairs et précis afin d'avoir une vue d'ensemble sur les différentes équipes.
-9. Il y a alors trois sujets principaux : celui sur lequel nous avons travaillé en dernier.
-10. Dans un premier temps, l'objectif est alors de faire un rapport des différentes avancées sur le sprint et donc des tâches en cours.
-11. En tant que data scientist, Je mentionne généralement le projet sur lesquels j'ai pu travailler la veille et les tâches que j'ai pu réaliser.
-12. Par exemple, hier, j'ai pu travailler sur le réglage des paramètres de mon modèle de deep learning.
-13. Nous discutons du sujet sur lequel nous allons travailler après la réunion.
-14. Nous pouvons aussi discuter des autres réunions que nous pourrions avoir avec les data engineers, software engineers, ou toutes les autres équipes en lien avec la tâche que nous devons accomplir.
-15. Dernier sujet : les problèmes que nous avons rencontrés et que nous sommes susceptibles de rencontrer.
-16. L'un des éléments les plus importants est la communication, qui doit se faire dans les bons comme dans les mauvais moments.
-17. C'est pourquoi il est essentiel de présenter les problèmes auxquels un data scientist peut faire face afin de permettre aux différentes équipes de pouvoir apporter une solution au problème, que ce soit un problème de code ou de techniques relatives à une méthode implémentée, plus vite l'information circulera, plus vite le problème sera résolu.
-18. À 12h00, c'est la pause repas.
-19. Il n'y a pas vraiment d'heure fixe car on essaye de terminer certaines tâches avant de passer à table.
-20. Suite à la daily du matin, j'ai des objectifs plus clairs et précis.
-21. Prenons l'exemple d'une mission typique d'un data scientist : un client qui aimerait connaître les habitudes de consommation de ses clients.
-22. La réalisation de cette tâche pourra prendre plusieurs jours, voire plusieurs semaines.
-23. Il y a cependant un certain cycle qui revient quotidiennement, qui est le suivant : énoncer le problème de l'entreprise.
-24. Il est primordial de définir clairement la problématique à traiter.
-25. Et comment moi, en tant que data scientist, je vais pouvoir y répondre.
-26. Par exemple, les clients changent d'avis et ont tendance à ne pas rester sur le long terme.
-27. On aimerait alors pouvoir déterminer les causes de ces tendances et trouver une solution pour parer à ce problème.
-28. Ce dont nous allons avoir besoin pour réaliser ce projet, c'est de savoir qui sera impliqué, quels sont les produits livrables souhaités, les résultats doivent-ils être mis à jour quotidiennement, hebdomadairement ou mensuellement ?
-29. Avons nous un fichier .CSV à disposition ou doit-on faire appel à un expert en web-scrapping afin de collecter les données ?
-30. La première analyse de mes données me permet d'avoir une vue d'ensemble sur la volumétrie des données, une description statistique de ces dernières ou encore l'étude des différentes distributions.
-31. Avant de pouvoir appliquer tout modèle de machine learning ou de deep learning, je vais m'assurer que les données sont conformes pour l'implémentation d'un modèle.
-32. Traitement des valeurs manquantes, gestion des doublons, encodage des variables.
-33. J'effectue également une première sélection des variables.
-34. Quelles sont les variables importantes ? 
-35. Quelles sont celles qui sont redondantes ? 
-36. Qu'en est-il des corrélations ?
-37. Après toutes ces étapes, nous allons passer à l'application d'un modèle de base en fonction de la problématique à laquelle je veux répondre, il faudra que je choisisse le type de modèle le plus adapté.
-38. Pour cela, il est essentiel de se poser les bonnes questions.
-39. Est-ce un modèle d'apprentissage supervisé ou non ?
-40. Suivant la réponse, on se concentrera sur des modèles de classification, de régression ou de clustering.
-41. Par exemple, importer un modèle de forêt aléatoire sans réglage de paramètres.
-42. Nous passons ensuite à l'itération du modèle une fois que notre modèle de base a été implémenté, Plusieurs étapes peuvent consister à l'améliorer en implémentant d'autres modèles plus performants ou encore en faisant de la recherche de paramètres et hyper paramètres de l'over ou de l’under sampling, de la sélection de feature, etc.
-43. Et enfin, nous terminons par l'évaluation du modèle.
-44. Une fois le modèle implémenté, l'évaluation des performances est une des tâches les plus importantes.
-45. En effet, selon la problématique, la métrique à optimiser afin de pouvoir y répondre le plus précisément possible peut être différente.
-46. Accuracy, F1 score, precision recall.
-47. 18h15 : Retour à la maison.
-48. Et voilà, J'espère que je vous ai donné une bonne idée de ma journée type en tant que data scientist.
-49. Alors évidemment, en fonction de l'entreprise, des missions ou des clients, aucune journée ne se ressemble vraiment et vous avez tout de même un aperçu de ce à quoi vous attendre lorsque vous travaillerez sur un projet en data science.
+1. Hello tout le monde, c’est Vincent et je suis data engineer et aujourd'hui,
+2. Pour faire très simple, un data engineer est un professionnel spécialisé dans la gestion et l'ingénierie des données.
+3. C'est un des métiers les plus recherchés dans le monde de la tech.
+4. Arrivé au travail entre 9 h et 9 h 30, je prends un café avec mes collègues et on discute un peu avant d'effectuer la réunion matinale avec nos équipes.
+5. Après la réunion, j'allume l'ordi et commence à vérifier les emails importants.
+6. Je réponds aux mails reçus et planifie ma journée en fonction de l'ordre de priorités et des différents projets sur lesquels je dois intervenir.
+7. Le travail d'un data engineer est de faciliter le travail des data scientists et analysts.
+8. Je m'assure donc d'offrir des données normalisées, c'est-à-dire des données dans un format uniforme.
+9. Exemple : les hommes sont des 0, les femmes sont des 1.
+10. On n'a pas de male/female, H/F, etc.
+11. Je vérifie également que les données sont complètes, qu'il n'y a pas de valeur manquante, mais aussi que les données sont cohérentes en créant des tables propres et bien rangées pour que les data analysts et scientists puissent se concentrer uniquement sur leur tâche.
+12. Je me mets ensuite à travailler sur un projet de création de pipeline de données.
+13. Pour ceux qui ne savent pas ce que c'est, un pipeline de données est le processus d'extraction, de transformation et d'enregistrement des données dans un format adapté à son utilisation.
+14. Je vais donc extraire les données en faisant du web scrapping, en cherchant des informations dans le code HTML des pages web, en faisant du requêtage d'API, des requêtes HTTP pour recevoir des informations.
+15. Une fois les données extraites, je les transforme pour ranger dans un tableau ou data frame, je fais ensuite du nettoyage de données, par exemple en retirant les doublons, en changeant les femmes en 1, en supprimant toutes les données inutiles afin de clarifier au maximum le data frame.
+16. Une fois que le data frame est prêt, J’enregistre les données dans une base de données en table ou sans structure.
+17. Je finis par créer un schéma de base de données et le plan de flux de données.
+18. Je prends généralement un repas vers midi et demi, mais cela dépend de mon avancement sur le travail de la matinée ainsi que la disponibilité de mes collègues.
+19. Après la pause déjeuner, je reviens au travail et je m'assure que toutes les données sont traitées correctement et que les informations sont stockées dans la base de données.
+20. Le traitement de données permet d'offrir des données propres et transformées selon les usages.
+21. Par exemple, on veut seulement des nombres pour définir des modèles de prédiction, pour cette étape, je vais m'aider de librairies spécialisées comme Pandas, Spark, etc.
+22. et j'utilise des langages qui peuvent exécuter des actions sur un large volume de données en un temps record, afin d'optimiser mon temps au travail.
+23. Pour ce qui est du stockage, on peut stocker les données dans le cloud ou encore sur un serveur en local, ou même bien sûr sur son ordinateur.
+24. Selon les besoins, je peux transformer les données en table SQL ou bien en documents JSON pour MongoDB.
+25. J’alimente ma base de données à l'aide d'un système de gestion de base de données aussi appelé SGBD.
+26. Une fois que je me suis occupé du stockage de données, je passe à l'optimisation des performances de la pipeline de données en examinant les points critiques et en effectuant des ajustements, comme par exemple en travaillant sur la qualité de mon code afin d'assurer une bonne documentation et une meilleure lisibilité.
+27. J'aime bien terminer ma journée en faisant de la veille, ça m'est utile lorsque les techniques que j'utilise deviennent obsolètes.
+28. En général, j'aime bien en discuter avec mes collègues.
+29. C'est toujours intéressant d'en apprendre des autres sur les nouveaux outils et les nouvelles technologies.
+30. Justement, aujourd'hui, je vais me former sur le cloud AWS afin de passer une certification.
+31. Je quitte le bureau généralement vers 18 h, une fois que mon planning de la journée est terminé.
+32. Si cette vidéo sur la journée type d'un data engineer vous a plu, n'hésitez pas à like, à poser vos questions dans les commentaires et à vous abonner pour ne rien rater aux prochaines vidéos.
+33. Et si cette vidéo vous a donné envie de plus vous renseigner en détail sur le métier de data engineer, n'hésitez pas à prendre rendez-vous avec un de nos conseillers.
