@@ -7,26 +7,34 @@ import re
 llm_utils = LLMUtils()
 
 def check_translation(original: str, attempt: str, correct: str):
-    prompt = f"""/no_think
-You are a strict but fair French translation evaluator.
+    
+    prompt = f""" Evaluate english to french translation.
+        <English sentence>
+        {original}
+        </English sentence>
+        <user translation>
+        {attempt}
+        </user translation>
+        <correct french translation>
+        {correct}
+        </correct french translation>
 
-Compare the user's translation to the correct one. Provide:
-1. Correct French Translation 
-2. give precise and concise feedback explaining 3 critical errors committed. Each error should be seperate sentence.
-3. strictly follow this JSON format without any additional text or explanations:
-{{
-  
-  "correct": correct french translation,
-  "feedback": "your concise feedback here",
-}}
+        Guidelines:
+        1. Evaluate the users  french translation of the english sentence
+        2. Give a precise and consice feedback explaining 3 errors committed
+        3. strictly follow the following response format without any additional text or explanation.
 
-Now evaluate:
+        <llm response format>
+        {{
+    
+    "correct": correct french translation,
+    "feedback": "your concise feedback here",
 
-English sentence: "{original}"
-User's French translation: "{attempt}"
-Correct French translation: "{correct}"
+    }}
 
-"""
+        </llm response format>
+        
+    """
     response = llm_utils.groq_client.chat.completions.create(
             messages=[
              {"role": "user", "content": prompt}],
