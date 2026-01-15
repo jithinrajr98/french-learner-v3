@@ -9,24 +9,20 @@ import streamlit as st
 
 
 class LLMUtils:
-    
+
     def __init__(self):
         """
         Initialize the LLMUtils class with a Groq client.
         """
-        
-         # Try to get API key from Streamlit secrets first, then environment variables
-        api_key = None
-        # Check Streamlit secrets
-        if hasattr(st, 'secrets') and 'GROQ_API_KEY' in st.secrets:
-            api_key = st.secrets['GROQ_API_KEY']
-        # Fallback to environment variable
-        elif 'GROQ_API_KEY' in os.environ:
-            api_key = os.environ['GROQ_API_KEY']
-        
+        # Try Streamlit secrets first (for cloud deployment), then env vars (for local dev)
+        try:
+            api_key = st.secrets["GROQ_API_KEY"]
+        except (KeyError, FileNotFoundError):
+            api_key = os.getenv('GROQ_API_KEY')
+
         if not api_key:
             raise ValueError("GROQ_API_KEY not found in Streamlit secrets or environment variables.")
-        
+
         self.api_key = api_key
         self.groq_client = Groq(api_key=self.api_key)  
         

@@ -1,4 +1,5 @@
 .env
 __pycache__
 .DS_Store
-.streamlit
+.streamlit/secrets.toml
+data/french_learner.db
