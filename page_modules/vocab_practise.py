@@ -99,7 +99,7 @@ def vocab_practise():
     example_sentence_display = html.escape(str(example_sentence)) if example_sentence else "No example available"
 
     # Progress indicator
-    st.markdown(f"<p style='text-align: center; color: rgba(255,255,255,0.7); margin-bottom: 0.5rem;'>{st.session_state.word_index + 1} / {len(saved_words)}</p>", unsafe_allow_html=True)
+    st.markdown(f"<p style='text-align: center; color: rgba(255,255,255,0.7); margin-bottom: 0.5rem;'>Total: {len(saved_words)} words</p>", unsafe_allow_html=True)
 
     # Card HTML
     card_html = f"""
@@ -119,34 +119,25 @@ def vocab_practise():
     st.write("")  # spacing
 
     # Action buttons row
-    col1, col2, col3, col4 = st.columns(4)
+    col1, col2, col3 = st.columns(3)
 
     with col1:
         if st.button("🔊 Play", use_container_width=True):
             play_audio_mobile_compatible(example_sentence)
 
     with col2:
-        if st.button("◀ Previous", use_container_width=True):
-            st.session_state.word_index -= 1
-            if st.session_state.word_index < 0:
-                st.session_state.word_index = len(saved_words) - 1
+        if st.button("Next ▶", use_container_width=True):
+            st.session_state.word_index = random.randint(0, len(saved_words) - 1)
             st.rerun()
 
     with col3:
-        if st.button("Next ▶", use_container_width=True):
-            st.session_state.word_index += 1
-            if st.session_state.word_index >= len(saved_words):
-                st.session_state.word_index = 0
-            st.rerun()
-
-    with col4:
         if st.button("🗑 Delete", use_container_width=True):
             try:
                 supabase_client.delete_saved_word(current_word)
                 saved_words_data = supabase_client.get_all_saved_words()
                 saved_words = [(item['word'], item['meaning'], item.get('added_on', '')) for item in saved_words_data]
                 if len(saved_words) > 0:
-                    st.session_state.word_index = min(st.session_state.word_index, len(saved_words) - 1)
+                    st.session_state.word_index = random.randint(0, len(saved_words) - 1)
                 else:
                     st.session_state.word_index = 0
                 st.rerun()
