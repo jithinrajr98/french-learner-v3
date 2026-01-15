@@ -122,18 +122,8 @@ def vocab_practise():
     col1, col2, col3, col4 = st.columns(4)
 
     with col1:
-        if st.button("🗑 Delete", use_container_width=True):
-            try:
-                supabase_client.delete_saved_word(current_word)
-                saved_words_data = supabase_client.get_all_saved_words()
-                saved_words = [(item['word'], item['meaning'], item.get('added_on', '')) for item in saved_words_data]
-                if len(saved_words) > 0:
-                    st.session_state.word_index = min(st.session_state.word_index, len(saved_words) - 1)
-                else:
-                    st.session_state.word_index = 0
-                st.rerun()
-            except Exception as e:
-                st.error(f"Error: {e}")
+        if st.button("🔊 Play", use_container_width=True):
+            play_audio_mobile_compatible(example_sentence)
 
     with col2:
         if st.button("◀ Previous", use_container_width=True):
@@ -150,6 +140,15 @@ def vocab_practise():
             st.rerun()
 
     with col4:
-        if st.button("🔊 Play", use_container_width=True):
-            play_audio_mobile_compatible(current_word)
-            play_audio_mobile_compatible(example_sentence)
+        if st.button("🗑 Delete", use_container_width=True):
+            try:
+                supabase_client.delete_saved_word(current_word)
+                saved_words_data = supabase_client.get_all_saved_words()
+                saved_words = [(item['word'], item['meaning'], item.get('added_on', '')) for item in saved_words_data]
+                if len(saved_words) > 0:
+                    st.session_state.word_index = min(st.session_state.word_index, len(saved_words) - 1)
+                else:
+                    st.session_state.word_index = 0
+                st.rerun()
+            except Exception as e:
+                st.error(f"Error: {e}")
