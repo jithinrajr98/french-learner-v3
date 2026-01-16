@@ -163,31 +163,33 @@ def vocab_builder():
             st.rerun()
     
     st.divider()
-    
-    # Get vocabulary list based on database type
-    try:
-        if db_type == "supabase" and db_client:
-            saved_words_data = db_client.get_all_saved_words()
-            # Convert Supabase data format to match original format (word, meaning, timestamp)
-            saved_words = [(item['word'], item['meaning'], item.get('added_on', '')) for item in saved_words_data]
-        else:
-            saved_words = get_all_saved_words()
-    except Exception as e:
-        st.error(f"Error fetching vocabulary: {e}")
-        saved_words = []
-    
+
     search_term = st.session_state.get('search_term', '')
-    
+
+    # Only fetch and display words when searching
     if search_term:
-        saved_words = [
-            (word, meaning, timestamp) for word, meaning, timestamp in saved_words
-            if search_term.lower() in word.lower() or search_term.lower() in meaning.lower()
-        ]
-        if saved_words:
-            st.write(f"**Found {len(saved_words)} words**")
-        else:
-            st.info("No words found")
-            st.divider()
+        try:
+            if db_type == "supabase" and db_client:
+                saved_words_data = db_client.get_all_saved_words()
+                saved_words = [(item['word'], item['meaning'], item.get('added_on', '')) for item in saved_words_data]
+            else:
+                saved_words = get_all_saved_words()
+
+            # Filter by search term
+            saved_words = [
+                (word, meaning, timestamp) for word, meaning, timestamp in saved_words
+                if search_term.lower() in word.lower() or search_term.lower() in meaning.lower()
+            ]
+
+            if saved_words:
+                st.write(f"**Found {len(saved_words)} words**")
+            else:
+                st.info("No words found matching your search")
+        except Exception as e:
+            st.error(f"Error fetching vocabulary: {e}")
+            saved_words = []
+    else:
+        saved_words = []
     
     if saved_words:
         # Bulk delete section
@@ -274,8 +276,7 @@ def vocab_builder():
     
     else:
         if not search_term:
-            st.info("No words in your vocabulary yet. Add some words above!")
-            st.divider()
+            st.info("🔍 Search for words to view your vocabulary")
 
 # Initialize session state for search
 if 'search_term' not in st.session_state:
