@@ -223,11 +223,74 @@ class LLMUtils:
                 model=GROQ_TRANSCRIPT_MODEL
             )
             response = response.choices[0].message.content.strip()
-            
+
         except Exception as e:
             return f"Error: {str(e)}"
-        
+
         return response
-    
-    
-    
+
+
+    # ========= Memorise page helpers =========
+
+    def judge_answer(self, direction: str, prompt_word: str, expected: str, user_answer: str):
+        """
+        Grade a flashcard answer. `direction` is "EN->FR" or "FR->EN".
+        Returns a dict: {"correct": bool, "note": str}.
+        Accepts typos, missing accents, and valid synonyms as correct.
+        """
+        prompt = f"""You are grading a French vocabulary flashcard.
+
+Direction: {direction}
+Prompt shown to learner: {prompt_word}
+Expected answer (reference): {expected}
+Learner's answer: {user_answer}
+
+Rules:
+- Typos, missing accents, and close synonyms count as CORRECT.
+- If the meaning column has multiple options (comma separated), any one of them is CORRECT.
+- Conjugated or differently inflected forms of the right root count as CORRECT.
+- A blank or completely unrelated answer is WRONG.
+
+Respond in EXACTLY this format, two lines, no extra text:
+Line 1: CORRECT or WRONG
+Line 2: one short sentence (max 15 words) explaining why, or giving the better answer."""
+
+        try:
+            response = self.groq_client.chat.completions.create(
+                messages=[{"role": "user", "content": prompt}],
+                model=GROQ_MODEL,
+                temperature=0.0,
+            )
+            text = response.choices[0].message.content.strip()
+            lines = [l.strip() for l in text.splitlines() if l.strip()]
+            verdict = (lines[0] if lines else "").upper()
+            note = lines[1] if len(lines) > 1 else ""
+            return {"correct": verdict.startswith("CORRECT"), "note": note}
+        except Exception as e:
+            return {"correct": False, "note": f"Grader error: {e}"}
+
+    def generate_story(self, words):
+        """
+        Generate a short French story that uses the given words, followed by
+        an English translation. Returns a single string with two sections.
+        """
+        word_list = ", ".join(words)
+        prompt = f"""Write a short, simple French story (5-8 sentences) that naturally uses ALL of these French words: {word_list}.
+
+Requirements:
+- Use each listed word at least once. Wrap each use in **double asterisks** so it is easy to spot.
+- Keep vocabulary around A2-B1 level outside of the target words.
+- Make it a coherent little scene, not a list of sentences.
+- After the French story, add a blank line, then the line "English translation:" and a faithful English translation (also bolding the equivalent English words).
+
+Output only the story and its translation, no preamble, no extra commentary."""
+
+        try:
+            response = self.groq_client.chat.completions.create(
+                messages=[{"role": "user", "content": prompt}],
+                model=GROQ_MODEL,
+                temperature=0.7,
+            )
+            return response.choices[0].message.content.strip()
+        except Exception as e:
+            return f"Error generating story: {e}"

@@ -18,12 +18,21 @@ The app runs on `http://localhost:8501`
 
 ## Environment Variables
 
-Required in `.env`:
+**Local development** - use `.env`:
 ```
 GROQ_API_KEY=<your-groq-api-key>
 SUPABASE_URL=<supabase-project-url>       # optional, falls back to SQLite
 SUPABASE_API_KEY=<supabase-anon-key>      # optional
 ```
+
+**Streamlit Cloud** - use secrets dashboard (TOML format):
+```toml
+GROQ_API_KEY = "your-key"
+SUPABASE_URL = "https://your-project.supabase.co"
+SUPABASE_API_KEY = "your-key"
+```
+
+See `.streamlit/secrets.toml.example` for template. Code uses `st.secrets` with fallback to `os.getenv()`.
 
 ## Architecture
 
