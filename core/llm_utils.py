@@ -294,3 +294,74 @@ Output only the story and its translation, no preamble, no extra commentary."""
             return response.choices[0].message.content.strip()
         except Exception as e:
             return f"Error generating story: {e}"
+
+    def generate_writing_exercise(self, words):
+        """
+        Generate a single English sentence that uses the given French words
+        (by their English meanings), plus a reference French translation of
+        the sentence. Returns {"english": str, "reference_french": str}.
+        """
+        word_list = ", ".join(words)
+        prompt = f"""You are creating a French translation practice exercise.
+
+Target French words to feature: {word_list}
+
+Task:
+1. Write ONE short English sentence that NATURALLY uses the English meaning of each target French word at least once.
+2. Then provide the correct French translation of that sentence. The translation MUST use each of the target French words above (not synonyms).
+3. Keep the language simple (A2-B1 level). No idioms, no fancy tenses.
+4. Output exactly one sentence for English and one sentence for French.
+
+Respond in EXACTLY this format, no extra text, no preamble:
+
+ENGLISH:
+<your single english sentence here>
+
+FRENCH:
+<reference french translation here>"""
+
+        try:
+            response = self.groq_client.chat.completions.create(
+                messages=[{"role": "user", "content": prompt}],
+                model=GROQ_MODEL,
+                temperature=0.5,
+            )
+            raw = response.choices[0].message.content.strip()
+        except Exception as e:
+            return {"english": "", "reference_french": "", "error": str(e)}
+
+        # Parse the two sections.
+        # The LLM mostly follows "ENGLISH:\n... \nFRENCH:\n..." but sometimes
+        # it typos the second label (e.g. "FRENISH:") or puts everything on
+        # one line. We use a fuzzy regex: match ENGLISH: and any token that
+        # starts with FR followed by a colon — that catches FRENCH, FRENISH,
+        # FRANCAIS, FR, etc. Case-insensitive.
+        en_re = re.compile(r"(?i)english\s*:\s*")
+        fr_re = re.compile(r"(?i)\bfr[a-z]*\s*:\s*")
+
+        en_match = en_re.search(raw)
+        # Skip any FR-label that happens to sit inside the ENGLISH label itself.
+        fr_match = None
+        search_from = en_match.end() if en_match else 0
+        for m in fr_re.finditer(raw, pos=search_from):
+            fr_match = m
+            break
+
+        if en_match and fr_match and en_match.start() < fr_match.start():
+            english = raw[en_match.end():fr_match.start()]
+            french = raw[fr_match.end():]
+        elif fr_match and not en_match:
+            english = raw[:fr_match.start()]
+            french = raw[fr_match.end():]
+        elif en_match and not fr_match:
+            english = raw[en_match.end():]
+            french = ""
+        else:
+            english = raw
+            french = ""
+
+        # Collapse whitespace/newlines inside each section.
+        english = " ".join(english.split()).strip()
+        french = " ".join(french.split()).strip()
+
+        return {"english": english, "reference_french": french}

@@ -12,6 +12,7 @@ import random
 import streamlit as st
 
 from core.database_supabase import SupabaseDB
+from core.evaluation import check_translation, scorer
 from core.llm_utils import LLMUtils
 
 llm_utils = LLMUtils()
@@ -19,6 +20,7 @@ supabase_client = SupabaseDB()
 
 SESSION_SIZE = 10
 STORY_MIN, STORY_MAX = 5, 10
+WRITE_MIN, WRITE_MAX = 1, 10
 
 
 def _vocab_reviews_ready():
@@ -134,7 +136,7 @@ def _render_review():
         disabled=already_graded,
     )
 
-    col1, col2 = st.columns(2)
+    col1, col2, col3 = st.columns(3)
     with col1:
         if not already_graded and st.button("✅ Check", use_container_width=True):
             if not user_answer.strip():
@@ -161,6 +163,20 @@ def _render_review():
 
     with col2:
         if already_graded and st.button("Next ▶", use_container_width=True):
+            st.session_state.mem_index += 1
+            st.session_state.mem_result = None
+            st.rerun()
+
+    with col3:
+        # Delete is available at any point on a card — removes it from the
+        # vocabulary, skips it in the session, and doesn't count toward
+        # correct/wrong totals.
+        if st.button("🗑 Delete", use_container_width=True, key=f"mem_delete_{idx}"):
+            try:
+                supabase_client.delete_saved_word(card["word"])
+            except Exception as e:
+                st.error(f"Could not delete '{card['word']}': {e}")
+                return
             st.session_state.mem_index += 1
             st.session_state.mem_result = None
             st.rerun()
@@ -238,16 +254,125 @@ def _render_story():
         st.markdown(story)
 
 
+# --------------------------- Write mode ---------------------------
+
+def _render_write():
+    st.markdown("#### ✍️ Writing Practice")
+    st.caption(
+        f"Pick {WRITE_MIN}-{WRITE_MAX} words from your last {STORY_MAX} reviewed. "
+        "The AI writes a short English sentence using them; you translate it into French."
+    )
+
+    if not _vocab_reviews_ready():
+        return
+
+    try:
+        words_data = supabase_client.get_recently_reviewed(limit=STORY_MAX)
+    except Exception as e:
+        st.error(f"Could not load recent reviews: {e}")
+        return
+
+    if not words_data:
+        st.info("No recently reviewed words yet. Run a Review session first.")
+        return
+
+    word_labels = {f"{w['word']} — {w['meaning']}": w['word'] for w in words_data}
+    selection = st.multiselect(
+        f"Pick {WRITE_MIN}-{WRITE_MAX} word(s) from your last {len(words_data)} reviewed",
+        options=list(word_labels.keys()),
+        max_selections=WRITE_MAX,
+        key="write_selection",
+    )
+    picked = [word_labels[label] for label in selection]
+
+    generate_clicked = st.button(
+        "✨ Generate exercise",
+        use_container_width=True,
+        disabled=len(picked) < WRITE_MIN,
+    )
+
+    if len(picked) < WRITE_MIN:
+        st.caption(f"Select at least {WRITE_MIN} word to enable the generator.")
+
+    if generate_clicked:
+        with st.spinner("Creating your exercise..."):
+            exercise = llm_utils.generate_writing_exercise(picked)
+        st.session_state.mem_write_exercise = exercise
+        st.session_state.mem_write_result = None
+        st.session_state.mem_write_attempt = ""
+
+    exercise = st.session_state.get("mem_write_exercise")
+    if not exercise or not exercise.get("english"):
+        if exercise and exercise.get("error"):
+            st.error(f"Could not generate exercise: {exercise['error']}")
+        return
+
+    # Show the English sentence to translate.
+    st.markdown("---")
+    st.markdown("**Translate this into French:**")
+    st.markdown(
+        f"""
+        <div class="card" style="font-size:1.05rem;">
+            {exercise['english']}
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    already_checked = st.session_state.get("mem_write_result") is not None
+    attempt = st.text_area(
+        "Your French translation",
+        key="mem_write_attempt_input",
+        height=140,
+        disabled=already_checked,
+    )
+
+    col1, col2 = st.columns(2)
+    with col1:
+        if not already_checked and st.button("✅ Check translation", use_container_width=True):
+            if not attempt.strip():
+                st.warning("Type your translation first.")
+            else:
+                with st.spinner("Grading..."):
+                    feedback = check_translation(
+                        original=exercise["english"],
+                        attempt=attempt.strip(),
+                        correct=exercise["reference_french"],
+                    )
+                    score = scorer(attempt.strip(), exercise["reference_french"])
+                st.session_state.mem_write_result = {"feedback": feedback, "score": score}
+                st.rerun()
+
+    with col2:
+        if st.button("🔄 New exercise", use_container_width=True):
+            for k in ("mem_write_exercise", "mem_write_result", "mem_write_attempt"):
+                st.session_state.pop(k, None)
+            st.rerun()
+
+    # Show grading result.
+    result = st.session_state.get("mem_write_result")
+    if result:
+        st.markdown("---")
+        st.markdown(f"<div class='score'>Score: {result['score']} / 10</div>", unsafe_allow_html=True)
+        st.markdown("**Feedback**")
+        st.markdown(f"<div class='feedback'>{result['feedback']}</div>", unsafe_allow_html=True)
+        st.markdown("**Reference translation**")
+        st.markdown(
+            f"<div class='card' style='font-size:1.05rem;'>{exercise['reference_french']}</div>",
+            unsafe_allow_html=True,
+        )
+
+
 # --------------------------- Entry point ---------------------------
 
 def memorise():
     st.divider()
     st.markdown("### 🧠 Memorise")
-    st.caption("AI-powered spaced-repetition review plus story mode to lock words into memory.")
+    st.caption("AI-powered spaced-repetition review, writing practice, and story mode — all driven by your vocabulary.")
 
     mode = st.radio(
         "Mode",
-        ["Review", "Story"],
+        ["Review", "Write", "Story"],
         horizontal=True,
         label_visibility="collapsed",
     )
@@ -256,5 +381,7 @@ def memorise():
 
     if mode == "Review":
         _render_review()
+    elif mode == "Write":
+        _render_write()
     else:
         _render_story()
