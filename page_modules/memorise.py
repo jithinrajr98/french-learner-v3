@@ -11,6 +11,7 @@ Two modes:
 import random
 import streamlit as st
 
+from core.audio import play_audio_mobile_compatible
 from core.database_supabase import SupabaseDB
 from core.evaluation import check_translation, scorer
 from core.llm_utils import LLMUtils
@@ -356,7 +357,30 @@ def _render_write():
         st.markdown(f"<div class='score'>Score: {result['score']} / 10</div>", unsafe_allow_html=True)
         st.markdown("**Feedback**")
         st.markdown(f"<div class='feedback'>{result['feedback']}</div>", unsafe_allow_html=True)
+
         st.markdown("**Reference translation**")
+        # Audio controls — only revealed alongside the reference, so they can't
+        # leak the answer mid-attempt.
+        SPEED_CHOICES = ["0.75x", "1.0x", "1.25x", "1.5x"]
+        listen_col, speed_col = st.columns([1, 1])
+        with speed_col:
+            speed_label = st.select_slider(
+                "Playback speed",
+                options=SPEED_CHOICES,
+                value=st.session_state.get("mem_write_audio_speed", "1.0x"),
+                key="mem_write_audio_speed",
+            )
+        with listen_col:
+            st.write("")  # vertical alignment with the slider label
+            listen_clicked = st.button(
+                "🔊 Listen to reference",
+                use_container_width=True,
+                key="mem_write_listen",
+            )
+        if listen_clicked:
+            speed_value = float(speed_label.rstrip("x"))
+            play_audio_mobile_compatible(exercise["reference_french"], speed=speed_value)
+
         st.markdown(
             f"<div class='card' style='font-size:1.05rem;'>{exercise['reference_french']}</div>",
             unsafe_allow_html=True,

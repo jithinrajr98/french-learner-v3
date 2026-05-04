@@ -1,7 +1,5 @@
-from typing import List, Dict, Any
-from ast import literal_eval
 import re, os
-from config.settings import GROQ_MODEL, GROQ_TRANSCRIPT_MODEL
+from config.settings import GROQ_MODEL
 from groq import Groq
 from dotenv import load_dotenv
 load_dotenv()
@@ -66,32 +64,6 @@ class LLMUtils:
         return response
     
     
-    def extract_missed_words(self, correct: str, attempt: str) -> List[str]:
-        """/nothink Identify missing words from user's translation attempt"""
-        prompt = f"""
-        Compare these French translations:
-        Correct: {correct}
-        Attempt: {attempt}
-        
-        Identify which  words (nouns, verbs, adjectives, adverbs) 
-        from the correct translation are missing in the attempt.
-        Return ONLY a Python list of the missing words in their base form.
-        Example: ['mot1', 'mot2']
-        """
-        try:
-            response = self.groq_client.chat.completions.create(
-                messages=[
-                {"role": "user", "content": prompt}],
-                model=GROQ_MODEL )
-            response = response.choices[0].message.content.strip()
-        
-            return literal_eval(response)
-        except:
-            return []
-
-
-
-
     def example_sentence_generator(self, word: str) -> str:
             """
             Generate an simple example french sentence using the given French word.
@@ -110,124 +82,6 @@ class LLMUtils:
                     model=GROQ_MODEL )
             
             return response.choices[0].message.content.strip()
-        
-    
-    def conjugation_details(self, word: str) -> str:
-        """
-        Get conjugation details for a French verb.
-        
-        Args:
-            word: The French verb to conjugate
-            
-        Returns:
-            A string with conjugation details or 'not a verb'
-        """
-        prompt = f"""Analyze the French word: "{word}"
-
-    1. First, determine if this is a verb in its infinitive form. If it is NOT a verb, return exactly: 'not a verb'
-
-    2. If it IS a verb, provide ONLY the conjugations in present tense in this format. Strictly follow the format without any additional text or explanations:
-    - je [conjugation]\n
-    - tu [conjugation]\n
-    - il/elle/on [conjugation]\n
-    - nous [conjugation]\n
-    - vous [conjugation]\n
-    - ils/elles [conjugation]\n
-
-    3. Return ONLY the conjugations or 'not a verb' - no explanations, no additional text."""
-
-        try:
-            response = self.groq_client.chat.completions.create(
-                messages=[{"role": "user", "content": prompt}],
-                model=GROQ_MODEL
-            )
-            
-            return response.choices[0].message.content.strip()
-        
-        except Exception as e:
-            return f"Error: {str(e)}"
-        
-        
-    def youtube_french_sentence_generator(self, transcript: str) -> str:
-            """
-            Generate a numbered list of French sentences from a YouTube transcript.
-            
-            Args:
-                transcript: The YouTube transcript text
-                
-            Returns:
-                A string with numbered French sentences
-            """
-            prompt = f"""ANALYZE this YouTube transcript and EXTRACT all complete French sentences:
-
-        TRANSCRIPT:
-        {transcript}
-
-        INSTRUCTIONS:
-        1. Extract ONLY complete, grammatically correct French sentences
-        2. PRESERVE the original wording, verb forms, tense, and sentence structure exactly as spoken
-        3. If a sentence is more than 10 words, you may split it into shorter sentences BUT only at natural pause points
-        4. OMIT incomplete phrases, filler words, repetitions, and non-French content
-        5. NUMBER each sentence sequentially
-        6. Return ONLY the numbered list without any additional text or explanations
-        7. PRESERVE ordering from the transcript
-
-        CRITERIA for what constitutes a sentence:
-        - Must have a subject and predicate
-        - Must express a complete thought
-        - Should be a self-contained utterance
-
-        OUTPUT FORMAT:
-        1. First complete French sentence
-        2. Second complete French sentence
-        3. Third complete French sentence
-        ..."""
-
-            try:
-                response = self.groq_client.chat.completions.create(
-                    messages=[{"role": "user", "content": prompt}],
-                    model=GROQ_TRANSCRIPT_MODEL,
-                    temperature=0.1,  # Lower temperature for more consistent results
-                    max_tokens=2000   # Adjust based on expected output length
-                )
-                response = response.choices[0].message.content.strip()
-                
-            except Exception as e:
-                return f"Error: {str(e)}"
-        
-            return response
-    
-    
-    def youtube_english_sentence_generator(self, french_transcript: str) -> str:
-        """
-        Generate a numbered list of English sentences from a french sentence list.
-        
-        Args:
-            french_transcript: french transcript
-            
-        Returns:
-            A string with numbered English sentences
-        """
-        prompt = f"""Translate numbered french sentences from {french_transcript} to english numbered sentences list. Give literal translations only.
-        
-                     Maintain the original numbering and structure.
-        
-        Format the output like this do not include any additional text or explanations:
-        1. English Sentence one
-        2. English Sentence two
-        3. English Sentence three"""
-        
-        try:
-            response = self.groq_client.chat.completions.create(
-                messages=[{"role": "user", "content": prompt}],
-                model=GROQ_TRANSCRIPT_MODEL
-            )
-            response = response.choices[0].message.content.strip()
-
-        except Exception as e:
-            return f"Error: {str(e)}"
-
-        return response
 
 
     # ========= Memorise page helpers =========

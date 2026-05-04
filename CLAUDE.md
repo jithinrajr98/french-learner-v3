@@ -36,51 +36,47 @@ See `.streamlit/secrets.toml.example` for template. Code uses `st.secrets` with 
 
 ## Architecture
 
-This is a Streamlit app for French language learning with AI-powered translation evaluation.
+This is a Streamlit app for French language learning, built around a personal vocabulary list and AI-powered spaced-repetition practice.
 
 ### Core Flow
 1. `app.py` - Entry point, initializes databases and routes to page modules
-2. User practices translations on the Writing Practice page
-3. `core/evaluation.py` evaluates translations and scores them (0-10)
-4. `core/llm_utils.py` handles all Groq LLM calls
-5. Missed vocabulary words are saved with meanings to the database
+2. The Memorise page drives study (review cards, story mode, writing practice)
+3. `core/llm_utils.py` handles all Groq LLM calls (grading, story/exercise generation, word meanings)
+4. `core/evaluation.py` provides translation feedback and 0-10 scoring used by Memorise's writing mode
+5. Vocabulary CRUD lives in the Explore Vocabulary and Practise Vocabulary pages
 
 ### Key Modules
 
 **config/**
-- `settings.py` - Paths, model names, constants. Models: `GROQ_MODEL`, `GROQ_EVAL_MODEL`, `GROQ_SCORE_MODEL`, `GROQ_TRANSCRIPT_MODEL`
+- `settings.py` - Paths, model names, constants. Models: `GROQ_MODEL`, `GROQ_EVAL_MODEL`, `GROQ_SCORE_MODEL`
 - `styles.py` - Streamlit CSS, header, sidebar navigation
 
 **core/**
-- `llm_utils.py` - `LLMUtils` class wrapping Groq API: word meanings, accent correction, missed word extraction, example sentences, verb conjugations, YouTube transcript processing
-- `evaluation.py` - `check_translation()` for feedback, `scorer()` for 0-10 scoring
-- `database.py` - SQLite operations (local fallback)
-- `database_supabase.py` - Supabase cloud database operations
-- `transcript_processing.py` - `TranscriptManager` for loading/randomizing sentence pairs
-- `audio.py` - gTTS audio playback
+- `llm_utils.py` - `LLMUtils` class wrapping Groq API: word meanings, accent correction, example sentences, flashcard grading, story generation, writing exercise generation
+- `evaluation.py` - `check_translation()` for feedback, `scorer()` for 0-10 scoring (used by Memorise's Write mode)
+- `database.py` - SQLite operations (local fallback): `init_db`, `get_all_saved_words`, `delete_saved_word`
+- `database_supabase.py` - Supabase cloud database operations: vocab CRUD plus spaced-repetition helpers (`get_due_words`, `update_review`, `get_recently_reviewed`, `count_due_today`)
+- `audio.py` - gTTS audio playback (`play_audio_mobile_compatible`)
 
 **page_modules/**
-- `writing_practise.py` - Main translation practice page
-- `vocab_builder.py` - View/delete saved vocabulary
+- `vocab_builder.py` - Add/search/delete saved vocabulary
 - `vocab_practise.py` - Flash card practice with audio
-- `transcript_viewer.py` - YouTube transcript extraction and processing
-- `performance_analyser.py` - Progress analytics with Altair charts
+- `memorise.py` - Spaced-repetition Review, AI-generated Write, and Story modes (default page)
 
 ### Database Schema
 
-Two tables (SQLite and Supabase):
+Tables (SQLite and Supabase):
 - `missing_words`: word (PK), meaning, added_on
-- `translation_scores`: id, sentence, user_translation, score, checked_on
+- `vocab_reviews`: word (PK), interval_days, next_due, correct_count, wrong_count, last_reviewed (Supabase only — see `data/vocab_reviews_migration.sql`)
+- `translation_scores`: id, sentence, user_translation, score, checked_on — **legacy**, no longer read or written by code, retained so historical rows survive
 
 ### Data Files
 
-- `data/english_transcript.txt` - English sentences (one per line)
-- `data/french_transcript.txt` - Corresponding French translations (same line numbers)
-- `data/youtube_transcript.txt` - Extracted YouTube transcript
 - `data/french_learner.db` - SQLite database
+- `data/vocab_reviews_migration.sql` - Supabase migration for the spaced-repetition table
 
 ### State Management
 
 Uses `st.session_state` extensively:
 - `db_status`: "supabase" | "local" | "error"
-- Sentence randomization state in `TranscriptManager`
+- Memorise session: `mem_cards`, `mem_index`, `mem_result`, `mem_correct`, `mem_wrong`, `mem_write_exercise`, `mem_write_result`, `mem_last_story`

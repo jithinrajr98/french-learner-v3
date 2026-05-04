@@ -1,6 +1,6 @@
 from ast import literal_eval
 from core.llm_utils import LLMUtils
-from config.settings import GROQ_MODEL, GROQ_TRANSCRIPT_MODEL, GROQ_EVAL_MODEL, GROQ_SCORE_MODEL
+from config.settings import GROQ_EVAL_MODEL, GROQ_SCORE_MODEL
 import json
 import re
 

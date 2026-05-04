@@ -1,7 +1,7 @@
 import streamlit as st
 from core.llm_utils import LLMUtils
-from core.audio import play_audio, play_audio_mobile_compatible
-from core.database import save_score, save_missing_words, get_all_saved_words, delete_saved_word
+from core.audio import play_audio_mobile_compatible
+from core.database import get_all_saved_words, delete_saved_word
 import sqlite3
 from config.settings import DB_PATH
 from core.database_supabase import SupabaseDB
