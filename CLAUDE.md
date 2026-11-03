@@ -48,7 +48,7 @@ This is a Streamlit app for French language learning, built around a personal vo
 ### Key Modules
 
 **config/**
-- `settings.py` - Paths, model names, constants. Models: `GROQ_MODEL`, `GROQ_EVAL_MODEL`, `GROQ_SCORE_MODEL`
+- `settings.py` - Paths, model names, constants. Models: `GROQ_MODEL`, `GROQ_EVAL_MODEL`, `GROQ_SCORE_MODEL` (all `openai/gpt-oss-120b`), `GROQ_REASONING_EFFORT`
 - `styles.py` - Streamlit CSS, header, sidebar navigation
 
 **core/**
@@ -60,7 +60,7 @@ This is a Streamlit app for French language learning, built around a personal vo
 
 **page_modules/**
 - `vocab_builder.py` - Add/search/delete saved vocabulary
-- `vocab_practise.py` - Flash card practice with audio
+- `vocab_practise.py` - Learning stage for new/difficult words: hidden-answer cards, Again/Hard/Good/Easy self-rating (keys Space, 1-4), mixed card types (recognise, recall, listen, fill-in-the-blank). Words graduate to Memorise after 2 first-try sessions in a row
 - `memorise.py` - Spaced-repetition Review, AI-generated Write, and Story modes (default page)
 
 ### Database Schema
@@ -68,15 +68,18 @@ This is a Streamlit app for French language learning, built around a personal vo
 Tables (SQLite and Supabase):
 - `missing_words`: word (PK), meaning, added_on
 - `vocab_reviews`: word (PK), interval_days, next_due, correct_count, wrong_count, last_reviewed (Supabase only — see `data/vocab_reviews_migration.sql`)
+- `vocab_practice`: word (PK), stage (new/learning/graduated), good_streak, times_seen, last_practised, plus cached card content: article, gender, examples, cloze, related (Supabase only — see `data/vocab_practice_migration.sql`)
 - `translation_scores`: id, sentence, user_translation, score, checked_on — **legacy**, no longer read or written by code, retained so historical rows survive
 
 ### Data Files
 
 - `data/french_learner.db` - SQLite database
 - `data/vocab_reviews_migration.sql` - Supabase migration for the spaced-repetition table
+- `data/vocab_practice_migration.sql` - Supabase migration for the Practise page's learning-stage table
 
 ### State Management
 
 Uses `st.session_state` extensively:
 - `db_status`: "supabase" | "local" | "error"
+- Practise session: `pr_queue`, `pr_total`, `pr_done`, `pr_first`, `pr_revealed`, `pr_removed`, `pr_error`
 - Memorise session: `mem_cards`, `mem_index`, `mem_result`, `mem_correct`, `mem_wrong`, `mem_write_exercise`, `mem_write_result`, `mem_last_story`

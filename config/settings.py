@@ -16,7 +16,11 @@ COLOR_SCHEME = {
 
 BACKGROUND = BASE_DIR / "static" / "pic_10.jpg"  #pic_7.jpg
 
-GROQ_MODEL = "llama-3.3-70b-versatile"
-GROQ_EVAL_MODEL = "llama-3.3-70b-versatile"
-GROQ_SCORE_MODEL = "llama-3.3-70b-versatile"
+# openai/gpt-oss-120b is Groq's strongest production model (checked Nov 2026);
+# llama-3.3-70b-versatile is no longer available to this account.
+GROQ_MODEL = "openai/gpt-oss-120b"
+GROQ_EVAL_MODEL = "openai/gpt-oss-120b"
+GROQ_SCORE_MODEL = "openai/gpt-oss-120b"
+# gpt-oss is a reasoning model; "low" keeps short tasks fast (~0.5s).
+GROQ_REASONING_EFFORT = "low"
 

@@ -1,5 +1,5 @@
-import re, os
-from config.settings import GROQ_MODEL
+import json, re, os
+from config.settings import GROQ_MODEL, GROQ_REASONING_EFFORT
 from groq import Groq
 from dotenv import load_dotenv
 load_dotenv()
@@ -219,3 +219,90 @@ FRENCH:
         french = " ".join(french.split()).strip()
 
         return {"english": english, "reference_french": french}
+
+
+    # ========= Practise page helpers =========
+
+    @staticmethod
+    def _reasoning_kwargs():
+        """Reasoning effort is only accepted by reasoning models (gpt-oss, qwen)."""
+        if GROQ_MODEL.startswith(("openai/gpt-oss", "qwen/")):
+            return {"reasoning_effort": GROQ_REASONING_EFFORT}
+        return {}
+
+    def generate_card_content(self, word: str, meaning: str):
+        """
+        Build the revealed side of a practice card for a French word.
+        Returns a dict {article, gender, examples, cloze, related}, or None
+        if the call or the response fails.
+        """
+        prompt = f"""You are helping an English speaker learn the French word or phrase "{word}" (meaning: {meaning}).
+
+Return a JSON object with exactly these keys:
+- "article": the definite article if it is a noun ("le", "la", "l'" or "les"), otherwise null
+- "gender": "m" or "f" if it is a noun, otherwise null
+- "examples": a list of 3 short, natural French sentences (A2-B1 level) using "{word}" in 3 different everyday situations, each as {{"fr": "...", "en": "English translation"}}
+- "cloze": {{"sentence": "a different short French sentence using the word, with the word replaced by ___", "answer": "the exact form that fills the blank"}}
+- "related": one related word or common phrase with its English meaning in brackets, e.g. "à la maison (at home)"
+
+Return only the JSON object."""
+        try:
+            response = self.groq_client.chat.completions.create(
+                messages=[{"role": "user", "content": prompt}],
+                model=GROQ_MODEL,
+                temperature=0.4,
+                response_format={"type": "json_object"},
+                **self._reasoning_kwargs(),
+            )
+            data = json.loads(response.choices[0].message.content)
+        except Exception as e:
+            print(f"generate_card_content failed for {word!r}: {e}")
+            return None
+        return self._clean_card_content(data)
+
+    @staticmethod
+    def _clean_card_content(data):
+        """Keep only well-formed fields from the model's JSON."""
+        if not isinstance(data, dict):
+            return None
+
+        article = data.get("article")
+        article = article.strip().lower() if isinstance(article, str) else None
+        if article not in ("le", "la", "l'", "les"):
+            article = None
+
+        gender = data.get("gender")
+        gender = gender.strip().lower() if isinstance(gender, str) else None
+        if gender not in ("m", "f"):
+            gender = None
+
+        examples = []
+        for ex in data.get("examples") or []:
+            if isinstance(ex, dict) and str(ex.get("fr", "")).strip():
+                examples.append({
+                    "fr": str(ex["fr"]).strip(),
+                    "en": str(ex.get("en", "")).strip(),
+                })
+        if not examples:
+            return None
+
+        cloze = data.get("cloze")
+        if not (
+            isinstance(cloze, dict)
+            and "___" in str(cloze.get("sentence", ""))
+            and str(cloze.get("answer", "")).strip()
+        ):
+            cloze = None
+        else:
+            cloze = {"sentence": str(cloze["sentence"]).strip(), "answer": str(cloze["answer"]).strip()}
+
+        related = data.get("related")
+        related = related.strip() if isinstance(related, str) and related.strip() else None
+
+        return {
+            "article": article,
+            "gender": gender,
+            "examples": examples[:3],
+            "cloze": cloze,
+            "related": related,
+        }

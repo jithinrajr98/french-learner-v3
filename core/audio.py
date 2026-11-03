@@ -4,6 +4,14 @@ import io
 import streamlit as st
 
 
+@st.cache_data(show_spinner=False, max_entries=300)
+def tts_bytes(text: str, lang: str = 'fr') -> bytes:
+    """MP3 bytes for `text`, cached so the same word isn't regenerated."""
+    buf = io.BytesIO()
+    gTTS(text=text, lang=lang, slow=False).write_to_fp(buf)
+    return buf.getvalue()
+
+
 def play_audio_mobile_compatible(text, lang='fr', speed=1.25):
     """
     Generate and play audio with mobile compatibility at the requested

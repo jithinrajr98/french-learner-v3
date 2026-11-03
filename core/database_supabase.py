@@ -10,6 +10,11 @@ load_dotenv()
 # On a correct answer we step forward one rung; on wrong we reset to the first rung.
 SR_INTERVALS = [1, 3, 7, 14, 30, 90]
 
+# Practise page: a word graduates to spaced review after this many sessions
+# in a row where you recalled it on the first try ("Good" or "Easy").
+PRACTICE_GRADUATE_STREAK = 2
+PRACTICE_CONTENT_FIELDS = ('article', 'gender', 'examples', 'cloze', 'related')
+
 class SupabaseDB:
     def __init__(self):
         # Try Streamlit secrets first (for cloud deployment), then env vars (for local dev)
@@ -184,3 +189,125 @@ class SupabaseDB:
         except Exception as e:
             print(f"Error in count_due_today: {e}")
             return 0
+
+    # ========= Practice helpers (used by the Practise Vocabulary page) =========
+
+    def get_practice_overview(self):
+        """
+        Load every saved word with its practice state and Memorise stats.
+
+        Returns a list of dicts with: word, meaning, added_on, stage,
+        good_streak, times_seen, last_practised, content, correct_count,
+        wrong_count. `content` is the saved card content dict, or None.
+
+        Stage is 'new', 'learning' or 'graduated'. A word with no practice
+        row counts as graduated if Memorise already reviews it, else new.
+        Raises on failure (e.g. vocab_practice table missing).
+        """
+        words = self.supabase.table('missing_words').select('word, meaning, added_on').execute().data or []
+        practice_rows = self.supabase.table('vocab_practice').select('*').execute().data or []
+        review_rows = (
+            self.supabase.table('vocab_reviews')
+            .select('word, correct_count, wrong_count')
+            .execute()
+            .data
+            or []
+        )
+        practice = {r['word']: r for r in practice_rows}
+        reviews = {r['word']: r for r in review_rows}
+
+        overview = []
+        for w in words:
+            p = practice.get(w['word'])
+            r = reviews.get(w['word'])
+            if p:
+                stage = p.get('stage') or 'new'
+            elif r:
+                stage = 'graduated'
+            else:
+                stage = 'new'
+            content = None
+            if p and p.get('examples'):
+                content = {k: p.get(k) for k in PRACTICE_CONTENT_FIELDS}
+            overview.append({
+                'word': w['word'],
+                'meaning': w.get('meaning') or '',
+                'added_on': w.get('added_on') or '',
+                'stage': stage,
+                'good_streak': (p or {}).get('good_streak') or 0,
+                'times_seen': (p or {}).get('times_seen') or 0,
+                'last_practised': (p or {}).get('last_practised') or '',
+                'content': content,
+                'correct_count': (r or {}).get('correct_count') or 0,
+                'wrong_count': (r or {}).get('wrong_count') or 0,
+            })
+        return overview
+
+    def _save_practice(self, word: str, fields: dict, stage_if_new: str):
+        """Update the word's practice row, or create it with `stage_if_new`."""
+        existing = self.supabase.table('vocab_practice').select('word').eq('word', word).execute().data
+        if existing:
+            self.supabase.table('vocab_practice').update(fields).eq('word', word).execute()
+        else:
+            row = {'word': word, 'stage': stage_if_new, **fields}
+            self.supabase.table('vocab_practice').insert(row).execute()
+
+    def save_card_content(self, word: str, content: dict, stage: str):
+        """Store AI-generated card content so it is reused next time."""
+        fields = {k: content.get(k) for k in PRACTICE_CONTENT_FIELDS}
+        self._save_practice(word, fields, stage)
+
+    def _schedule_review(self, word: str, interval_days: int):
+        """Hand a word to Memorise, unless Memorise already schedules it."""
+        existing = self.supabase.table('vocab_reviews').select('word').eq('word', word).execute().data
+        if existing:
+            return
+        self.supabase.table('vocab_reviews').insert({
+            'word': word,
+            'interval_days': interval_days,
+            'next_due': (date.today() + timedelta(days=interval_days)).isoformat(),
+            'correct_count': 0,
+            'wrong_count': 0,
+        }).execute()
+
+    def record_practice_result(self, word: str, first_rating: str, stage: str,
+                               good_streak: int, times_seen: int):
+        """
+        Save the outcome of one practice session for a word.
+        `first_rating` is the first rating given in this session:
+        'again', 'hard', 'good' or 'easy'.
+        Returns (new_stage, new_good_streak).
+        """
+        if first_rating in ('good', 'easy'):
+            streak = good_streak + 1
+        elif first_rating == 'hard':
+            streak = good_streak
+        else:
+            streak = 0
+
+        known_on_sight = first_rating == 'easy' and times_seen == 0
+        graduates_now = stage != 'graduated' and (streak >= PRACTICE_GRADUATE_STREAK or known_on_sight)
+        new_stage = 'graduated' if (stage == 'graduated' or graduates_now) else 'learning'
+
+        self._save_practice(word, {
+            'stage': new_stage,
+            'good_streak': streak,
+            'times_seen': times_seen + 1,
+            'last_practised': datetime.utcnow().isoformat(),
+        }, new_stage)
+
+        if graduates_now:
+            self._schedule_review(word, SR_INTERVALS[0])
+        return new_stage, streak
+
+    def skip_to_review(self, word: str):
+        """'Too easy': graduate the word now and schedule it a week out."""
+        self._save_practice(word, {
+            'stage': 'graduated',
+            'last_practised': datetime.utcnow().isoformat(),
+        }, 'graduated')
+        self._schedule_review(word, 7)
+
+    def update_meaning(self, word: str, meaning: str):
+        """Correct a word's saved meaning."""
+        self.supabase.table('missing_words').update({'meaning': meaning}).eq('word', word).execute()
